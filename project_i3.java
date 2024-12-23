@@ -13,6 +13,7 @@ public class project_i3 {
         System.out.println("You are " + age + " years old");
         System.out.println("Thank you for using my program");
         System.out.println("Goodbye");
+        System.out.println("Goodbye");
         sc.close();
 
         
