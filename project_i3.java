@@ -7,22 +7,18 @@ import javax.swing.JTextField;
 public class project_i3 {
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("hello hello hello");
-        System.out.println("it is working as i planned");
-        System.out.print("Enter your name: ");
-        String name = sc.nextLine();
-        System.out.println("Hello " + name);
-        System.out.print("Enter your age: ");
-        int age = sc.nextInt();
-        System.out.println("You are " + age + " years old");
-        System.out.println("Thank you for using my program");
-        System.out.println("Goodbye");
-        System.out.println("Goodbye");
-        System.out.println("there is a new brand iphone here. ");
-        System.out.println("Enjoy your new iPhone!");
-        sc.close();
+        JFrame frame = new JFrame("Project I3");
+        frame.setSize(300, 200);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JPanel panel = new JPanel();
+        frame.add(panel);
+        panel.setLayout(null);
 
-        
+        JLabel label = new JLabel("Hello World");
+        label.setBounds(100, 50, 100, 25);
+        panel.add(label);
+
+        frame.setVisible(true);
+
     }
 }
