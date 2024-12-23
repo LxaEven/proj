@@ -14,6 +14,7 @@ public class project_i3 {
         System.out.println("Thank you for using my program");
         System.out.println("Goodbye");
         System.out.println("Goodbye");
+        System.out.println("there is a new brand iphone here. ");
         sc.close();
 
         
