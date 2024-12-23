@@ -1,4 +1,9 @@
 import java.util.Scanner;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JTextField;
 public class project_i3 {
 
     public static void main(String[] args) {
@@ -15,6 +20,7 @@ public class project_i3 {
         System.out.println("Goodbye");
         System.out.println("Goodbye");
         System.out.println("there is a new brand iphone here. ");
+        System.out.println("Enjoy your new iPhone!");
         sc.close();
 
         
