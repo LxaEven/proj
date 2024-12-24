@@ -17,7 +17,15 @@ public class project_i3 {
         JLabel label = new JLabel("Hello World");
         label.setBounds(100, 50, 100, 25);
         panel.add(label);
+        JButton button = new JButton("Enter");
+        button.setBounds(100, 100, 80, 25);
+        panel.add(button);
 
+        // Add action listener to the button
+        button.addActionListener(e -> System.out.println("Button clicked"));
+
+        // Add key listener to the frame to listen for Enter key press
+        frame.getRootPane().setDefaultButton(button);
         frame.setVisible(true);
 
     }
