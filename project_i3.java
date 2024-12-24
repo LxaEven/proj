@@ -7,7 +7,7 @@ import javax.swing.JTextField;
 public class project_i3 {
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Project I3");
+        JFrame frame = new JFrame("Student management system");
         frame.setSize(300, 200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
@@ -24,9 +24,12 @@ public class project_i3 {
         // Add action listener to the button
         button.addActionListener(e -> System.out.println("Button clicked"));
 
+
         // Add key listener to the frame to listen for Enter key press
         frame.getRootPane().setDefaultButton(button);
         frame.setVisible(true);
+
+        
 
     }
 }
