@@ -8,9 +8,10 @@ public class login extends JPanel {
 
         setLayout(new BorderLayout());
         // Title Label
-        JLabel titleLabel = new JLabel("Student Management System", SwingConstants.CENTER);
-        titleLabel.setBounds(50, 10, 100, 30);
-        add(titleLabel);
+        JLabel titleLabel = new JLabel("Log in as:", SwingConstants.CENTER);
+        titleLabel.setBounds(20, 10, 100, 30);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        add(titleLabel, BorderLayout.NORTH);
 
         
 
@@ -41,7 +42,6 @@ public class login extends JPanel {
             }
         });
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(3, 1));
         buttonPanel.add(adminButton);
         buttonPanel.add(teacherButton);
         buttonPanel.add(studentButton);

@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 public class startPanel extends JPanel {
 
@@ -9,14 +10,15 @@ public class startPanel extends JPanel {
         // Title Label
         JLabel titleLabel = new JLabel("Student Management System", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        titleLabel.setPreferredSize(new Dimension(100, 30));
-        titleLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         add(titleLabel, BorderLayout.NORTH);
 
         JButton tologin = new JButton("next");
-        tologin.addActionListener((ActionEvent e) -> {
-            CardLayout cl = (CardLayout) mainPanel.getLayout();
-            cl.show(mainPanel, "login");
+        tologin.setPreferredSize(new Dimension(100, 30));
+        tologin.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                CardLayout c1 = (CardLayout) mainPanel.getLayout();
+                c1.show(mainPanel, "next");
+            }
         });
         add(tologin, BorderLayout.SOUTH);
     
