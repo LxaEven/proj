@@ -20,7 +20,9 @@ public class startPanel extends JPanel {
                 c4.show(mainPanel, "login");
             }
         });
-        add(tologin, BorderLayout.SOUTH);
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buttonPanel.add(tologin);
+        add(buttonPanel, BorderLayout.SOUTH);
     
     }
 }

@@ -28,6 +28,6 @@ public class student extends JPanel {
                 
             }
         });
-        add(backButton, BorderLayout.SOUTH);
+        add(backButton, FlowLayout.CENTER);
     }
 }
