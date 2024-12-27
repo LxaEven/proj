@@ -7,11 +7,13 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
 public class student extends JPanel {
+
     public student(JPanel mainPanel){
         setLayout(new BorderLayout());
         JLabel titleLabel = new JLabel("Student", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         add(titleLabel, BorderLayout.NORTH);
+        
         JLabel result = new JLabel("Result: ", SwingConstants.CENTER);
         int Result = 5 + 5;
         result.setText("Result: " + Result);
