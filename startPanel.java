@@ -16,8 +16,8 @@ public class startPanel extends JPanel {
         tologin.setPreferredSize(new Dimension(100, 30));
         tologin.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
-                CardLayout c1 = (CardLayout) mainPanel.getLayout();
-                c1.show(mainPanel, "next");
+                CardLayout c4 = (CardLayout) mainPanel.getLayout();
+                c4.show(mainPanel, "login");
             }
         });
         add(tologin, BorderLayout.SOUTH);

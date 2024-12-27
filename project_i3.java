@@ -12,9 +12,11 @@ public class project_i3 {
         JPanel mainPanel = new JPanel(new CardLayout());
         login loginPanel = new login(mainPanel);
         startPanel startPanel = new startPanel(mainPanel);
+        student studentPanel = new student(mainPanel);
 
         mainPanel.add(startPanel, "start");
         mainPanel.add(loginPanel, "login");
+        mainPanel.add(studentPanel, "student");
 
         frame.add(mainPanel);
         frame.setVisible(true);

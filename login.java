@@ -7,7 +7,7 @@ public class login extends JPanel {
     public login(JPanel mainPanel) {
 
         setLayout(new BorderLayout());
-        // Title Label
+        
         JLabel titleLabel = new JLabel("Log in as:", SwingConstants.CENTER);
         titleLabel.setBounds(20, 10, 100, 30);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
@@ -31,14 +31,14 @@ public class login extends JPanel {
         });
         teacherButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                CardLayout cl = (CardLayout) mainPanel.getLayout();
-                cl.show(mainPanel, "Teacher");
+                CardLayout c2 = (CardLayout) mainPanel.getLayout();
+                c2.show(mainPanel, "Teacher");
             }
         });
         studentButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                CardLayout cl = (CardLayout) mainPanel.getLayout();
-                cl.show(mainPanel, "Student");
+                CardLayout c3 = (CardLayout) mainPanel.getLayout();
+                c3.show(mainPanel, "student");
             }
         });
         JPanel buttonPanel = new JPanel();
