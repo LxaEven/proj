@@ -6,7 +6,7 @@ public class project_i3 {
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Student management system");
-        frame.setSize(500, 400);
+        frame.setSize(1080, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         JPanel mainPanel = new JPanel(new CardLayout());
