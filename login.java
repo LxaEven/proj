@@ -41,11 +41,11 @@ public class login extends JPanel {
                 c3.show(mainPanel, "student");
             }
         });
-        JPanel buttonPanel = new JPanel( new FlowLayout(FlowLayout.CENTER));
+        JPanel buttonPanel = new JPanel( new FlowLayout(FlowLayout.LEADING));
         buttonPanel.add(adminButton);
         buttonPanel.add(teacherButton);
         buttonPanel.add(studentButton);
-        add(buttonPanel, BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.WEST);
         
     }
 
