@@ -13,16 +13,18 @@ public class student extends JPanel {
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         add(titleLabel, BorderLayout.NORTH);
         JLabel result = new JLabel("Result: ", SwingConstants.CENTER);
+        int Result = 5 + 5;
+        result.setText("Result: " + Result);
+        add(result, BorderLayout.CENTER);
 
         JButton backButton = new JButton("Back");
         backButton.setPreferredSize(new Dimension(100, 30));
         backButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 CardLayout c5 = (CardLayout) mainPanel.getLayout();
-                c5.show(mainPanel, "login");
-                int Result = 5 + 5;
-                result.setText("Result: " + Result);
-                mainPanel.add(result, "result");
+                c5.show(mainPanel, "start");
+                
+                
                 
             }
         });
