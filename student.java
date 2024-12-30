@@ -12,6 +12,7 @@ public class student extends JPanel {
         add(titleLabel, BorderLayout.NORTH);
 
         JLabel result = new JLabel("Result: ", SwingConstants.CENTER);
+        result.setFont(new Font("Arial", Font.PLAIN, 20));
         int Result = 5 + 5;
         result.setText("Result: " + Result);
         add(result, BorderLayout.CENTER);
