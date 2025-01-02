@@ -7,29 +7,72 @@ public class student extends JPanel {
 
     public student(JPanel mainPanel){
         setLayout(new BorderLayout());
-        JLabel titleLabel = new JLabel("Student", SwingConstants.CENTER);
+        JLabel titleLabel = new JLabel("Student");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         add(titleLabel, BorderLayout.NORTH);
 
-        JLabel result = new JLabel("Result: ", SwingConstants.CENTER);
-        result.setFont(new Font("Arial", Font.PLAIN, 20));
-        int Result = 5 + 5;
-        result.setText("Result: " + Result);
-        add(result, BorderLayout.CENTER);
-
-        JButton backButton = new JButton("Back");
-        backButton.setPreferredSize(new Dimension(100, 30));
-        backButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                CardLayout c5 = (CardLayout) mainPanel.getLayout();
-                c5.show(mainPanel, "login");
-                
-                
-                
+        JButton ViewScore = new JButton("View Score");
+        ViewScore.setFont(new Font("Arial", Font.BOLD, 15));
+        ViewScore.setPreferredSize(new Dimension(900, 50));
+        ViewScore.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                CardLayout c4 = (CardLayout) mainPanel.getLayout();
+                c4.show(mainPanel, "ViewScore");
             }
         });
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        buttonPanel.add(backButton);
-        add(buttonPanel, BorderLayout.SOUTH);
+
+        JButton ViewCourse = new JButton("View Course");
+        ViewCourse.setFont(new Font("Arial", Font.BOLD, 15));
+        ViewCourse.setPreferredSize(new Dimension(900, 50));
+        ViewCourse.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                CardLayout c4 = (CardLayout) mainPanel.getLayout();
+                c4.show(mainPanel, "ViewCourse");
+            }
+        });
+
+        JButton ChangePassword = new JButton("Change Password");
+        ChangePassword.setFont(new Font("Arial", Font.BOLD, 15));
+        ChangePassword.setPreferredSize(new Dimension(900, 50));
+        ChangePassword.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                CardLayout c4 = (CardLayout) mainPanel.getLayout();
+                c4.show(mainPanel, "ChangePassword");
+            }
+        });
+
+        JButton Logout = new JButton("Logout");
+        Logout.setFont(new Font("Arial", Font.BOLD, 15));
+        Logout.setPreferredSize(new Dimension(900, 50));
+        Logout.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                CardLayout c4 = (CardLayout) mainPanel.getLayout();
+                c4.show(mainPanel, "login");
+            }
+        });
+
+        JButton CloseProgram = new JButton("Exit");
+        CloseProgram.setFont(new Font("Arial", Font.BOLD, 15));
+        CloseProgram.setPreferredSize(new Dimension(900, 50));
+        CloseProgram.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        JPanel buttonPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(20, 20, 20, 20);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        buttonPanel.add(ViewScore, gbc);
+        gbc.gridy++;
+        buttonPanel.add(ViewCourse, gbc);
+        gbc.gridy++;
+        buttonPanel.add(ChangePassword, gbc);
+        gbc.gridy++;
+        buttonPanel.add(Logout, gbc);
+        gbc.gridy++;
+        buttonPanel.add(CloseProgram, gbc);
+        add(buttonPanel, BorderLayout.CENTER);
     }
 }

@@ -42,22 +42,18 @@ public class login extends JPanel {
             }
         });
 
-        JButton backButton = new JButton("Back");
-        backButton.setPreferredSize(new Dimension(100, 30));
-        backButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                CardLayout c4 = (CardLayout) mainPanel.getLayout();
-                c4.show(mainPanel, "start");
-            }
-        });
-        JPanel buttonPanel = new JPanel( new FlowLayout(FlowLayout.CENTER));
-        buttonPanel.add(adminButton);
-        buttonPanel.add(teacherButton);
-        buttonPanel.add(studentButton);
+        JPanel buttonPanel = new JPanel( new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        buttonPanel.add(adminButton, gbc);
+        gbc.gridx++;
+        buttonPanel.add(teacherButton, gbc);
+        gbc.gridx++;
+        buttonPanel.add(studentButton, gbc);
+        
         add(buttonPanel, BorderLayout.CENTER);
-        JPanel buttonPanel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        buttonPanel2.add(backButton);
-        add(buttonPanel2, BorderLayout.SOUTH);
         
     }
 
