@@ -1,31 +1,61 @@
-import java.beans.Statement;
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ViewScore extends JPanel {
     public ViewScore(JPanel mainPanel) {
+
+        String url = "jdbc:mysql://localhost:3306/mydb";
+        String username = "root";
+        String password = "Web#11*03";
+
         setLayout(new BorderLayout());
         JLabel titleLabel = new JLabel("Student > View Score");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         add(titleLabel, BorderLayout.NORTH);
-        try {
-            Class.forName("student_data");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/student_data", "root", "Web#11*03");
-            Statement stmt = (Statement) con.createStatement();
-            ResultSet rs = ((java.sql.Statement) stmt).executeQuery("select * from student");
+        DefaultTableModel tableModel = new DefaultTableModel();
+        JTable table = new JTable(tableModel);
+
+        try (Connection conn = DriverManager.getConnection(url, username, password);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM student")) {
+
+            // Add column header
+            tableModel.addColumn("student_id");
+            tableModel.addColumn("student_firstname");
+            tableModel.addColumn("student_lastname");
+            tableModel.addColumn("phone_number");
+            tableModel.addColumn("student_birth");
+            tableModel.addColumn("student_score");
+
+            // Fetch rows
             while (rs.next()) {
-                System.out.println(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3));
+                int id = rs.getInt("student_id");
+                String studentfirstName = rs.getString("student_firstname");
+                String studentlastName = rs.getString("student_lastname");
+                String studentPhoneNumber = rs.getString("phone_number");
+                String studentBirth = rs.getString("student_birth");
+                float studentScore = rs.getFloat("student_score");
+                tableModel.addRow(new Object[]{id, studentfirstName, studentlastName, studentPhoneNumber, studentBirth, studentScore});
             }
-            con.close();
-        } catch (Exception e) {
+
+        } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(mainPanel, "Error: " + e.getMessage());
         }
+
+        // Add Table to JScrollPane
+        JScrollPane scrollPane = new JScrollPane(table);
+        add(scrollPane, BorderLayout.CENTER);
+
 
         JButton backButton = new JButton("Back");
         backButton.setFont(new Font("Arial", Font.BOLD, 15));
