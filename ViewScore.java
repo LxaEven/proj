@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 public class ViewScore extends JPanel {
     public ViewScore(JPanel mainPanel) {
 
-        String url = "jdbc:mysql://localhost:3306/mydb";
+        String url = "jdbc:mysql://localhost:3306/mydbSELECT * FROM student;";
         String username = "root";
         String password = "Web#11*03";
 
