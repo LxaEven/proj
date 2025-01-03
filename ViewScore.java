@@ -24,7 +24,7 @@ public class ViewScore extends JPanel {
         DefaultTableModel tableModel = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false; // Make all cells non-editable
+                return false; 
             }
         };
 
@@ -34,7 +34,7 @@ public class ViewScore extends JPanel {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT * FROM student")) {
 
-            // Add column header
+            
             tableModel.addColumn("student_id");
             tableModel.addColumn("student_firstname");
             tableModel.addColumn("student_lastname");
@@ -42,7 +42,7 @@ public class ViewScore extends JPanel {
             tableModel.addColumn("student_birth");
             tableModel.addColumn("student_score");
 
-            // Fetch rows
+            
             while (rs.next()) {
                 int id = rs.getInt("student_id");
                 String studentfirstName = rs.getString("student_firstname");
@@ -58,7 +58,7 @@ public class ViewScore extends JPanel {
             JOptionPane.showMessageDialog(mainPanel, "Error: " + e.getMessage());
         }
 
-        // Add Table to JScrollPane
+        
         JScrollPane scrollPanel = new JScrollPane(table);
         add(scrollPanel, BorderLayout.CENTER);
 
