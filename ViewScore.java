@@ -24,7 +24,7 @@ public class ViewScore extends JPanel {
         DefaultTableModel tableModel = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false; 
+                return false; // Make all cells non-editable
             }
         };
 
