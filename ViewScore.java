@@ -59,8 +59,8 @@ public class ViewScore extends JPanel {
         }
 
         // Add Table to JScrollPane
-        JScrollPane scrollPane = new JScrollPane(table);
-        add(scrollPane, BorderLayout.CENTER);
+        JScrollPane scrollPanel = new JScrollPane(table);
+        add(scrollPanel, BorderLayout.CENTER);
 
 
         JButton backButton = new JButton("Back");

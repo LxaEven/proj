@@ -14,11 +14,13 @@ public class project_i3 {
         startPanel startPanel = new startPanel(mainPanel);
         student studentPanel = new student(mainPanel);
         ViewScore ViewScorePanel = new ViewScore(mainPanel);
+        ChangePassword ChangePasswordPanel = new ChangePassword(mainPanel);
 
         mainPanel.add(startPanel, "start");
         mainPanel.add(loginPanel, "login");
         mainPanel.add(studentPanel, "student");
         mainPanel.add(ViewScorePanel, "ViewScore");
+        mainPanel.add(ChangePasswordPanel, "ChangePassword");
 
         frame.add(mainPanel);
         frame.setVisible(true);
