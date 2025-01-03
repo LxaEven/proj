@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 public class ViewScore extends JPanel {
     public ViewScore(JPanel mainPanel) {
 
-        String url = "jdbc:mysql://localhost:3306/mydbSELECT * FROM student;";
+        String url = "jdbc:mysql://localhost:3306/mydb";
         String username = "root";
         String password = "Web#11*03";
 
@@ -21,7 +21,13 @@ public class ViewScore extends JPanel {
         JLabel titleLabel = new JLabel("Student > View Score");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         add(titleLabel, BorderLayout.NORTH);
-        DefaultTableModel tableModel = new DefaultTableModel();
+        DefaultTableModel tableModel = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Make all cells non-editable
+            }
+        };
+
         JTable table = new JTable(tableModel);
 
         try (Connection conn = DriverManager.getConnection(url, username, password);
