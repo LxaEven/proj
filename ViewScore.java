@@ -15,8 +15,8 @@ public class ViewScore extends JPanel {
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         add(titleLabel, BorderLayout.NORTH);
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentmanagement", "root", "");
+            Class.forName("student_data");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/student_data", "root", "Web#11*03");
             Statement stmt = (Statement) con.createStatement();
             ResultSet rs = ((java.sql.Statement) stmt).executeQuery("select * from student");
             while (rs.next()) {
