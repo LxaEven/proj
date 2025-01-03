@@ -2,7 +2,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
 
-public class project_i3 {
+public class project_i3 extends JFrame {
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Student management system");

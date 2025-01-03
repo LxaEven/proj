@@ -8,6 +8,7 @@ public class login extends JPanel {
 
         setLayout(new BorderLayout());
         
+        
         JLabel titleLabel = new JLabel("Log in as:", SwingConstants.CENTER);
         titleLabel.setBounds(20, 10, 100, 30);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
