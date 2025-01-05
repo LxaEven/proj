@@ -38,8 +38,15 @@ public class login extends JPanel {
         });
         studentButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                
+                JOptionPane.showMessageDialog(
+                    null, 
+                    "Login successful", 
+                    "Log in",
+                    JOptionPane.INFORMATION_MESSAGE
+                ); 
                 CardLayout c3 = (CardLayout) mainPanel.getLayout();
-                c3.show(mainPanel, "student");
+                c3.show(mainPanel, "student"); 
             }
         });
 
