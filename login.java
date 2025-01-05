@@ -61,8 +61,7 @@ public class login extends JPanel {
         gbc.gridx++;
         buttonPanel.add(studentButton, gbc);
         
-        add(buttonPanel, BorderLayout.CENTER);
-        
+        add(buttonPanel, BorderLayout.CENTER);        
     }
 
 }

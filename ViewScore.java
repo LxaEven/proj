@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.*;
@@ -21,10 +22,14 @@ public class ViewScore extends JPanel {
         JLabel titleLabel = new JLabel("Student > View Score");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         add(titleLabel, BorderLayout.NORTH);
+
+        JLabel tableLabel = new JLabel("Student Score", SwingConstants.CENTER);
+        tableLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        add(tableLabel, BorderLayout.CENTER);
         DefaultTableModel tableModel = new DefaultTableModel() {
-            @Override
+            
             public boolean isCellEditable(int row, int column) {
-                return false; // Make all cells non-editable
+                return false; 
             }
         };
 
@@ -57,6 +62,17 @@ public class ViewScore extends JPanel {
             e.printStackTrace();
             JOptionPane.showMessageDialog(mainPanel, "Error: " + e.getMessage());
         }
+        table.setFont(new Font("Arial", Font.PLAIN, 14));
+        table.setRowHeight(20);
+        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+        table.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+        table.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+        table.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+        table.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
 
         
         JScrollPane scrollPanel = new JScrollPane(table);
@@ -72,8 +88,13 @@ public class ViewScore extends JPanel {
                 c4.show(mainPanel, "student");
             }
         });
-        JPanel buttonPanel = new JPanel(new BorderLayout());
-        buttonPanel.add(backButton, BorderLayout.CENTER);
-        add(backButton, BorderLayout.SOUTH);
+        JPanel buttonPanel = new JPanel( new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.gridx = 1;
+        gbc.gridy = 5;
+        buttonPanel.add(backButton, gbc);
+
+        add(buttonPanel, BorderLayout.SOUTH);
     }
 }

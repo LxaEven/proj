@@ -13,7 +13,7 @@ public class student extends JPanel {
 
         JButton ViewScore = new JButton("View Score");
         ViewScore.setFont(new Font("Arial", Font.BOLD, 15));
-        ViewScore.setPreferredSize(new Dimension(900, 50));
+        ViewScore.setPreferredSize(new Dimension(800, 50));
         ViewScore.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CardLayout c4 = (CardLayout) mainPanel.getLayout();
@@ -23,7 +23,7 @@ public class student extends JPanel {
 
         JButton ViewCourse = new JButton("View Course");
         ViewCourse.setFont(new Font("Arial", Font.BOLD, 15));
-        ViewCourse.setPreferredSize(new Dimension(900, 50));
+        ViewCourse.setPreferredSize(new Dimension(800, 50));
         ViewCourse.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CardLayout c4 = (CardLayout) mainPanel.getLayout();
@@ -33,7 +33,7 @@ public class student extends JPanel {
 
         JButton ChangePassword = new JButton("Change Password");
         ChangePassword.setFont(new Font("Arial", Font.BOLD, 15));
-        ChangePassword.setPreferredSize(new Dimension(900, 50));
+        ChangePassword.setPreferredSize(new Dimension(800, 50));
         ChangePassword.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CardLayout c4 = (CardLayout) mainPanel.getLayout();
@@ -43,7 +43,7 @@ public class student extends JPanel {
 
         JButton Logout = new JButton("Logout");
         Logout.setFont(new Font("Arial", Font.BOLD, 15));
-        Logout.setPreferredSize(new Dimension(900, 50));
+        Logout.setPreferredSize(new Dimension(800, 50));
         Logout.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int response = JOptionPane.showConfirmDialog(
@@ -64,7 +64,7 @@ public class student extends JPanel {
 
         JButton CloseProgram = new JButton("Exit");
         CloseProgram.setFont(new Font("Arial", Font.BOLD, 15));
-        CloseProgram.setPreferredSize(new Dimension(900, 50));
+        CloseProgram.setPreferredSize(new Dimension(800, 50));
         CloseProgram.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int response = JOptionPane.showConfirmDialog(
