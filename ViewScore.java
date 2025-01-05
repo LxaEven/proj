@@ -86,6 +86,7 @@ public class ViewScore extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 CardLayout c4 = (CardLayout) mainPanel.getLayout();
                 c4.show(mainPanel, "student");
+                
             }
         });
         JPanel buttonPanel = new JPanel( new GridBagLayout());
