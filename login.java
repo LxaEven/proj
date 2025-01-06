@@ -12,7 +12,7 @@ public class login extends JPanel {
         JLabel titleLabel = new JLabel("Log in as:", SwingConstants.CENTER);
         titleLabel.setBounds(20, 10, 100, 30);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        add(titleLabel, BorderLayout.NORTH);
+        
 
         
 
@@ -55,6 +55,8 @@ public class login extends JPanel {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridx = 0;
         gbc.gridy = 0;
+        buttonPanel.add(titleLabel, gbc);
+        gbc.gridy++;
         buttonPanel.add(adminButton, gbc);
         gbc.gridx++;
         buttonPanel.add(teacherButton, gbc);
