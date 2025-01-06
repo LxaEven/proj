@@ -19,8 +19,12 @@ public class startPanel extends JPanel {
                 c4.show(mainPanel, "login");
             }
         });
-        // Add the startPanel to the mainPanel
-        mainPanel.add(this, "start");
+        JPanel clickToContinue = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        clickToContinue.add(titleLabel, gbc);
+        add(clickToContinue, BorderLayout.CENTER);
     
     }
 }
