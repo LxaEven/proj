@@ -41,12 +41,31 @@ public class login extends JPanel {
                 
                 JOptionPane.showMessageDialog(
                     null, 
-                    "Login successful", 
+                    "Login successfully", 
                     "Log in",
                     JOptionPane.INFORMATION_MESSAGE
                 ); 
                 CardLayout c3 = (CardLayout) mainPanel.getLayout();
                 c3.show(mainPanel, "student"); 
+            }
+        });
+        JButton CloseProgram = new JButton("Exit");
+        CloseProgram.setPreferredSize(new Dimension(100, 30));
+        CloseProgram.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int response = JOptionPane.showConfirmDialog(
+                    null, 
+                    "Do you want to Exit the program?", 
+                    "Exit the program", 
+                    JOptionPane.YES_NO_OPTION
+                );
+                
+                if (response == JOptionPane.NO_OPTION) {
+                    CardLayout c4 = (CardLayout) mainPanel.getLayout();
+                    c4.show(mainPanel, "student");
+                } else {
+                    System.exit(0);
+                }
             }
         });
 
@@ -62,8 +81,13 @@ public class login extends JPanel {
         buttonPanel.add(teacherButton, gbc);
         gbc.gridx++;
         buttonPanel.add(studentButton, gbc);
+        JPanel buttonPanel2 = new JPanel( new GridBagLayout());
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        buttonPanel2.add(CloseProgram, gbc);
         
-        add(buttonPanel, BorderLayout.CENTER);        
+        add(buttonPanel, BorderLayout.CENTER);
+        add(buttonPanel2, BorderLayout.SOUTH);        
     }
 
 }

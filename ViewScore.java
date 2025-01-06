@@ -25,7 +25,7 @@ public class ViewScore extends JPanel {
 
         JLabel tableLabel = new JLabel("Student Score", SwingConstants.CENTER);
         tableLabel.setFont(new Font("Arial", Font.BOLD, 15));
-        add(tableLabel, BorderLayout.CENTER);
+        add(tableLabel, BorderLayout.NORTH);
         DefaultTableModel tableModel = new DefaultTableModel() {
             
             public boolean isCellEditable(int row, int column) {
@@ -92,8 +92,8 @@ public class ViewScore extends JPanel {
         JPanel buttonPanel = new JPanel( new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.gridx = 1;
-        gbc.gridy = 5;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
         buttonPanel.add(backButton, gbc);
 
         add(buttonPanel, BorderLayout.SOUTH);
