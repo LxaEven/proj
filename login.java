@@ -23,7 +23,7 @@ public class login extends JPanel {
         JButton studentButton = new JButton("Student");
         studentButton.setPreferredSize(new Dimension(100, 30));
 
-        // Button Actions
+        
         adminButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CardLayout cl = (CardLayout) mainPanel.getLayout();

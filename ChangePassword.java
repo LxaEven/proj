@@ -13,13 +13,16 @@ public class ChangePassword extends JPanel {
         JLabel titleLabel = new JLabel("Student");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
 
+        
         JLabel oldPasswordLabel = new JLabel("Old Password:");
         JTextField oldPassword = new JTextField();
         oldPassword.setPreferredSize(new Dimension(200, 30));
 
+
         JLabel newPasswordLabel = new JLabel("New Password:");
         JTextField newPassword = new JTextField();
         newPassword.setPreferredSize(new Dimension(200, 30));
+
 
         JButton submitButton = new JButton("Submit");
         submitButton.setPreferredSize(new Dimension(100, 30));
@@ -43,6 +46,7 @@ public class ChangePassword extends JPanel {
             }
         });
 
+
         JButton ViewProfile = new JButton("View Profile");
         ViewProfile.setFont(new Font("Arial", Font.BOLD, 13));
         ViewProfile.setPreferredSize(new Dimension(160, 30));
@@ -52,6 +56,7 @@ public class ChangePassword extends JPanel {
                 c4.show(mainPanel, "ViewProfile");
             }
         });
+
 
         JButton ViewScore = new JButton("View Score");
         ViewScore.setFont(new Font("Arial", Font.BOLD, 13));
@@ -63,6 +68,7 @@ public class ChangePassword extends JPanel {
             }
         });
 
+
         JButton ViewCourse = new JButton("View Course");
         ViewCourse.setFont(new Font("Arial", Font.BOLD, 13));
         ViewCourse.setPreferredSize(new Dimension(160, 30));
@@ -72,6 +78,7 @@ public class ChangePassword extends JPanel {
                 c4.show(mainPanel, "ViewCourse");
             }
         });
+
 
         JButton ChangePassword = new JButton("Change Password");
         ChangePassword.setFont(new Font("Arial", Font.BOLD, 13));
@@ -84,6 +91,7 @@ public class ChangePassword extends JPanel {
                 c4.show(mainPanel, "ChangePassword");
             }
         });
+
 
         JButton Logout = new JButton("Logout");
         Logout.setFont(new Font("Arial", Font.BOLD, 13));
@@ -106,6 +114,7 @@ public class ChangePassword extends JPanel {
             }
         });
 
+
         JButton CloseProgram = new JButton("Exit");
         CloseProgram.setFont(new Font("Arial", Font.BOLD, 13));
         CloseProgram.setPreferredSize(new Dimension(160, 30));
@@ -127,6 +136,8 @@ public class ChangePassword extends JPanel {
                 }
             }
         });
+
+
         JPanel buttonPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(20, 20, 20, 20);
@@ -147,6 +158,8 @@ public class ChangePassword extends JPanel {
         buttonPanel.add(CloseProgram, gbc);
         buttonPanel.setBackground(Color.CYAN);
         add(buttonPanel, BorderLayout.WEST);
+
+
         JPanel formPanel = new JPanel(new GridBagLayout());
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridx = 0;

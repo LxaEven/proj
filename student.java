@@ -19,6 +19,8 @@ public class student extends JPanel {
                 c4.show(mainPanel, "ViewProfile");
             }
         });
+
+
         JButton ViewScore = new JButton("View Score");
         ViewScore.setFont(new Font("Arial", Font.BOLD, 13));
         ViewScore.setPreferredSize(new Dimension(160, 30));
@@ -28,6 +30,7 @@ public class student extends JPanel {
                 c4.show(mainPanel, "ViewScore");
             }
         });
+
 
         JButton ViewCourse = new JButton("View Course");
         ViewCourse.setFont(new Font("Arial", Font.BOLD, 13));
@@ -39,6 +42,7 @@ public class student extends JPanel {
             }
         });
 
+
         JButton ChangePassword = new JButton("Change Password");
         ChangePassword.setFont(new Font("Arial", Font.BOLD, 13));
         ChangePassword.setPreferredSize(new Dimension(160, 30));
@@ -48,6 +52,7 @@ public class student extends JPanel {
                 c4.show(mainPanel, "ChangePassword");
             }
         });
+
 
         JButton Logout = new JButton("Logout");
         Logout.setFont(new Font("Arial", Font.BOLD, 13));
@@ -70,6 +75,7 @@ public class student extends JPanel {
             }
         });
 
+
         JButton CloseProgram = new JButton("Exit");
         CloseProgram.setFont(new Font("Arial", Font.BOLD, 13));
         CloseProgram.setPreferredSize(new Dimension(160, 30));
@@ -91,8 +97,11 @@ public class student extends JPanel {
                 }
             }
         });
+
+
         JPanel buttonPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
+        
         gbc.insets = new Insets(20, 20, 20, 20);
         gbc.gridx = 0;
         gbc.gridy = 0;
