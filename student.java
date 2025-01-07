@@ -9,11 +9,10 @@ public class student extends JPanel {
         setLayout(new BorderLayout());
         JLabel titleLabel = new JLabel("Student");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        add(titleLabel, BorderLayout.NORTH);
 
         JButton ViewScore = new JButton("View Score");
-        ViewScore.setFont(new Font("Arial", Font.BOLD, 15));
-        ViewScore.setPreferredSize(new Dimension(800, 50));
+        ViewScore.setFont(new Font("Arial", Font.BOLD, 13));
+        ViewScore.setPreferredSize(new Dimension(130, 30));
         ViewScore.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CardLayout c4 = (CardLayout) mainPanel.getLayout();
@@ -22,8 +21,8 @@ public class student extends JPanel {
         });
 
         JButton ViewCourse = new JButton("View Course");
-        ViewCourse.setFont(new Font("Arial", Font.BOLD, 15));
-        ViewCourse.setPreferredSize(new Dimension(800, 50));
+        ViewCourse.setFont(new Font("Arial", Font.BOLD, 13));
+        ViewCourse.setPreferredSize(new Dimension(130, 30));
         ViewCourse.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CardLayout c4 = (CardLayout) mainPanel.getLayout();
@@ -32,8 +31,8 @@ public class student extends JPanel {
         });
 
         JButton ChangePassword = new JButton("Change Password");
-        ChangePassword.setFont(new Font("Arial", Font.BOLD, 15));
-        ChangePassword.setPreferredSize(new Dimension(800, 50));
+        ChangePassword.setFont(new Font("Arial", Font.BOLD, 13));
+        ChangePassword.setPreferredSize(new Dimension(130, 30));
         ChangePassword.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CardLayout c4 = (CardLayout) mainPanel.getLayout();
@@ -42,8 +41,8 @@ public class student extends JPanel {
         });
 
         JButton Logout = new JButton("Logout");
-        Logout.setFont(new Font("Arial", Font.BOLD, 15));
-        Logout.setPreferredSize(new Dimension(800, 50));
+        Logout.setFont(new Font("Arial", Font.BOLD, 13));
+        Logout.setPreferredSize(new Dimension(130, 30));
         Logout.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int response = JOptionPane.showConfirmDialog(
@@ -63,8 +62,8 @@ public class student extends JPanel {
         });
 
         JButton CloseProgram = new JButton("Exit");
-        CloseProgram.setFont(new Font("Arial", Font.BOLD, 15));
-        CloseProgram.setPreferredSize(new Dimension(800, 50));
+        CloseProgram.setFont(new Font("Arial", Font.BOLD, 13));
+        CloseProgram.setPreferredSize(new Dimension(130, 30));
         CloseProgram.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int response = JOptionPane.showConfirmDialog(
@@ -87,6 +86,8 @@ public class student extends JPanel {
         gbc.insets = new Insets(20, 20, 20, 20);
         gbc.gridx = 0;
         gbc.gridy = 0;
+        buttonPanel.add(titleLabel, gbc);
+        gbc.gridy++;
         buttonPanel.add(ViewScore, gbc);
         gbc.gridy++;
         buttonPanel.add(ViewCourse, gbc);
@@ -96,6 +97,7 @@ public class student extends JPanel {
         buttonPanel.add(Logout, gbc);
         gbc.gridy++;
         buttonPanel.add(CloseProgram, gbc);
-        add(buttonPanel, BorderLayout.CENTER);
+        buttonPanel.setBackground(Color.BLUE);
+        add(buttonPanel, BorderLayout.WEST);
     }
 }

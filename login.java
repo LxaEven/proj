@@ -62,7 +62,7 @@ public class login extends JPanel {
                 
                 if (response == JOptionPane.NO_OPTION) {
                     CardLayout c4 = (CardLayout) mainPanel.getLayout();
-                    c4.show(mainPanel, "student");
+                    c4.show(mainPanel, "login");
                 } else {
                     System.exit(0);
                 }
