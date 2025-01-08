@@ -88,7 +88,7 @@ public class ViewScore extends JPanel {
         JButton ViewScore = new JButton("View Score");
         ViewScore.setFont(new Font("Arial", Font.BOLD, 13));
         ViewScore.setPreferredSize(new Dimension(160, 30));
-        ViewScore.setBackground(Color.BLACK);
+        ViewScore.setBackground(Color.GRAY);
         ViewScore.setForeground(Color.WHITE);
         ViewScore.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -212,16 +212,28 @@ public class ViewScore extends JPanel {
         buttonPanel.add(Logout, gbc);
         gbc.gridy++;
         buttonPanel.add(CloseProgram, gbc);
-        buttonPanel.setBackground(Color.CYAN);
+        buttonPanel.setBackground(Color.GRAY);
         add(buttonPanel, BorderLayout.WEST);
 
         JPanel ModePanel = new JPanel(new GridBagLayout());
+        ModePanel.setPreferredSize(new Dimension(180, 50));
         gbc.gridy = 0;
         gbc.gridx = 0;
         ModePanel.add(darkMode, gbc);
         gbc.gridx++;
         ModePanel.add(lightMode, gbc);
-        ModePanel.setBackground(Color.CYAN);
+        ModePanel.setBackground(Color.GRAY);
         add(ModePanel, BorderLayout.NORTH);
+
+        JPanel eastPanel = new JPanel();
+        eastPanel.setBackground(Color.GRAY);
+        eastPanel.setPreferredSize(new Dimension(50, 300));
+        add(eastPanel, BorderLayout.EAST);
+
+        JPanel southPanel = new JPanel();
+        southPanel.setBackground(Color.GRAY);
+        southPanel.setPreferredSize(new Dimension(200, 50));
+        add(southPanel, BorderLayout.SOUTH);
+    
     }
 }

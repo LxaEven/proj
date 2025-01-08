@@ -1,13 +1,19 @@
 import javax.swing.*;
+
+import com.formdev.flatlaf.FlatLightLaf;
+
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 public class startPanel extends JPanel {
 
     public startPanel(JPanel mainPanel) {
 
         setLayout(new BorderLayout());
-        // Title Label
+        try {
+            UIManager.setLookAndFeel( new FlatLightLaf() );
+        } catch( Exception ex ) {
+            System.err.println( "Failed to initialize LaF" );
+        }
         JLabel titleLabel = new JLabel("Click to continue...", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         add(titleLabel, BorderLayout.NORTH);

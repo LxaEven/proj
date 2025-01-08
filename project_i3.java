@@ -1,16 +1,9 @@
 import javax.swing.*;
-
-import com.formdev.flatlaf.*;
 import java.awt.CardLayout;
 
 public class project_i3 extends JFrame {
 
     public static void main(String[] args) {
-        try {
-            UIManager.setLookAndFeel( new FlatLightLaf() );
-        } catch( Exception ex ) {
-            System.err.println( "Failed to initialize LaF" );
-        }
         
 
         JFrame frame = new JFrame("Student management system");

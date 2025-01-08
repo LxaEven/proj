@@ -82,7 +82,7 @@ public class ChangePassword extends JPanel {
         JButton ChangePassword = new JButton("Change Password");
         ChangePassword.setFont(new Font("Arial", Font.BOLD, 13));
         ChangePassword.setPreferredSize(new Dimension(160, 30));
-        ChangePassword.setBackground(Color.BLACK);
+        ChangePassword.setBackground(Color.GRAY);
         ChangePassword.setForeground(Color.WHITE);
         ChangePassword.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -184,7 +184,7 @@ public class ChangePassword extends JPanel {
         buttonPanel.add(Logout, gbc);
         gbc.gridy++;
         buttonPanel.add(CloseProgram, gbc);
-        buttonPanel.setBackground(Color.CYAN);
+        buttonPanel.setBackground(Color.GRAY);
         add(buttonPanel, BorderLayout.WEST);
 
 
@@ -212,16 +212,16 @@ public class ChangePassword extends JPanel {
         ModePanel.add(darkMode, gbc);
         gbc.gridx++;
         ModePanel.add(lightMode, gbc);
-        ModePanel.setBackground(Color.CYAN);
+        ModePanel.setBackground(Color.GRAY);
         add(ModePanel, BorderLayout.NORTH);
 
         JPanel eastPanel = new JPanel();
-        eastPanel.setBackground(Color.CYAN);
+        eastPanel.setBackground(Color.GRAY);
         eastPanel.setPreferredSize(new Dimension(50, 300));
         add(eastPanel, BorderLayout.EAST);
 
         JPanel southPanel = new JPanel();
-        southPanel.setBackground(Color.CYAN);
+        southPanel.setBackground(Color.GRAY);
         southPanel.setPreferredSize(new Dimension(200, 50));
         add(southPanel, BorderLayout.SOUTH);
     }

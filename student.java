@@ -146,16 +146,28 @@ public class student extends JPanel {
         buttonPanel.add(Logout, gbc);
         gbc.gridy++;
         buttonPanel.add(CloseProgram, gbc);
-        buttonPanel.setBackground(Color.CYAN);
+        buttonPanel.setBackground(Color.GRAY);
         add(buttonPanel, BorderLayout.WEST);
 
         JPanel ModePanel = new JPanel(new GridBagLayout());
+        ModePanel.setPreferredSize(new Dimension(180, 50));
         gbc.gridy = 0;
         gbc.gridx = 0;
         ModePanel.add(darkMode, gbc);
         gbc.gridx++;
         ModePanel.add(lightMode, gbc);
-        ModePanel.setBackground(Color.CYAN);
+        ModePanel.setBackground(Color.GRAY);
         add(ModePanel, BorderLayout.NORTH);
+
+        JPanel eastPanel = new JPanel();
+        eastPanel.setBackground(Color.GRAY);
+        eastPanel.setPreferredSize(new Dimension(50, 300));
+        add(eastPanel, BorderLayout.EAST);
+
+        JPanel southPanel = new JPanel();
+        southPanel.setBackground(Color.GRAY);
+        southPanel.setPreferredSize(new Dimension(200, 50));
+        add(southPanel, BorderLayout.SOUTH);
+    
     }
 }
