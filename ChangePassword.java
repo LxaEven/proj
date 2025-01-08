@@ -12,11 +12,13 @@ public class ChangePassword extends JPanel {
 
         
         JLabel oldPasswordLabel = new JLabel("Old Password:");
+        oldPasswordLabel.setFont(new Font("Arial", Font.BOLD, 13));
         JTextField oldPassword = new JTextField();
         oldPassword.setPreferredSize(new Dimension(200, 30));
 
 
         JLabel newPasswordLabel = new JLabel("New Password:");
+        newPasswordLabel.setFont(new Font("Arial", Font.BOLD, 13));
         JTextField newPassword = new JTextField();
         newPassword.setPreferredSize(new Dimension(200, 30));
 
@@ -187,6 +189,7 @@ public class ChangePassword extends JPanel {
 
 
         JPanel formPanel = new JPanel(new GridBagLayout());
+        buttonPanel.setPreferredSize(new Dimension(200, 300));
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -203,6 +206,7 @@ public class ChangePassword extends JPanel {
         add(formPanel, BorderLayout.CENTER);
 
         JPanel ModePanel = new JPanel(new GridBagLayout());
+        ModePanel.setPreferredSize(new Dimension(180, 50));
         gbc.gridy = 0;
         gbc.gridx = 0;
         ModePanel.add(darkMode, gbc);
@@ -210,5 +214,15 @@ public class ChangePassword extends JPanel {
         ModePanel.add(lightMode, gbc);
         ModePanel.setBackground(Color.CYAN);
         add(ModePanel, BorderLayout.NORTH);
+
+        JPanel eastPanel = new JPanel();
+        eastPanel.setBackground(Color.CYAN);
+        eastPanel.setPreferredSize(new Dimension(50, 300));
+        add(eastPanel, BorderLayout.EAST);
+
+        JPanel southPanel = new JPanel();
+        southPanel.setBackground(Color.CYAN);
+        southPanel.setPreferredSize(new Dimension(200, 50));
+        add(southPanel, BorderLayout.SOUTH);
     }
 }
