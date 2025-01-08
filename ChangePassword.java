@@ -1,11 +1,8 @@
+import java.sql.*;
 import javax.swing.*;
+import com.formdev.flatlaf.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.awt.event.*;
 
 public class ChangePassword extends JPanel {
     public ChangePassword(JPanel mainPanel) {
@@ -137,6 +134,35 @@ public class ChangePassword extends JPanel {
             }
         });
 
+         JButton darkMode = new JButton("Dark Mode");
+        darkMode.setFont(new Font("Arial", Font.BOLD, 13));
+        darkMode.setPreferredSize(new Dimension(160, 30));
+        darkMode.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    UIManager.setLookAndFeel( new FlatDarkLaf() );
+                    SwingUtilities.updateComponentTreeUI(mainPanel);
+                } catch( Exception ex ) {
+                    System.err.println( "Failed to initialize LaF" );
+                }
+            }
+        });
+
+        JButton lightMode = new JButton("Light Mode");
+        lightMode.setFont(new Font("Arial", Font.BOLD, 13));
+        lightMode.setPreferredSize(new Dimension(160, 30));
+        lightMode.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    UIManager.setLookAndFeel( new FlatLightLaf() );
+                    SwingUtilities.updateComponentTreeUI(mainPanel);
+                } catch( Exception ex ) {
+                    System.err.println( "Failed to initialize LaF" );
+                }
+            }
+        });
+
+
 
         JPanel buttonPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -175,5 +201,14 @@ public class ChangePassword extends JPanel {
         gbc.gridy++;
         formPanel.add(submitButton, gbc);
         add(formPanel, BorderLayout.CENTER);
+
+        JPanel ModePanel = new JPanel(new GridBagLayout());
+        gbc.gridy = 0;
+        gbc.gridx = 0;
+        ModePanel.add(darkMode, gbc);
+        gbc.gridx++;
+        ModePanel.add(lightMode, gbc);
+        ModePanel.setBackground(Color.CYAN);
+        add(ModePanel, BorderLayout.NORTH);
     }
 }

@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 public class loginScreen extends JPanel {
 
     public loginScreen(JPanel mainPanel) {
@@ -31,11 +30,11 @@ public class loginScreen extends JPanel {
         
         studentButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Login.showLoginScreen();
-                if(Login.loginSuccess){
+                // Login.showLoginScreen();
+                // if(Login.loginSuccess){
                     CardLayout c3 = (CardLayout) mainPanel.getLayout();
                     c3.show(mainPanel, "student");
-                }
+                //}
                 
             }
         });

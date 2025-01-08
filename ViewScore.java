@@ -1,15 +1,9 @@
-import java.sql.Statement;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.ResultSet;
+import java.sql.*;
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-
+import javax.swing.table.*;
+import com.formdev.flatlaf.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class ViewScore extends JPanel {
     public ViewScore(JPanel mainPanel) {
@@ -71,6 +65,9 @@ public class ViewScore extends JPanel {
         for(int i = 0; i < table.getColumnCount(); i++) {
             table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        
+        
 
         
         JScrollPane scrollPanel = new JScrollPane(table);
@@ -167,6 +164,35 @@ public class ViewScore extends JPanel {
             }
         });
 
+         JButton darkMode = new JButton("Dark Mode");
+        darkMode.setFont(new Font("Arial", Font.BOLD, 13));
+        darkMode.setPreferredSize(new Dimension(160, 30));
+        darkMode.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    UIManager.setLookAndFeel( new FlatDarkLaf() );
+                    SwingUtilities.updateComponentTreeUI(mainPanel);
+                } catch( Exception ex ) {
+                    System.err.println( "Failed to initialize LaF" );
+                }
+            }
+        });
+
+        JButton lightMode = new JButton("Light Mode");
+        lightMode.setFont(new Font("Arial", Font.BOLD, 13));
+        lightMode.setPreferredSize(new Dimension(160, 30));
+        lightMode.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    UIManager.setLookAndFeel( new FlatLightLaf() );
+                    SwingUtilities.updateComponentTreeUI(mainPanel);
+                } catch( Exception ex ) {
+                    System.err.println( "Failed to initialize LaF" );
+                }
+            }
+        });
+
+
 
         JPanel buttonPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -188,5 +214,14 @@ public class ViewScore extends JPanel {
         buttonPanel.add(CloseProgram, gbc);
         buttonPanel.setBackground(Color.CYAN);
         add(buttonPanel, BorderLayout.WEST);
+
+        JPanel ModePanel = new JPanel(new GridBagLayout());
+        gbc.gridy = 0;
+        gbc.gridx = 0;
+        ModePanel.add(darkMode, gbc);
+        gbc.gridx++;
+        ModePanel.add(lightMode, gbc);
+        ModePanel.setBackground(Color.CYAN);
+        add(ModePanel, BorderLayout.NORTH);
     }
 }
