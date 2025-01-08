@@ -34,12 +34,12 @@ public class ViewScore extends JPanel {
              ResultSet rs = stmt.executeQuery("SELECT * FROM student")) {
 
             
-            tableModel.addColumn("student_id");
-            tableModel.addColumn("student_firstname");
-            tableModel.addColumn("student_lastname");
-            tableModel.addColumn("phone_number");
-            tableModel.addColumn("student_birth");
-            tableModel.addColumn("student_score");
+            tableModel.addColumn("ID");
+            tableModel.addColumn("Firstname");
+            tableModel.addColumn("Lastname");
+            tableModel.addColumn("Phone Number");
+            tableModel.addColumn("Birth");
+            tableModel.addColumn("Score");
 
             
             while (rs.next()) {
@@ -66,12 +66,51 @@ public class ViewScore extends JPanel {
             table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
+        TableRowSorter<DefaultTableModel> rowSorter = new TableRowSorter<>(tableModel);
+        table.setRowSorter(rowSorter);
         
+        JLabel searchLabel = new JLabel("Search:");
+        searchLabel.setFont(new Font("Arial", Font.BOLD, 12));
+        searchLabel.setPreferredSize(new Dimension(100, 30));
+        JTextField searchField = new JTextField(20);
+        searchField.setPreferredSize(new Dimension(300, 30));
+        String placeholder = "Enter your search here...";
+        searchField.setText(placeholder);
+
+        JButton searchButton = new JButton("Search");
+        searchButton.setFont(new Font("Arial", Font.BOLD, 12));
+        searchButton.setPreferredSize(new Dimension(100, 30));
+        searchField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                String searchText = searchField.getText();
+                if (searchText.trim().length() == 0) {
+                    rowSorter.setRowFilter(null); 
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + searchText)); 
+                }
+            }
+        });
+
+        searchField.addFocusListener(new FocusListener() {
+            public void focusGained(FocusEvent e) {
+                searchField.setText("");
+            }
         
+            public void focusLost(FocusEvent e) {
+                // nothing
+            }
+        });
+
+        
+
 
         
         JScrollPane scrollPanel = new JScrollPane(table);
-        add(scrollPanel, BorderLayout.CENTER);
+        table.setFillsViewportHeight(true);
+        
+        
 
 
         JButton ViewProfile = new JButton("View Profile");
@@ -164,9 +203,9 @@ public class ViewScore extends JPanel {
             }
         });
 
-         JButton darkMode = new JButton("Dark Mode");
-        darkMode.setFont(new Font("Arial", Font.BOLD, 13));
-        darkMode.setPreferredSize(new Dimension(160, 30));
+        JButton darkMode = new JButton("Dark Mode");
+        darkMode.setFont(new Font("Arial", Font.BOLD, 12));
+        darkMode.setPreferredSize(new Dimension(130, 30));
         darkMode.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -179,8 +218,8 @@ public class ViewScore extends JPanel {
         });
 
         JButton lightMode = new JButton("Light Mode");
-        lightMode.setFont(new Font("Arial", Font.BOLD, 13));
-        lightMode.setPreferredSize(new Dimension(160, 30));
+        lightMode.setFont(new Font("Arial", Font.BOLD, 12));
+        lightMode.setPreferredSize(new Dimension(130, 30));
         lightMode.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -215,8 +254,10 @@ public class ViewScore extends JPanel {
         buttonPanel.setBackground(Color.GRAY);
         add(buttonPanel, BorderLayout.WEST);
 
+
         JPanel ModePanel = new JPanel(new GridBagLayout());
         ModePanel.setPreferredSize(new Dimension(180, 50));
+        gbc.insets = new Insets(20, 20, 20, 20);
         gbc.gridy = 0;
         gbc.gridx = 0;
         ModePanel.add(darkMode, gbc);
@@ -234,6 +275,30 @@ public class ViewScore extends JPanel {
         southPanel.setBackground(Color.GRAY);
         southPanel.setPreferredSize(new Dimension(200, 50));
         add(southPanel, BorderLayout.SOUTH);
+
+        JPanel SearchPanel = new JPanel(new GridBagLayout());
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        SearchPanel.add(searchLabel, gbc);
+        gbc.gridx++;
+        SearchPanel.add(searchField, gbc);
+        gbc.gridx++;
+        SearchPanel.add(searchButton, gbc);
+
+        JPanel TablePanel = new JPanel(new GridBagLayout());
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 3;
+        gbc.anchor = GridBagConstraints.CENTER;
+        TablePanel.add(SearchPanel, gbc);
+        gbc.gridy++; 
+        gbc.fill = GridBagConstraints.BOTH; 
+        gbc.weightx = 1.0; 
+        gbc.weighty = 1.0;
+        TablePanel.add(scrollPanel, gbc);
+        add(TablePanel, BorderLayout.CENTER);
     
     }
 }

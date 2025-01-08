@@ -136,9 +136,9 @@ public class ChangePassword extends JPanel {
             }
         });
 
-         JButton darkMode = new JButton("Dark Mode");
-        darkMode.setFont(new Font("Arial", Font.BOLD, 13));
-        darkMode.setPreferredSize(new Dimension(160, 30));
+        JButton darkMode = new JButton("Dark Mode");
+        darkMode.setFont(new Font("Arial", Font.BOLD, 12));
+        darkMode.setPreferredSize(new Dimension(130, 30));
         darkMode.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -151,8 +151,8 @@ public class ChangePassword extends JPanel {
         });
 
         JButton lightMode = new JButton("Light Mode");
-        lightMode.setFont(new Font("Arial", Font.BOLD, 13));
-        lightMode.setPreferredSize(new Dimension(160, 30));
+        lightMode.setFont(new Font("Arial", Font.BOLD, 12));
+        lightMode.setPreferredSize(new Dimension(130, 30));
         lightMode.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -206,6 +206,7 @@ public class ChangePassword extends JPanel {
         add(formPanel, BorderLayout.CENTER);
 
         JPanel ModePanel = new JPanel(new GridBagLayout());
+        gbc.insets = new Insets(20, 20, 20, 20);
         ModePanel.setPreferredSize(new Dimension(180, 50));
         gbc.gridy = 0;
         gbc.gridx = 0;
