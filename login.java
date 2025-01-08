@@ -44,6 +44,7 @@ public class Login {
             } else if (username.equals(validUsername) && password.equals(validPassword)) {
                 JOptionPane.showMessageDialog(frame, "Login successful!", "Info", JOptionPane.INFORMATION_MESSAGE);
                 frame.dispose();
+                loginSuccess = true;
             } else {
                 JOptionPane.showMessageDialog(frame, "Incorrect username or password.", "Error", JOptionPane.ERROR_MESSAGE);
             }
