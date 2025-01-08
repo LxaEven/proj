@@ -59,7 +59,7 @@ public class ViewScore extends JPanel {
         
         table.setFont(new Font("Arial", Font.PLAIN, 14));
         table.setRowHeight(20);
-        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
+        table.getTableHeader().setFont(new Font("Time New Roman", Font.BOLD, 15));
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         for(int i = 0; i < table.getColumnCount(); i++) {
