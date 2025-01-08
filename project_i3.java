@@ -10,14 +10,14 @@ public class project_i3 extends JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         JPanel mainPanel = new JPanel(new CardLayout());
-        login loginPanel = new login(mainPanel);
+        loginScreen loginScreenPanel = new loginScreen(mainPanel);
         startPanel startPanel = new startPanel(mainPanel);
         student studentPanel = new student(mainPanel);
         ViewScore ViewScorePanel = new ViewScore(mainPanel);
         ChangePassword ChangePasswordPanel = new ChangePassword(mainPanel);
 
         mainPanel.add(startPanel, "start");
-        mainPanel.add(loginPanel, "login");
+        mainPanel.add(loginScreenPanel, "loginScreen");
         mainPanel.add(studentPanel, "student");
         mainPanel.add(ViewScorePanel, "ViewScore");
         mainPanel.add(ChangePasswordPanel, "ChangePassword");

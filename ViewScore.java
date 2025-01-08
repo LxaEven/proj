@@ -137,7 +137,7 @@ public class ViewScore extends JPanel {
                 
                 if (response == JOptionPane.YES_OPTION) {
                     CardLayout c4 = (CardLayout) mainPanel.getLayout();
-                    c4.show(mainPanel, "login");
+                    c4.show(mainPanel, "loginScreen");
                 } else {
                     System.out.println("Stayed logged in");
                 }

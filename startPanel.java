@@ -16,7 +16,7 @@ public class startPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 CardLayout c4 = (CardLayout) mainPanel.getLayout();
-                c4.show(mainPanel, "login");
+                c4.show(mainPanel, "loginScreen");
             }
         });
         JPanel clickToContinue = new JPanel(new GridBagLayout());
