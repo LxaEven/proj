@@ -94,6 +94,7 @@ public class ViewScore extends JPanel {
         });
 
         searchField.addFocusListener(new FocusListener() {
+            @Override
             public void focusGained(FocusEvent e) {
                 searchField.setText("");
             }
