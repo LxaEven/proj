@@ -72,7 +72,7 @@ public class ViewScore extends JPanel {
         
         JLabel searchLabel = new JLabel("Search:");
         searchLabel.setFont(new Font("Arial", Font.BOLD, 12));
-        searchLabel.setPreferredSize(new Dimension(100, 30));
+        searchLabel.setPreferredSize(new Dimension(50, 30));
         JTextField searchField = new JTextField(20);
         searchField.setPreferredSize(new Dimension(300, 30));
         String placeholder = "Enter your search here...";
