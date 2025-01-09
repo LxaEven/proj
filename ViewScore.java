@@ -57,9 +57,9 @@ public class ViewScore extends JPanel {
             JOptionPane.showMessageDialog(mainPanel, "Error: " + e.getMessage());
         }
         
-        table.setFont(new Font("Arial", Font.PLAIN, 14));
+        table.setFont(new Font("Arial", Font.PLAIN, 15));
         table.setRowHeight(20);
-        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 15));
+        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 17));
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         for(int i = 0; i < table.getColumnCount(); i++) {
@@ -74,7 +74,7 @@ public class ViewScore extends JPanel {
         searchLabel.setFont(new Font("Arial", Font.BOLD, 12));
         searchLabel.setPreferredSize(new Dimension(50, 30));
         JTextField searchField = new JTextField(20);
-        searchField.setPreferredSize(new Dimension(300, 30));
+        searchField.setPreferredSize(new Dimension(600, 30));
         String placeholder = "Enter your search here...";
         searchField.setText(placeholder);
 
@@ -99,11 +99,9 @@ public class ViewScore extends JPanel {
             }
         
             public void focusLost(FocusEvent e) {
-                // nothing
+                searchField.setText(placeholder);
             }
         });
-
-        
 
 
         
@@ -111,8 +109,6 @@ public class ViewScore extends JPanel {
         table.setFillsViewportHeight(true);
         
         
-
-
         JButton ViewProfile = new JButton("View Profile");
         ViewProfile.setFont(new Font("Arial", Font.BOLD, 13));
         ViewProfile.setPreferredSize(new Dimension(160, 30));
