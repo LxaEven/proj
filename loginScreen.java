@@ -42,6 +42,7 @@ public class loginScreen extends JPanel {
         });
         JButton CloseProgram = new JButton("Exit");
         CloseProgram.setPreferredSize(new Dimension(100, 30));
+        CloseProgram.setFocusPainted(false);
         CloseProgram.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int response = JOptionPane.showConfirmDialog(
