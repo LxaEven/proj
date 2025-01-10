@@ -37,7 +37,7 @@ public class ChangePassword extends JPanel {
                 String password = "Web#11*03";
                 try (Connection conn = DriverManager.getConnection(url, username, password);
                      Statement stmt = conn.createStatement()) {
-                    String query = "UPDATE student SET password = '" + newPasswordValue + "' WHERE password = '" + oldPasswordValue + "'";
+                    String query = "UPDATE student SET phone_number = '" + newPasswordValue + "' WHERE phone_number = '" + oldPasswordValue + "'";
                     stmt.executeUpdate(query);
                     JOptionPane.showMessageDialog(mainPanel, "Password changed successfully");
                 } catch (SQLException ex) {
