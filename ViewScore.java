@@ -38,6 +38,7 @@ public class ViewScore extends JPanel {
             tableModel.addColumn("Firstname");
             tableModel.addColumn("Lastname");
             tableModel.addColumn("Gender");
+            tableModel.addColumn("Birth");
             tableModel.addColumn("Score");
 
             
@@ -46,8 +47,9 @@ public class ViewScore extends JPanel {
                 String studentfirstName = rs.getString("student_firstname");
                 String studentlastName = rs.getString("student_lastname");
                 String studentGender = rs.getString("gender");
+                String studentBirth = rs.getString("student_birth");
                 float studentScore = rs.getFloat("student_score");
-                tableModel.addRow(new Object[]{id, studentfirstName, studentlastName, studentGender, studentScore});
+                tableModel.addRow(new Object[]{id, studentfirstName, studentlastName, studentGender,  studentBirth, studentScore});
             }
 
         } catch (SQLException e) {
