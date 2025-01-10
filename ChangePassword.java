@@ -25,6 +25,8 @@ public class ChangePassword extends JPanel {
 
         JButton submitButton = new JButton("Submit");
         submitButton.setPreferredSize(new Dimension(100, 30));
+        submitButton.setFont(new Font("Arial", Font.BOLD, 13));
+        submitButton.setFocusPainted(false);
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String oldPasswordValue = oldPassword.getText();
@@ -49,6 +51,7 @@ public class ChangePassword extends JPanel {
         JButton ViewProfile = new JButton("View Profile");
         ViewProfile.setFont(new Font("Arial", Font.BOLD, 13));
         ViewProfile.setPreferredSize(new Dimension(160, 30));
+        ViewProfile.setFocusPainted(false);
         ViewProfile.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CardLayout c4 = (CardLayout) mainPanel.getLayout();
@@ -60,6 +63,7 @@ public class ChangePassword extends JPanel {
         JButton ViewScore = new JButton("View Score");
         ViewScore.setFont(new Font("Arial", Font.BOLD, 13));
         ViewScore.setPreferredSize(new Dimension(160, 30));
+        ViewScore.setFocusPainted(false);
         ViewScore.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CardLayout c4 = (CardLayout) mainPanel.getLayout();
@@ -71,6 +75,7 @@ public class ChangePassword extends JPanel {
         JButton ViewCourse = new JButton("View Course");
         ViewCourse.setFont(new Font("Arial", Font.BOLD, 13));
         ViewCourse.setPreferredSize(new Dimension(160, 30));
+        ViewCourse.setFocusPainted(false);
         ViewCourse.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CardLayout c4 = (CardLayout) mainPanel.getLayout();
@@ -82,6 +87,7 @@ public class ChangePassword extends JPanel {
         JButton ChangePassword = new JButton("Change Password");
         ChangePassword.setFont(new Font("Arial", Font.BOLD, 13));
         ChangePassword.setPreferredSize(new Dimension(160, 30));
+        ChangePassword.setFocusPainted(false);
         ChangePassword.setBackground(Color.GRAY);
         ChangePassword.setForeground(Color.WHITE);
         ChangePassword.addActionListener(new ActionListener() {
@@ -95,6 +101,7 @@ public class ChangePassword extends JPanel {
         JButton Logout = new JButton("Logout");
         Logout.setFont(new Font("Arial", Font.BOLD, 13));
         Logout.setPreferredSize(new Dimension(160, 30));
+        Logout.setFocusPainted(false);
         Logout.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int response = JOptionPane.showConfirmDialog(
@@ -117,6 +124,7 @@ public class ChangePassword extends JPanel {
         JButton CloseProgram = new JButton("Exit");
         CloseProgram.setFont(new Font("Arial", Font.BOLD, 13));
         CloseProgram.setPreferredSize(new Dimension(160, 30));
+        CloseProgram.setFocusPainted(false);
         CloseProgram.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int response = JOptionPane.showConfirmDialog(
@@ -139,6 +147,7 @@ public class ChangePassword extends JPanel {
         JButton darkMode = new JButton("Dark Mode");
         darkMode.setFont(new Font("Arial", Font.BOLD, 12));
         darkMode.setPreferredSize(new Dimension(130, 30));
+        darkMode.setFocusPainted(false);
         darkMode.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -153,6 +162,7 @@ public class ChangePassword extends JPanel {
         JButton lightMode = new JButton("Light Mode");
         lightMode.setFont(new Font("Arial", Font.BOLD, 12));
         lightMode.setPreferredSize(new Dimension(130, 30));
+        lightMode.setFocusPainted(false);
         lightMode.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {

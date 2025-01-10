@@ -17,8 +17,10 @@ public class loginScreen extends JPanel {
 
         JButton adminButton = new JButton("Admin");
         adminButton.setPreferredSize(new Dimension(100, 30));
+        adminButton.setFocusPainted(false);
         JButton studentButton = new JButton("Student");
         studentButton.setPreferredSize(new Dimension(100, 30));
+        studentButton.setFocusPainted(false);
 
         
         adminButton.addActionListener(new ActionListener() {
