@@ -9,10 +9,10 @@
             "server": "localhost",
             "port": 3306,
             "driver": "MySQL",
-            "name": "student_data",
-            "database": "mydb",
+            "name": "studentData",
+            "database": "student",
             "username": "root",
-            "password": "Web#11*03"
+            "password": ""
         }
     ]
 }

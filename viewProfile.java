@@ -7,9 +7,9 @@ import java.sql.*;
 public class viewProfile extends JPanel{
     public viewProfile(JPanel mainPanel){
         
-        String url = "jdbc:mysql://localhost:3306/mydb";
+        String url = "jdbc:mysql://localhost:3306/student";
         String username = "root";
-        String password = "Web#11*03";
+        String password = "";
 
 
         setLayout(new BorderLayout());
@@ -56,7 +56,7 @@ public class viewProfile extends JPanel{
 
         try (Connection conn = DriverManager.getConnection(url, username, password);
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM student WHERE student_id = 5")) {
+            ResultSet rs = stmt.executeQuery("SELECT * FROM students WHERE student_id = 5")) {
 
             if (rs.next()) {
                 idLabel.setText("Student ID:     " + "e2022"+String.format("%03d",rs.getInt("student_id")));

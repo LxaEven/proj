@@ -8,9 +8,9 @@ import java.awt.event.*;
 public class ViewScore extends JPanel {
     public ViewScore(JPanel mainPanel) {
 
-        String url = "jdbc:mysql://localhost:3306/mydb";
+        String url = "jdbc:mysql://localhost:3306/student";
         String username = "root";
-        String password = "Web#11*03";
+        String password = "";
 
         setLayout(new BorderLayout());
         JLabel titleLabel = new JLabel("Student");
@@ -31,7 +31,7 @@ public class ViewScore extends JPanel {
 
         try (Connection conn = DriverManager.getConnection(url, username, password);
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM student")) {
+             ResultSet rs = stmt.executeQuery("SELECT * FROM students")) {
 
             
             tableModel.addColumn("ID");
