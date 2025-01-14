@@ -10,7 +10,7 @@ public class ChangePassword extends JPanel {
         
 
         ImageIcon imageIcon = new ImageIcon("image//logo.jpg");
-        Image resizedImage = imageIcon.getImage().getScaledInstance(160, 150, Image.SCALE_SMOOTH);
+        Image resizedImage = imageIcon.getImage().getScaledInstance(160, 160, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(resizedImage);
         JLabel logoLabel = new JLabel(resizedIcon);
 
