@@ -180,25 +180,35 @@ public class ChangePassword extends JPanel {
 
 
 
-        JPanel buttonPanel = new JPanel(new GridBagLayout());
+        JPanel buttonPanel = new JPanel(new BorderLayout());
+        buttonPanel.setBackground(Color.GRAY);
+
+        JPanel logoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        logoPanel.add(logoLabel);
+        logoPanel.setBackground(Color.GRAY);
+
+        buttonPanel.add(logoPanel, BorderLayout.NORTH);
+
+        JPanel buttonsContainer = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(20, 20, 20, 20);
         gbc.gridx = 0;
         gbc.gridy = 0;
-        buttonPanel.add(logoLabel, gbc);
+
+        buttonsContainer.add(ViewProfile, gbc);
         gbc.gridy++;
-        buttonPanel.add(ViewProfile, gbc);
+        buttonsContainer.add(ViewScore, gbc);
         gbc.gridy++;
-        buttonPanel.add(ViewScore, gbc);
+        buttonsContainer.add(ViewCourse, gbc);
         gbc.gridy++;
-        buttonPanel.add(ViewCourse, gbc);
+        buttonsContainer.add(ChangePassword, gbc);
         gbc.gridy++;
-        buttonPanel.add(ChangePassword, gbc);
+        buttonsContainer.add(Logout, gbc);
         gbc.gridy++;
-        buttonPanel.add(Logout, gbc);
-        gbc.gridy++;
-        buttonPanel.add(CloseProgram, gbc);
-        buttonPanel.setBackground(Color.GRAY);
+        buttonsContainer.add(CloseProgram, gbc);
+
+        buttonsContainer.setBackground(Color.GRAY);
+        buttonPanel.add(buttonsContainer, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.WEST);
 
 
