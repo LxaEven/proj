@@ -85,7 +85,7 @@ public class loginScreen extends JPanel {
                 g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
             }
         };
-        LogoPanel.setPreferredSize(new Dimension(500, 200));
+        LogoPanel.setPreferredSize(new Dimension(400, 200));
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridx = 0;
         gbc.gridy = 0;
