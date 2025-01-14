@@ -7,12 +7,14 @@ public class loginScreen extends JPanel {
 
         setLayout(new BorderLayout());
         
-        
+        ImageIcon imageIcon = new ImageIcon("image\\logo.jpg");
+        Image resizedImage = imageIcon.getImage().getScaledInstance(300, 300, Image.SCALE_SMOOTH);
+        ImageIcon resizedIcon = new ImageIcon(resizedImage);
+        JLabel logoLabel = new JLabel(resizedIcon);
+
         JLabel titleLabel = new JLabel("Log in as:", SwingConstants.CENTER);
         titleLabel.setBounds(20, 10, 100, 30);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        
-
         
 
         JButton adminButton = new JButton("Admin");
@@ -70,15 +72,27 @@ public class loginScreen extends JPanel {
         buttonPanel.add(titleLabel, gbc);
         gbc.gridy++;
         buttonPanel.add(adminButton, gbc);
-        gbc.gridx++;
+        gbc.gridy++;
         buttonPanel.add(studentButton, gbc);
-        JPanel buttonPanel2 = new JPanel( new GridBagLayout());
+        gbc.gridy++;
+        buttonPanel.add(CloseProgram, gbc);
+        JPanel LogoPanel = new JPanel(new GridBagLayout()){
+            private Image backgroundImage = new ImageIcon("image\\chromakophia.jpg").getImage();
+
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        LogoPanel.setPreferredSize(new Dimension(500, 200));
+        gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridx = 0;
         gbc.gridy = 0;
-        buttonPanel2.add(CloseProgram, gbc);
+        LogoPanel.add(logoLabel, gbc);
         
         add(buttonPanel, BorderLayout.CENTER);
-        add(buttonPanel2, BorderLayout.SOUTH);        
+        add(LogoPanel, BorderLayout.WEST);       
     }
 
 }

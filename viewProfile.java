@@ -10,11 +10,14 @@ public class viewProfile extends JPanel{
         String url = "jdbc:mysql://localhost:3306/student";
         String username = "root";
         String password = "";
-
-
         setLayout(new BorderLayout());
-        JLabel titleLabel = new JLabel("Student");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
+
+        ImageIcon imageIcon = new ImageIcon("image//logo.jpg");
+        Image resizedImage = imageIcon.getImage().getScaledInstance(160, 150, Image.SCALE_SMOOTH);
+        ImageIcon resizedIcon = new ImageIcon(resizedImage);
+        JLabel logoLabel = new JLabel(resizedIcon);
+
+        
         JLabel idLabel = new JLabel("Student ID:   ");
         idLabel.setFont(new Font("Arial", Font.BOLD, 17));
         JLabel firstnameLabel = new JLabel("Firstname:   ");
@@ -36,8 +39,6 @@ public class viewProfile extends JPanel{
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.WEST;
-        profilePanel.add(titleLabel, gbc);
-        gbc.gridy++;
         profilePanel.add(idLabel, gbc);
         gbc.gridy++;
         profilePanel.add(firstnameLabel, gbc);
@@ -206,7 +207,7 @@ public class viewProfile extends JPanel{
         gbc.insets = new Insets(20, 20, 20, 20);
         gbc.gridx = 0;
         gbc.gridy = 0;
-        buttonPanel.add(titleLabel, gbc);
+        buttonPanel.add(logoLabel, gbc);
         gbc.gridy++;
         buttonPanel.add(ViewProfile, gbc);
         gbc.gridy++;

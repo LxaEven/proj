@@ -13,8 +13,10 @@ public class ViewScore extends JPanel {
         String password = "";
 
         setLayout(new BorderLayout());
-        JLabel titleLabel = new JLabel("Student");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        ImageIcon imageIcon = new ImageIcon("image//logo.jpg");
+        Image resizedImage = imageIcon.getImage().getScaledInstance(160, 150, Image.SCALE_SMOOTH);
+        ImageIcon resizedIcon = new ImageIcon(resizedImage);
+        JLabel logoLabel = new JLabel(resizedIcon);
         
 
         JLabel tableLabel = new JLabel("Student Score", SwingConstants.CENTER);
@@ -246,7 +248,7 @@ public class ViewScore extends JPanel {
         gbc.insets = new Insets(20, 20, 20, 20);
         gbc.gridx = 0;
         gbc.gridy = 0;
-        buttonPanel.add(titleLabel, gbc);
+        buttonPanel.add(logoLabel, gbc);
         gbc.gridy++;
         buttonPanel.add(ViewProfile, gbc);
         gbc.gridy++;
