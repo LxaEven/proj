@@ -36,12 +36,12 @@ public class ChangePassword extends JPanel {
                 String oldPasswordValue = oldPassword.getText();
                 String newPasswordValue = newPassword.getText();
                 
-                String url = "jdbc:mysql://localhost:3306/student";
+                String url = "jdbc:mysql://localhost:3306/mydb";
                 String username = "root";
-                String password = "";
+                String password = "Web#11*03";
                 try (Connection conn = DriverManager.getConnection(url, username, password);
                      Statement stmt = conn.createStatement()) {
-                    String query = "UPDATE students SET phone_number = '" + newPasswordValue + "' WHERE phone_number = '" + oldPasswordValue + "'";
+                    String query = "UPDATE student SET phone_number = '" + newPasswordValue + "' WHERE phone_number = '" + oldPasswordValue + "'";
                     stmt.executeUpdate(query);
                     JOptionPane.showMessageDialog(mainPanel, "Password changed successfully");
                 } catch (SQLException ex) {
