@@ -10,7 +10,7 @@ public class ViewScore extends JPanel {
 
         String url = "jdbc:mysql://localhost:3306/student";
         String username = "root";
-        String password = "";
+        String password = ""; 
 
         setLayout(new BorderLayout());
         ImageIcon imageIcon = new ImageIcon("image//logo.jpg");
