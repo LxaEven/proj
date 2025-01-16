@@ -5,8 +5,8 @@ import com.formdev.flatlaf.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class ViewScore extends JPanel {
-    public ViewScore(JPanel mainPanel) {
+public class ViewCourse extends JPanel {
+    public ViewCourse(JPanel mainPanel) {
 
         String url = "jdbc:mysql://localhost:3306/mydb";
         String username = "root";
@@ -33,27 +33,21 @@ public class ViewScore extends JPanel {
 
         try (Connection conn = DriverManager.getConnection(url, username, password);
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM student")) {
+             ResultSet rs = stmt.executeQuery("SELECT * FROM course")) {
 
             
-            tableModel.addColumn("ID");
-            tableModel.addColumn("Firstname");
-            tableModel.addColumn("Lastname");
-            tableModel.addColumn("Gender");
-            tableModel.addColumn("Birth");
-            tableModel.addColumn("Phone Number");
-            tableModel.addColumn("Score");
+            tableModel.addColumn("No.");
+            tableModel.addColumn("subject");
+            tableModel.addColumn("Hours per Week");
+            tableModel.addColumn("Hours per semester");
 
             
             while (rs.next()) {
-                int id = rs.getInt("student_id");
-                String studentfirstName = rs.getString("student_firstname");
-                String studentlastName = rs.getString("student_lastname");
-                String studentGender = rs.getString("gender");
-                String studentBirth = rs.getString("student_birth");
-                String studentPhoneNumber = rs.getString("phone_number");
-                float studentScore = rs.getFloat("student_score");
-                tableModel.addRow(new Object[]{"e2022"+String.format("%03d", id), studentfirstName, studentlastName, studentGender,  studentBirth, studentPhoneNumber, studentScore});
+                int no = rs.getInt("subject_No");
+                String subject = rs.getString("subject");
+                String HrsPerWeek = rs.getString("per_week");
+                String HrsPerSem = rs.getString("per_semester");
+                tableModel.addRow(new Object[]{no, subject, HrsPerWeek, HrsPerSem});
             }
 
         } catch (SQLException e) {
@@ -61,58 +55,19 @@ public class ViewScore extends JPanel {
             JOptionPane.showMessageDialog(mainPanel, "Error: " + e.getMessage());
         }
         
-        table.setFont(new Font("Arial", Font.PLAIN, 16));
+        table.setFont(new Font("Arial", Font.PLAIN, 17));
         table.setRowHeight(20);
-        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 18));
-        table.setRowHeight(30);
+        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 20));
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         for(int i = 0; i < table.getColumnCount(); i++) {
             table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-
+        table.setRowHeight(30);
         TableRowSorter<DefaultTableModel> rowSorter = new TableRowSorter<>(tableModel);
         table.setRowSorter(rowSorter);
         table.setFillsViewportHeight(true);
-        
-        JLabel searchLabel = new JLabel("Search:");
-        searchLabel.setFont(new Font("Arial", Font.BOLD, 13));
-        searchLabel.setPreferredSize(new Dimension(50, 30));
-        JTextField searchField = new JTextField(20);
-        searchField.setPreferredSize(new Dimension(600, 30));
-        String placeholder = "Enter your search here...";
-        searchField.setText(placeholder);
-
-        JButton searchButton = new JButton("Search");
-        searchButton.setFont(new Font("Arial", Font.BOLD, 13));
-        searchButton.setPreferredSize(new Dimension(100, 30));
-        searchButton.setFocusPainted(false);
-        searchField.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                String searchText = searchField.getText();
-                if (searchText.trim().length() == 0) {
-                    rowSorter.setRowFilter(null); 
-                } else {
-                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + searchText)); 
-                }
-            }
-        });
-
-        searchField.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                searchField.setText("");
-            }
-        
-            public void focusLost(FocusEvent e) {
-                searchField.setText(placeholder);
-            }
-        });
-
-
-        
         JScrollPane scrollPanel = new JScrollPane(table);
         
         
@@ -133,8 +88,6 @@ public class ViewScore extends JPanel {
         ViewScore.setFont(new Font("Arial", Font.BOLD, 13));
         ViewScore.setPreferredSize(new Dimension(160, 30));
         ViewScore.setFocusPainted(false);
-        ViewScore.setBackground(Color.GRAY);
-        ViewScore.setForeground(Color.WHITE);
         ViewScore.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CardLayout c4 = (CardLayout) mainPanel.getLayout();
@@ -146,6 +99,8 @@ public class ViewScore extends JPanel {
         JButton ViewCourse = new JButton("View Course");
         ViewCourse.setFont(new Font("Arial", Font.BOLD, 13));
         ViewCourse.setPreferredSize(new Dimension(160, 30));
+        ViewCourse.setBackground(Color.GRAY);
+        ViewCourse.setForeground(Color.WHITE);
         ViewCourse.setFocusPainted(false);
         ViewCourse.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -297,24 +252,11 @@ public class ViewScore extends JPanel {
         southPanel.setPreferredSize(new Dimension(200, 50));
         add(southPanel, BorderLayout.SOUTH);
 
-        JPanel SearchPanel = new JPanel(new GridBagLayout());
-        gbc.insets = new Insets(5, 5, 5, 5);
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        SearchPanel.add(searchLabel, gbc);
-        gbc.gridx++;
-        SearchPanel.add(searchField, gbc);
-        gbc.gridx++;
-        SearchPanel.add(searchButton, gbc);
-
         JPanel TablePanel = new JPanel(new GridBagLayout());
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 3;
-        gbc.anchor = GridBagConstraints.CENTER;
-        TablePanel.add(SearchPanel, gbc);
-        gbc.gridy++; 
         gbc.fill = GridBagConstraints.BOTH; 
         gbc.weightx = 1.0; 
         gbc.weighty = 1.0;
