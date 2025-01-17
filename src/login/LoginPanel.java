@@ -1,7 +1,7 @@
 package login;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-
+import main.*;
 import java.awt.*;
 public class LoginPanel extends JPanel {
     public LoginPanel(MainPanel mainPanel) {

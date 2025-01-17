@@ -1,6 +1,6 @@
+package main;
 import javax.swing.*;
 
-import login.MainPanel;
 
 
 public class project_i3 extends JFrame {

@@ -1,8 +1,9 @@
-package login;
+package main;
 
 import javax.swing.*;
 
 import student.*;
+import login.*;
 
 import java.awt.*;
 import java.util.Random;
@@ -24,6 +25,7 @@ public class MainPanel extends JPanel {
         add(new viewProfile(this), "ViewProfile");
         add(new ViewCourse(this), "ViewCourse");
         add(new student(this), "student");
+        
         add(new LoginPanel(this), "Login");
         add(new ForgotPasswordPanel(this), "ForgotPassword");
         add(new VerificationPanel(this), "Verification");
