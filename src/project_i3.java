@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.CardLayout;
 
 public class project_i3 extends JFrame {
@@ -19,7 +18,7 @@ public class project_i3 extends JFrame {
         ChangePassword ChangePasswordPanel = new ChangePassword(mainPanel);
         viewProfile ViewProfile = new viewProfile(mainPanel);
         ViewCourse ViewCoursePanel = new ViewCourse(mainPanel);
-        Main2 Login = new Main2();
+        // Main2 Login = new Main2();
 
         mainPanel.add(startPanel, "start");
         mainPanel.add(loginScreenPanel, "loginScreen");
