@@ -1,3 +1,4 @@
+package student;
 import java.sql.*;
 import javax.swing.*;
 import com.formdev.flatlaf.*;

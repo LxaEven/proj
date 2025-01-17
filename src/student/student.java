@@ -1,15 +1,12 @@
+package student;
 import javax.swing.*;
-import java.awt.*;
 import com.formdev.flatlaf.*;
+import java.awt.*;
 import java.awt.event.*;
-import java.sql.*;
 
-public class viewProfile extends JPanel{
-    public viewProfile(JPanel mainPanel){
-        
-        String url = "jdbc:mysql://localhost:3306/mydb";
-        String username = "root";
-        String password = "Web#11*03";
+public class student extends JPanel {
+
+    public student(JPanel mainPanel){
         setLayout(new BorderLayout());
 
         ImageIcon imageIcon = new ImageIcon("image//logo.jpg");
@@ -17,69 +14,11 @@ public class viewProfile extends JPanel{
         ImageIcon resizedIcon = new ImageIcon(resizedImage);
         JLabel logoLabel = new JLabel(resizedIcon);
 
-        
-        JLabel idLabel = new JLabel("Student ID:   ");
-        idLabel.setFont(new Font("Arial", Font.BOLD, 17));
-        JLabel firstnameLabel = new JLabel("Firstname:   ");
-        firstnameLabel.setFont(new Font("Arial", Font.BOLD, 17));
-        JLabel lastnameLabel = new JLabel("Lastname:  ");
-        lastnameLabel.setFont(new Font("Arial", Font.BOLD, 17));
-        JLabel genderLabel = new JLabel("Gender:   ");
-        genderLabel.setFont(new Font("Arial", Font.BOLD, 17));
-        JLabel birthLabel = new JLabel("Birth:   ");
-        birthLabel.setFont(new Font("Arial", Font.BOLD, 17));
-        JLabel phoneNumberLabel = new JLabel("Phone Number:   ");
-        phoneNumberLabel.setFont(new Font("Arial", Font.BOLD, 17));
-        JLabel emailLabel = new JLabel("Email:   ");
-        emailLabel.setFont(new Font("Arial", Font.BOLD, 17));
-
-        GridBagConstraints gbc = new GridBagConstraints();
-        JPanel profilePanel = new JPanel(new GridBagLayout());
-        gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.WEST;
-        profilePanel.add(idLabel, gbc);
-        gbc.gridy++;
-        profilePanel.add(firstnameLabel, gbc);
-        gbc.gridy++;
-        profilePanel.add(lastnameLabel, gbc);
-        gbc.gridy++;
-        profilePanel.add(genderLabel, gbc);
-        gbc.gridy++;
-        profilePanel.add(birthLabel, gbc);
-        gbc.gridy++;
-        profilePanel.add(phoneNumberLabel, gbc);
-        gbc.gridy++;
-        profilePanel.add(emailLabel, gbc);
-        gbc.anchor = GridBagConstraints.CENTER;
-        add(profilePanel, BorderLayout.CENTER);
-
-        try (Connection conn = DriverManager.getConnection(url, username, password);
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM student WHERE student_id = 5")) {
-
-            if (rs.next()) {
-                idLabel.setText("Student ID:     " + "e2022"+String.format("%03d",rs.getInt("student_id")));
-                firstnameLabel.setText("Firstname:     " + rs.getString("student_firstname"));
-                lastnameLabel.setText("Lastname:     " + rs.getString("student_lastname"));
-                genderLabel.setText("Gender:     " + rs.getString("gender"));
-                birthLabel.setText("Birth:     " + rs.getString("student_birth"));
-                phoneNumberLabel.setText("Phone Number:     " + rs.getString("phone_number"));
-                emailLabel.setText("Email:     " + rs.getString("email"));
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(profilePanel, "Error: " + e.getMessage());
-        }
 
         JButton ViewProfile = new JButton("View Profile");
         ViewProfile.setFont(new Font("Arial", Font.BOLD, 13));
         ViewProfile.setPreferredSize(new Dimension(160, 30));
         ViewProfile.setFocusPainted(false);
-        ViewProfile.setBackground(Color.GRAY);
-        ViewProfile.setForeground(Color.WHITE);
         ViewProfile.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CardLayout c4 = (CardLayout) mainPanel.getLayout();
@@ -201,8 +140,6 @@ public class viewProfile extends JPanel{
         });
 
 
-        
-        
         JPanel buttonPanel = new JPanel(new BorderLayout());
         buttonPanel.setBackground(Color.GRAY);
 
@@ -213,6 +150,7 @@ public class viewProfile extends JPanel{
         buttonPanel.add(logoPanel, BorderLayout.NORTH);
 
         JPanel buttonsContainer = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(20, 20, 20, 20);
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -254,16 +192,5 @@ public class viewProfile extends JPanel{
         southPanel.setPreferredSize(new Dimension(200, 50));
         add(southPanel, BorderLayout.SOUTH);
     
-    }
-    
-
-    public class User{
-        public int ID;
-        public String firstName;
-        public String lastName;
-        public String Gender;
-        public String Birth;
-        public String phone_number;
-        public String email;
     }
 }

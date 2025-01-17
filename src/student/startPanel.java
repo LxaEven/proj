@@ -1,3 +1,4 @@
+package student;
 import javax.swing.*;
 
 import com.formdev.flatlaf.FlatLightLaf;

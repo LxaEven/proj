@@ -1,4 +1,13 @@
 import javax.swing.*;
+
+import student.ChangePassword;
+import student.ViewCourse;
+import student.ViewScore;
+import student.loginScreen;
+import student.startPanel;
+import student.student;
+import student.viewProfile;
+
 import java.awt.CardLayout;
 
 public class project_i3 extends JFrame {
@@ -18,7 +27,7 @@ public class project_i3 extends JFrame {
         ChangePassword ChangePasswordPanel = new ChangePassword(mainPanel);
         viewProfile ViewProfile = new viewProfile(mainPanel);
         ViewCourse ViewCoursePanel = new ViewCourse(mainPanel);
-        // Main2 Login = new Main2();
+       
 
         mainPanel.add(startPanel, "start");
         mainPanel.add(loginScreenPanel, "loginScreen");
@@ -27,7 +36,7 @@ public class project_i3 extends JFrame {
         mainPanel.add(ChangePasswordPanel, "ChangePassword");
         mainPanel.add(ViewProfile, "ViewProfile");
         mainPanel.add(ViewCoursePanel, "ViewCourse");
-        // mainPanel.add(Login, "Logininto");
+        
 
         frame.add(mainPanel);
         frame.setVisible(true);
