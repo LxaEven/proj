@@ -1,8 +1,8 @@
 package login;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-import java.awt.*;
 
+import java.awt.*;
 public class LoginPanel extends JPanel {
     public LoginPanel(MainPanel mainPanel) {
         setLayout(new BorderLayout(20, 20));
@@ -74,7 +74,7 @@ public class LoginPanel extends JPanel {
             } else {
                 // Simulate a successful login for demonstration purposes
                 JOptionPane.showMessageDialog(mainPanel, "Login successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
-                mainPanel.showScreen("Project");
+                mainPanel.showScreen("student");
             }
         });
 

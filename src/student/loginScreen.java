@@ -2,6 +2,7 @@ package student;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+
 public class loginScreen extends JPanel {
 
     public loginScreen(JPanel mainPanel) {
@@ -35,12 +36,9 @@ public class loginScreen extends JPanel {
         
         studentButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Login.showLoginScreen();
-                // if(Login.loginSuccess){
-                    JOptionPane.showMessageDialog(mainPanel, "Login sucessfully");
                     CardLayout c3 = (CardLayout) mainPanel.getLayout();
-                    c3.show(mainPanel, "student");
-                //}
+                    c3.show(mainPanel, "Login");
+                
                 
             }
         });

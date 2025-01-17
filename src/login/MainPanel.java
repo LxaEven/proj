@@ -1,5 +1,8 @@
 package login;
 import javax.swing.*;
+
+import student.*;
+
 import java.awt.*;
 import java.util.Random;
 public class MainPanel extends JPanel {
@@ -12,14 +15,22 @@ public class MainPanel extends JPanel {
         setLayout(cardLayout);
 
         // Add different screens to the main panel
+        add(new startPanel(this), "start");
+        add(new loginScreen(this), "loginScreen");
+        add(new student(this), "student");
+        add(new ViewScore(this), "ViewScore");
+        add(new ChangePassword(this), "ChangePassword");
+        add(new viewProfile(this), "ViewProfile");
+        add(new ViewCourse(this), "ViewCourse");
+        add(new student(this), "student");
         add(new LoginPanel(this), "Login");
         add(new ForgotPasswordPanel(this), "ForgotPassword");
         add(new VerificationPanel(this), "Verification");
         add(new ResetPasswordPanel(this), "ResetPassword");
-        add(new ProjectPanel(), "Project");
+        
 
         // Show the login screen by default
-        showScreen("Login");
+        showScreen("start");
     }
 
     public void showScreen(String screenName) {
