@@ -1,120 +1,57 @@
 import java.sql.*;
 import javax.swing.*;
-import javax.swing.table.*;
 import com.formdev.flatlaf.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class ViewScore extends JPanel {
-    public ViewScore(JPanel mainPanel) {
-
-        String url = "jdbc:mysql://localhost:3306/student";
-        String username = "root";
-        String password = "";
-
+public class ChangePassword extends JPanel {
+    public ChangePassword(JPanel mainPanel) {
         setLayout(new BorderLayout());
+        
+
         ImageIcon imageIcon = new ImageIcon("image//logo.jpg");
         Image resizedImage = imageIcon.getImage().getScaledInstance(160, 160, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(resizedImage);
         JLabel logoLabel = new JLabel(resizedIcon);
+
         
+        JLabel oldPasswordLabel = new JLabel("Old Password:");
+        oldPasswordLabel.setFont(new Font("Arial", Font.BOLD, 13));
+        JTextField oldPassword = new JTextField();
+        oldPassword.setPreferredSize(new Dimension(200, 30));
 
-        JLabel tableLabel = new JLabel("Student Score", SwingConstants.CENTER);
-        tableLabel.setFont(new Font("Arial", Font.BOLD, 15));
 
-        DefaultTableModel tableModel = new DefaultTableModel() {
-            
-            public boolean isCellEditable(int row, int column) {
-                return false; 
-            }
-        };
+        JLabel newPasswordLabel = new JLabel("New Password:");
+        newPasswordLabel.setFont(new Font("Arial", Font.BOLD, 13));
+        JTextField newPassword = new JTextField();
+        newPassword.setPreferredSize(new Dimension(200, 30));
 
-        JTable table = new JTable(tableModel);
 
-        try (Connection conn = DriverManager.getConnection(url, username, password);
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM students")) {
-
-            
-            tableModel.addColumn("ID");
-            tableModel.addColumn("Firstname");
-            tableModel.addColumn("Lastname");
-            tableModel.addColumn("Gender");
-            tableModel.addColumn("Birth");
-            tableModel.addColumn("Phone Number");
-            tableModel.addColumn("Score");
-
-            
-            while (rs.next()) {
-                int id = rs.getInt("student_id");
-                String studentfirstName = rs.getString("student_firstname");
-                String studentlastName = rs.getString("student_lastname");
-                String studentGender = rs.getString("gender");
-                String studentBirth = rs.getString("student_birth");
-                String studentPhoneNumber = rs.getString("phone_number");
-                float studentScore = rs.getFloat("student_score");
-                tableModel.addRow(new Object[]{"e2022"+String.format("%03d", id), studentfirstName, studentlastName, studentGender,  studentBirth, studentPhoneNumber, studentScore});
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(mainPanel, "Error: " + e.getMessage());
-        }
-        
-        table.setFont(new Font("Arial", Font.PLAIN, 15));
-        table.setRowHeight(20);
-        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 17));
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-        for(int i = 0; i < table.getColumnCount(); i++) {
-            table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-        }
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-
-        TableRowSorter<DefaultTableModel> rowSorter = new TableRowSorter<>(tableModel);
-        table.setRowSorter(rowSorter);
-        
-        JLabel searchLabel = new JLabel("Search:");
-        searchLabel.setFont(new Font("Arial", Font.BOLD, 12));
-        searchLabel.setPreferredSize(new Dimension(50, 30));
-        JTextField searchField = new JTextField(20);
-        searchField.setPreferredSize(new Dimension(600, 30));
-        String placeholder = "Enter your search here...";
-        searchField.setText(placeholder);
-
-        JButton searchButton = new JButton("Search");
-        searchButton.setFont(new Font("Arial", Font.BOLD, 12));
-        searchButton.setPreferredSize(new Dimension(100, 30));
-        searchButton.setFocusPainted(false);
-        searchField.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                String searchText = searchField.getText();
-                if (searchText.trim().length() == 0) {
-                    rowSorter.setRowFilter(null); 
-                } else {
-                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + searchText)); 
+        JButton submitButton = new JButton("Submit");
+        submitButton.setPreferredSize(new Dimension(100, 30));
+        submitButton.setFont(new Font("Arial", Font.BOLD, 13));
+        submitButton.setFocusPainted(false);
+        submitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String oldPasswordValue = oldPassword.getText();
+                String newPasswordValue = newPassword.getText();
+                
+                String url = "jdbc:mysql://localhost:3306/mydb";
+                String username = "root";
+                String password = "Web#11*03";
+                try (Connection conn = DriverManager.getConnection(url, username, password);
+                     Statement stmt = conn.createStatement()) {
+                    String query = "UPDATE student SET phone_number = '" + newPasswordValue + "' WHERE phone_number = '" + oldPasswordValue + "'";
+                    stmt.executeUpdate(query);
+                    JOptionPane.showMessageDialog(mainPanel, "Password changed successfully");
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(mainPanel, "Error: " + ex.getMessage());
                 }
             }
         });
 
-        searchField.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                searchField.setText("");
-            }
-        
-            public void focusLost(FocusEvent e) {
-                searchField.setText(placeholder);
-            }
-        });
 
-
-        
-        JScrollPane scrollPanel = new JScrollPane(table);
-        table.setFillsViewportHeight(true);
-        
-        
         JButton ViewProfile = new JButton("View Profile");
         ViewProfile.setFont(new Font("Arial", Font.BOLD, 13));
         ViewProfile.setPreferredSize(new Dimension(160, 30));
@@ -131,8 +68,6 @@ public class ViewScore extends JPanel {
         ViewScore.setFont(new Font("Arial", Font.BOLD, 13));
         ViewScore.setPreferredSize(new Dimension(160, 30));
         ViewScore.setFocusPainted(false);
-        ViewScore.setBackground(Color.GRAY);
-        ViewScore.setForeground(Color.WHITE);
         ViewScore.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CardLayout c4 = (CardLayout) mainPanel.getLayout();
@@ -157,6 +92,8 @@ public class ViewScore extends JPanel {
         ChangePassword.setFont(new Font("Arial", Font.BOLD, 13));
         ChangePassword.setPreferredSize(new Dimension(160, 30));
         ChangePassword.setFocusPainted(false);
+        ChangePassword.setBackground(Color.GRAY);
+        ChangePassword.setForeground(Color.WHITE);
         ChangePassword.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CardLayout c4 = (CardLayout) mainPanel.getLayout();
@@ -203,7 +140,7 @@ public class ViewScore extends JPanel {
                 
                 if (response == JOptionPane.NO_OPTION) {
                     CardLayout c4 = (CardLayout) mainPanel.getLayout();
-                    c4.show(mainPanel, "ViewScore");
+                    c4.show(mainPanel, "ChangePassword");
                 } else {
                     System.out.println("Program ended");
                     System.exit(0);
@@ -273,10 +210,28 @@ public class ViewScore extends JPanel {
         buttonsContainer.setBackground(Color.GRAY);
         buttonPanel.add(buttonsContainer, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.WEST);
-        
+
+
+        JPanel formPanel = new JPanel(new GridBagLayout());
+        buttonPanel.setPreferredSize(new Dimension(200, 300));
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        formPanel.add(oldPasswordLabel, gbc);
+        gbc.gridx++;
+        formPanel.add(oldPassword, gbc);
+        gbc.gridy++;
+        gbc.gridx = 0;
+        formPanel.add(newPasswordLabel, gbc);
+        gbc.gridx++;
+        formPanel.add(newPassword, gbc);
+        gbc.gridy++;
+        formPanel.add(submitButton, gbc);
+        add(formPanel, BorderLayout.CENTER);
+
         JPanel ModePanel = new JPanel(new GridBagLayout());
-        ModePanel.setPreferredSize(new Dimension(180, 50));
         gbc.insets = new Insets(20, 20, 20, 20);
+        ModePanel.setPreferredSize(new Dimension(180, 50));
         gbc.gridy = 0;
         gbc.gridx = 0;
         ModePanel.add(darkMode, gbc);
@@ -294,30 +249,5 @@ public class ViewScore extends JPanel {
         southPanel.setBackground(Color.GRAY);
         southPanel.setPreferredSize(new Dimension(200, 50));
         add(southPanel, BorderLayout.SOUTH);
-
-        JPanel SearchPanel = new JPanel(new GridBagLayout());
-        gbc.insets = new Insets(5, 5, 5, 5);
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        SearchPanel.add(searchLabel, gbc);
-        gbc.gridx++;
-        SearchPanel.add(searchField, gbc);
-        gbc.gridx++;
-        SearchPanel.add(searchButton, gbc);
-
-        JPanel TablePanel = new JPanel(new GridBagLayout());
-        gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 3;
-        gbc.anchor = GridBagConstraints.CENTER;
-        TablePanel.add(SearchPanel, gbc);
-        gbc.gridy++; 
-        gbc.fill = GridBagConstraints.BOTH; 
-        gbc.weightx = 1.0; 
-        gbc.weighty = 1.0;
-        TablePanel.add(scrollPanel, gbc);
-        add(TablePanel, BorderLayout.CENTER);
-    
     }
 }
