@@ -1,4 +1,5 @@
 package login;
+
 import javax.swing.*;
 
 import student.*;
@@ -27,7 +28,7 @@ public class MainPanel extends JPanel {
         add(new ForgotPasswordPanel(this), "ForgotPassword");
         add(new VerificationPanel(this), "Verification");
         add(new ResetPasswordPanel(this), "ResetPassword");
-        
+        // Remove the package declaration at the top of the file
 
         // Show the login screen by default
         showScreen("start");
