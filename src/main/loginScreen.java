@@ -1,11 +1,12 @@
-package student;
+package main;
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 
 public class loginScreen extends JPanel {
 
-    public loginScreen(JPanel mainPanel) {
+    public loginScreen(MainPanel mainPanel) {
 
         setLayout(new BorderLayout());
         

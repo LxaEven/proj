@@ -2,11 +2,14 @@ package student;
 import javax.swing.*;
 import java.awt.*;
 import com.formdev.flatlaf.*;
+
+import main.MainPanel;
+
 import java.awt.event.*;
 import java.sql.*;
 
 public class viewProfile extends JPanel{
-    public viewProfile(JPanel mainPanel){
+    public viewProfile(MainPanel mainPanel){
         
         String url = "jdbc:mysql://localhost:3306/mydb";
         String username = "root";

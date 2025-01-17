@@ -1,12 +1,15 @@
 package student;
 import javax.swing.*;
 import com.formdev.flatlaf.*;
+
+import main.MainPanel;
+
 import java.awt.*;
 import java.awt.event.*;
 
 public class student extends JPanel {
 
-    public student(JPanel mainPanel){
+    public student(MainPanel mainPanel){
         setLayout(new BorderLayout());
 
         ImageIcon imageIcon = new ImageIcon("image//logo.jpg");

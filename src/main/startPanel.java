@@ -1,4 +1,4 @@
-package student;
+package main;
 import javax.swing.*;
 
 import com.formdev.flatlaf.FlatLightLaf;
@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 public class startPanel extends JPanel {
 
-    public startPanel(JPanel mainPanel) {
+    public startPanel(MainPanel mainPanel) {
 
         setLayout(new BorderLayout());
         try {

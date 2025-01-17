@@ -3,11 +3,14 @@ import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.*;
 import com.formdev.flatlaf.*;
+
+import main.MainPanel;
+
 import java.awt.*;
 import java.awt.event.*;
 
 public class ViewScore extends JPanel {
-    public ViewScore(JPanel mainPanel) {
+    public ViewScore(MainPanel mainPanel) {
 
         String url = "jdbc:mysql://localhost:3306/mydb";
         String username = "root";

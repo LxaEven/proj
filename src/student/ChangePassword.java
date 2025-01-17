@@ -2,11 +2,14 @@ package student;
 import java.sql.*;
 import javax.swing.*;
 import com.formdev.flatlaf.*;
+
+import main.MainPanel;
+
 import java.awt.*;
 import java.awt.event.*;
 
 public class ChangePassword extends JPanel {
-    public ChangePassword(JPanel mainPanel) {
+    public ChangePassword(MainPanel mainPanel) {
         setLayout(new BorderLayout());
         
 
