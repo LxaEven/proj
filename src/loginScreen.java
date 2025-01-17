@@ -38,7 +38,7 @@ public class loginScreen extends JPanel {
                 // if(Login.loginSuccess){
                     JOptionPane.showMessageDialog(mainPanel, "Login sucessfully");
                     CardLayout c3 = (CardLayout) mainPanel.getLayout();
-                    c3.show(mainPanel, "Logininto");
+                    c3.show(mainPanel, "student");
                 //}
                 
             }

@@ -28,7 +28,7 @@ public class project_i3 extends JFrame {
         mainPanel.add(ChangePasswordPanel, "ChangePassword");
         mainPanel.add(ViewProfile, "ViewProfile");
         mainPanel.add(ViewCoursePanel, "ViewCourse");
-        mainPanel.add(Login, "Logininto");
+        // mainPanel.add(Login, "Logininto");
 
         frame.add(mainPanel);
         frame.setVisible(true);
