@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.CardLayout;
-import java.awt.Component;
 
 public class project_i3 extends JFrame {
 

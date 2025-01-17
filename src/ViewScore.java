@@ -8,11 +8,7 @@ import java.awt.event.*;
 public class ViewScore extends JPanel {
     public ViewScore(JPanel mainPanel) {
 
-<<<<<<< HEAD:ViewScore.java
-        String url = "jdbc:mysql://localhost:3306/student";
-=======
         String url = "jdbc:mysql://localhost:3306/mydb";
->>>>>>> e3c91ede8a3506eab50ddc56adcb9419c0e8ca77:src/ViewScore.java
         String username = "root";
         String password = "Web#11*03";
 
@@ -23,7 +19,7 @@ public class ViewScore extends JPanel {
         JLabel logoLabel = new JLabel(resizedIcon);
         
 
-        JLabel tableLabel = new JLabel("Student Score", SwingConstants.CENTER);
+        JLabel tableLabel = new JLabel("Course Score", SwingConstants.CENTER);
         tableLabel.setFont(new Font("Arial", Font.BOLD, 15));
 
         DefaultTableModel tableModel = new DefaultTableModel() {
@@ -37,11 +33,7 @@ public class ViewScore extends JPanel {
 
         try (Connection conn = DriverManager.getConnection(url, username, password);
              Statement stmt = conn.createStatement();
-<<<<<<< HEAD:ViewScore.java
-             ResultSet rs = stmt.executeQuery("SELECT * FROM students")) {
-=======
              ResultSet rs = stmt.executeQuery("SELECT * FROM student")) {
->>>>>>> e3c91ede8a3506eab50ddc56adcb9419c0e8ca77:src/ViewScore.java
 
             
             tableModel.addColumn("ID");
