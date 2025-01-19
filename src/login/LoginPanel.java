@@ -3,7 +3,16 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import main.*;
 import java.awt.*;
+import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 public class LoginPanel extends JPanel {
+
+    private JTextField emailField;
+    private JPasswordField passwordField;
+    private MainPanel mainPanel;
     public LoginPanel(MainPanel mainPanel) {
         setLayout(new BorderLayout(20, 20));
         setBackground(new Color(173, 216, 230)); // Light Blue background
@@ -19,13 +28,13 @@ public class LoginPanel extends JPanel {
         inputPanel.setBackground(new Color(173, 216, 230));
         inputPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Add padding
 
-        JTextField emailField = new JTextField();
+        emailField = new JTextField();
         emailField.setPreferredSize(new Dimension(500, 60));
         emailField.setBorder(BorderFactory.createTitledBorder(
                 BorderFactory.createLineBorder(Color.GRAY), "Phone Number or Email", TitledBorder.LEFT, TitledBorder.TOP, new Font("Arial", Font.PLAIN, 20)));
         emailField.setFont(new Font("Arial", Font.PLAIN, 20));
 
-        JPasswordField passwordField = new JPasswordField();
+        passwordField = new JPasswordField();
         passwordField.setPreferredSize(new Dimension(500, 60));
         passwordField.setBorder(BorderFactory.createTitledBorder(
                 BorderFactory.createLineBorder(Color.GRAY), "Password", TitledBorder.LEFT, TitledBorder.TOP, new Font("Arial", Font.PLAIN, 20)));
@@ -97,20 +106,47 @@ public class LoginPanel extends JPanel {
 
         // Add action listener for the login button
         backButton.addActionListener(e -> mainPanel.showScreen("loginScreen"));
-        loginButton.addActionListener(e -> {
-            String email = emailField.getText().trim();
-            String password = new String(passwordField.getPassword());
-
-            if (email.isEmpty() || password.isEmpty()) {
-                JOptionPane.showMessageDialog(mainPanel, "All fields are required!", "Error", JOptionPane.ERROR_MESSAGE);
-            } else {
-                // Simulate a successful login for demonstration purposes
-                JOptionPane.showMessageDialog(mainPanel, "Login successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
-                mainPanel.showScreen("student");
-            }
-        });
+        loginButton.addActionListener(new LoginButtonListener());
 
         // Add action listener for the forgot password button
         forgotPasswordButton.addActionListener(e -> mainPanel.showScreen("ForgotPassword"));
+    }
+
+    private class LoginButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String identifier = emailField.getText().trim();
+            String password = new String(passwordField.getPassword()).trim();
+
+            if (identifier.isEmpty() || password.isEmpty()) {
+                JOptionPane.showMessageDialog(LoginPanel.this, "Please enter both identifier and password.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (authenticateUser(identifier, password)) {
+                mainPanel.showScreen("student");
+            } else {
+                JOptionPane.showMessageDialog(LoginPanel.this, "Invalid username/ID or password.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private boolean authenticateUser(String identifier, String password) {
+        String query = "SELECT * FROM student WHERE (email = ? OR phone_number = ?) AND student_password = ?";
+        
+        try (Connection conn = DBConnect.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            
+            stmt.setString(1, identifier);
+            stmt.setString(2, identifier);
+            stmt.setString(3, password);
+            
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
