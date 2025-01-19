@@ -1,15 +1,17 @@
 package main;
 import javax.swing.*;
 
+import com.formdev.flatlaf.FlatLightLaf;
+
 import java.awt.*;
 import java.awt.event.*;
+
 
 public class loginScreen extends JPanel {
 
     public loginScreen(MainPanel mainPanel) {
 
         setLayout(new BorderLayout());
-        
         ImageIcon imageIcon = new ImageIcon("image\\logo.jpg");
         Image resizedImage = imageIcon.getImage().getScaledInstance(300, 300, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(resizedImage);
@@ -18,13 +20,18 @@ public class loginScreen extends JPanel {
         JLabel titleLabel = new JLabel("Log in as:", SwingConstants.CENTER);
         titleLabel.setBounds(20, 10, 100, 30);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        titleLabel.setForeground(Color.BLUE);
         
 
         JButton adminButton = new JButton("Admin");
-        adminButton.setPreferredSize(new Dimension(100, 30));
+        adminButton.setPreferredSize(new Dimension(200, 50));
+        adminButton.setFont(new Font("Arial", Font.PLAIN, 18));
         adminButton.setFocusPainted(false);
+        adminButton.setBackground(new Color(144, 238, 144));
         JButton studentButton = new JButton("Student");
-        studentButton.setPreferredSize(new Dimension(100, 30));
+        studentButton.setPreferredSize(new Dimension(200, 50));
+        studentButton.setFont(new Font("Arial", Font.PLAIN, 18));
+        studentButton.setBackground(new Color(144, 238, 144));
         studentButton.setFocusPainted(false);
 
         
@@ -44,8 +51,10 @@ public class loginScreen extends JPanel {
             }
         });
         JButton CloseProgram = new JButton("Exit");
-        CloseProgram.setPreferredSize(new Dimension(100, 30));
+        CloseProgram.setPreferredSize(new Dimension(200, 50));
+        CloseProgram.setFont(new Font("Arial", Font.PLAIN, 18));
         CloseProgram.setFocusPainted(false);
+        CloseProgram.setBackground(new Color(255, 102, 102));
         CloseProgram.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int response = JOptionPane.showConfirmDialog(
@@ -66,14 +75,18 @@ public class loginScreen extends JPanel {
 
         JPanel buttonPanel = new JPanel( new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
+            JPanel loginPanel = new JPanel(new GridBagLayout());
+            gbc.insets = new Insets(10, 10, 10, 10);
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            loginPanel.add(adminButton, gbc);
+            gbc.gridx++;
+            loginPanel.add(studentButton, gbc);
         gbc.gridx = 0;
         gbc.gridy = 0;
         buttonPanel.add(titleLabel, gbc);
         gbc.gridy++;
-        buttonPanel.add(adminButton, gbc);
-        gbc.gridy++;
-        buttonPanel.add(studentButton, gbc);
+        buttonPanel.add(loginPanel, gbc);
         gbc.gridy++;
         buttonPanel.add(CloseProgram, gbc);
         JPanel LogoPanel = new JPanel(new GridBagLayout());
@@ -94,7 +107,13 @@ public class loginScreen extends JPanel {
         LogoPanel.add(logoLabel, gbc);
         
         add(buttonPanel, BorderLayout.CENTER);
-        add(LogoPanel, BorderLayout.WEST);       
+        add(LogoPanel, BorderLayout.WEST);
+        
+        try {
+            UIManager.setLookAndFeel( new FlatLightLaf() );
+        } catch( Exception ex ) {
+            System.err.println( "Failed to initialize LaF" );
+        }
     }
 
 }
