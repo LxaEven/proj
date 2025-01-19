@@ -60,34 +60,32 @@ public class viewProfile extends JPanel{
         add(profilePanel, BorderLayout.CENTER);
 
         try (Connection conn = DBConnect.getConnection();
-        PreparedStatement pstmt = conn.prepareStatement(
-            "SELECT * FROM student WHERE (email = ? OR phone_number = ?) AND student_password = ?"))
-             {
+        PreparedStatement pstmt = conn.prepareStatement
+        ("SELECT * FROM student WHERE (email = ? OR phone_number = ?) AND student_password = ?")){
+            LoginPanel loginPanel = new LoginPanel(mainPanel);
 
-                LoginPanel loginPanel = new LoginPanel(mainPanel);
+            String identifier = loginPanel.getIdentifier();
+            String password = loginPanel.getPassword();
 
-                String identifier = loginPanel.getIdentifier();
-                String password = loginPanel.getPassword();
-   
-                pstmt.setString(1, identifier);
-                pstmt.setString(2, identifier);
-                pstmt.setString(3, password);
-            
-                try (ResultSet rs = pstmt.executeQuery()) {
-                    if (rs.next()) {
-                        idLabel.setText("Student ID:     " + "e2022" + String.format("%03d", rs.getInt("student_id")));
-                        firstnameLabel.setText("Firstname:     " + rs.getString("student_firstname"));
-                        lastnameLabel.setText("Lastname:     " + rs.getString("student_lastname"));
-                        genderLabel.setText("Gender:     " + rs.getString("gender"));
-                        birthLabel.setText("Birth:     " + rs.getString("student_birth"));
-                        phoneNumberLabel.setText("Phone Number:     " + rs.getString("phone_number"));
-                        emailLabel.setText("Email:     " + rs.getString("email"));
-                    }
-       }
-   } catch (SQLException e) {
+            pstmt.setString(1, identifier);
+            pstmt.setString(2, identifier);
+            pstmt.setString(3, password);
+        
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    idLabel.setText("Student ID:     " + "e2022" + String.format("%03d", rs.getInt("student_id")));
+                    firstnameLabel.setText("Firstname:     " + rs.getString("student_firstname"));
+                    lastnameLabel.setText("Lastname:     " + rs.getString("student_lastname"));
+                    genderLabel.setText("Gender:     " + rs.getString("gender"));
+                    birthLabel.setText("Birth:     " + rs.getString("student_birth"));
+                    phoneNumberLabel.setText("Phone Number:     " + rs.getString("phone_number"));
+                    emailLabel.setText("Email:     " + rs.getString("email"));
+                }
+            }
+        } catch (SQLException e) {
        e.printStackTrace();
        JOptionPane.showMessageDialog(profilePanel, "Error: " + e.getMessage());
-   }
+        }        
    
 
 
@@ -273,14 +271,4 @@ public class viewProfile extends JPanel{
     
     }
     
-
-    public class User{
-        public int ID;
-        public String firstName;
-        public String lastName;
-        public String Gender;
-        public String Birth;
-        public String phone_number;
-        public String email;
-    }
 }
