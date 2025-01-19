@@ -3,17 +3,17 @@ import javax.swing.*;
 import java.awt.*;
 import com.formdev.flatlaf.*;
 
-import main.MainPanel;
+import main.*;
+import login.*;
 
 import java.awt.event.*;
 import java.sql.*;
 
 public class viewProfile extends JPanel{
+
+
     public viewProfile(MainPanel mainPanel){
         
-        String url = "jdbc:mysql://localhost:3306/mydb";
-        String username = "root";
-        String password = "Web#11*03";
         setLayout(new BorderLayout());
 
         ImageIcon imageIcon = new ImageIcon("image//logo.jpg");
@@ -59,24 +59,37 @@ public class viewProfile extends JPanel{
         gbc.anchor = GridBagConstraints.CENTER;
         add(profilePanel, BorderLayout.CENTER);
 
-        try (Connection conn = DriverManager.getConnection(url, username, password);
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM student WHERE student_id = 5")) {
+        try (Connection conn = DBConnect.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(
+            "SELECT * FROM student WHERE (email = ? OR phone_number = ?) AND student_password = ?"))
+             {
 
-            if (rs.next()) {
-                idLabel.setText("Student ID:     " + "e2022"+String.format("%03d",rs.getInt("student_id")));
-                firstnameLabel.setText("Firstname:     " + rs.getString("student_firstname"));
-                lastnameLabel.setText("Lastname:     " + rs.getString("student_lastname"));
-                genderLabel.setText("Gender:     " + rs.getString("gender"));
-                birthLabel.setText("Birth:     " + rs.getString("student_birth"));
-                phoneNumberLabel.setText("Phone Number:     " + rs.getString("phone_number"));
-                emailLabel.setText("Email:     " + rs.getString("email"));
-            }
+                LoginPanel loginPanel = new LoginPanel(mainPanel);
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(profilePanel, "Error: " + e.getMessage());
-        }
+                String identifier = loginPanel.getIdentifier();
+                String password = loginPanel.getPassword();
+   
+                pstmt.setString(1, identifier);
+                pstmt.setString(2, identifier);
+                pstmt.setString(3, password);
+            
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    if (rs.next()) {
+                        idLabel.setText("Student ID:     " + "e2022" + String.format("%03d", rs.getInt("student_id")));
+                        firstnameLabel.setText("Firstname:     " + rs.getString("student_firstname"));
+                        lastnameLabel.setText("Lastname:     " + rs.getString("student_lastname"));
+                        genderLabel.setText("Gender:     " + rs.getString("gender"));
+                        birthLabel.setText("Birth:     " + rs.getString("student_birth"));
+                        phoneNumberLabel.setText("Phone Number:     " + rs.getString("phone_number"));
+                        emailLabel.setText("Email:     " + rs.getString("email"));
+                    }
+       }
+   } catch (SQLException e) {
+       e.printStackTrace();
+       JOptionPane.showMessageDialog(profilePanel, "Error: " + e.getMessage());
+   }
+   
+
 
         JButton ViewProfile = new JButton("View Profile");
         ViewProfile.setFont(new Font("Arial", Font.BOLD, 13));

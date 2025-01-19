@@ -14,6 +14,7 @@ public class LoginPanel extends JPanel {
     private JPasswordField passwordField;
     private MainPanel mainPanel;
     public LoginPanel(MainPanel mainPanel) {
+        this.mainPanel = mainPanel;
         setLayout(new BorderLayout(20, 20));
         setBackground(new Color(173, 216, 230)); // Light Blue background
 
@@ -115,8 +116,8 @@ public class LoginPanel extends JPanel {
     private class LoginButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String identifier = emailField.getText().trim();
-            String password = new String(passwordField.getPassword()).trim();
+            String identifier = emailField.getText();
+            String password = new String(passwordField.getPassword());
 
             if (identifier.isEmpty() || password.isEmpty()) {
                 JOptionPane.showMessageDialog(LoginPanel.this, "Please enter both identifier and password.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -124,7 +125,9 @@ public class LoginPanel extends JPanel {
             }
 
             if (authenticateUser(identifier, password)) {
+                JOptionPane.showMessageDialog(LoginPanel.this, "Login successfully");
                 mainPanel.showScreen("student");
+                
             } else {
                 JOptionPane.showMessageDialog(LoginPanel.this, "Invalid username/ID or password.", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -149,4 +152,14 @@ public class LoginPanel extends JPanel {
             return false;
         }
     }
+
+    public String getIdentifier() {
+        return emailField.getText(); 
+    }
+    
+    public String getPassword() {
+        return new String(passwordField.getPassword()); 
+    }
+    
+
 }

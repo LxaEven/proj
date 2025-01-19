@@ -3,6 +3,7 @@ import java.sql.*;
 import javax.swing.*;
 import com.formdev.flatlaf.*;
 
+import main.DBConnect;
 import main.MainPanel;
 
 import java.awt.*;
@@ -39,11 +40,8 @@ public class ChangePassword extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 String oldPasswordValue = oldPassword.getText();
                 String newPasswordValue = newPassword.getText();
-                
-                String url = "jdbc:mysql://localhost:3306/mydb";
-                String username = "root";
-                String password = "Web#11*03";
-                try (Connection conn = DriverManager.getConnection(url, username, password);
+
+                try (Connection conn = DBConnect.getConnection();
                      Statement stmt = conn.createStatement()) {
                     String query = "UPDATE student SET phone_number = '" + newPasswordValue + "' WHERE phone_number = '" + oldPasswordValue + "'";
                     stmt.executeUpdate(query);

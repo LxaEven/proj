@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.table.*;
 import com.formdev.flatlaf.*;
 
+import main.DBConnect;
 import main.MainPanel;
 
 import java.awt.*;
@@ -12,9 +13,6 @@ import java.awt.event.*;
 public class ViewCourse extends JPanel {
     public ViewCourse(MainPanel mainPanel) {
 
-        String url = "jdbc:mysql://localhost:3306/mydb";
-        String username = "root";
-        String password = "Web#11*03";
 
         setLayout(new BorderLayout());
         ImageIcon imageIcon = new ImageIcon("image//logo.jpg");
@@ -35,7 +33,7 @@ public class ViewCourse extends JPanel {
 
         JTable table = new JTable(tableModel);
 
-        try (Connection conn = DriverManager.getConnection(url, username, password);
+        try (Connection conn = DBConnect.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT * FROM course")) {
 
