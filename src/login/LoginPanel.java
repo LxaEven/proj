@@ -9,6 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 public class LoginPanel extends JPanel {
+    private static String identifier;
+    private static String password;
+
 
     private JTextField emailField;
     private JPasswordField passwordField;
@@ -116,8 +119,8 @@ public class LoginPanel extends JPanel {
     private class LoginButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String identifier = emailField.getText();
-            String password = new String(passwordField.getPassword());
+            identifier = emailField.getText();
+            password = new String(passwordField.getPassword());
 
             if (identifier.isEmpty() || password.isEmpty()) {
                 JOptionPane.showMessageDialog(LoginPanel.this, "Please enter both identifier and password.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -154,11 +157,11 @@ public class LoginPanel extends JPanel {
     }
 
     public String getIdentifier() {
-        return emailField.getText(); 
+        return  identifier;
     }
     
     public String getPassword() {
-        return new String(passwordField.getPassword()); 
+        return  password;
     }
     
 
