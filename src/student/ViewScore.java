@@ -65,6 +65,7 @@ public class ViewScore extends JPanel {
         table.setFont(new Font("Arial", Font.PLAIN, 16));
         table.setRowHeight(20);
         table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 18));
+        table.getTableHeader().setBackground(Color.BLUE);
         table.setRowHeight(30);
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
@@ -75,6 +76,7 @@ public class ViewScore extends JPanel {
 
         TableRowSorter<DefaultTableModel> rowSorter = new TableRowSorter<>(tableModel);
         table.setRowSorter(rowSorter);
+        table.setBackground(new Color(173, 216, 230));
         table.setFillsViewportHeight(true);
         
         JLabel searchLabel = new JLabel("Search:");
@@ -115,7 +117,6 @@ public class ViewScore extends JPanel {
 
         
         JScrollPane scrollPanel = new JScrollPane(table);
-        
         
         
         JButton ViewProfile = new JButton("View Profile");
@@ -309,6 +310,7 @@ public class ViewScore extends JPanel {
         SearchPanel.add(searchButton, gbc);
 
         JPanel TablePanel = new JPanel(new GridBagLayout());
+        // TablePanel.setBackground(new Color(173, 216, 230));
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridx = 0;
         gbc.gridy = 0;

@@ -74,8 +74,10 @@ public class loginScreen extends JPanel {
         });
 
         JPanel buttonPanel = new JPanel( new GridBagLayout());
+        buttonPanel.setBackground(new Color(173, 216, 230));
         GridBagConstraints gbc = new GridBagConstraints();
             JPanel loginPanel = new JPanel(new GridBagLayout());
+            loginPanel.setBackground(new Color(173, 216, 230));
             gbc.insets = new Insets(10, 10, 10, 10);
             gbc.gridx = 0;
             gbc.gridy = 0;
@@ -89,17 +91,9 @@ public class loginScreen extends JPanel {
         buttonPanel.add(loginPanel, gbc);
         gbc.gridy++;
         buttonPanel.add(CloseProgram, gbc);
+
         JPanel LogoPanel = new JPanel(new GridBagLayout());
         LogoPanel.setBackground(Color.CYAN);
-        // {
-        //     private Image backgroundImage = new ImageIcon("image\\chromakophia.jpg").getImage();
-
-        //     @Override
-        //     protected void paintComponent(Graphics g) {
-        //         super.paintComponent(g);
-        //         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-        //     }
-        // };
         LogoPanel.setPreferredSize(new Dimension(400, 200));
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridx = 0;
