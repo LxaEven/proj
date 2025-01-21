@@ -121,6 +121,8 @@ public class LoginPanel extends JPanel {
         public void actionPerformed(ActionEvent e) {
             identifier = emailField.getText();
             password = new String(passwordField.getPassword());
+            mainPanel.setIdentifier(identifier);
+            mainPanel.setPassword(password);
 
             if (identifier.isEmpty() || password.isEmpty()) {
                 JOptionPane.showMessageDialog(LoginPanel.this, "Please enter both identifier and password.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -156,13 +158,6 @@ public class LoginPanel extends JPanel {
         }
     }
 
-    public String getIdentifier() {
-        return  identifier;
-    }
-    
-    public String getPassword() {
-        return  password;
-    }
     
 
 }

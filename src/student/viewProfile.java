@@ -62,10 +62,9 @@ public class viewProfile extends JPanel{
         try (Connection conn = DBConnect.getConnection();
         PreparedStatement pstmt = conn.prepareStatement
         ("SELECT * FROM student WHERE (email = ? OR phone_number = ?) AND student_password = ?")){
-            LoginPanel loginPanel = new LoginPanel(mainPanel);
 
-            String identifier = loginPanel.getIdentifier();
-            String password = loginPanel.getPassword();
+            String identifier = mainPanel.getIdentifier();
+            String password = mainPanel.getPassword();
 
             pstmt.setString(1, identifier);
             pstmt.setString(2, identifier);
@@ -270,5 +269,7 @@ public class viewProfile extends JPanel{
         add(southPanel, BorderLayout.SOUTH);
     
     }
+
+    
     
 }

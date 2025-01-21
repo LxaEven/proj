@@ -11,6 +11,8 @@ public class MainPanel extends JPanel {
     private CardLayout cardLayout;
     private static String verificationCode;
     private static String userEmailOrId;
+    private static String userIdentifier;
+    private static String userPassword;
 
     public MainPanel() {
         cardLayout = new CardLayout();
@@ -61,5 +63,21 @@ public class MainPanel extends JPanel {
 
     public static String getUserEmailOrId() {
         return userEmailOrId;
+    }
+
+    public void setIdentifier(String identifier) {
+        userIdentifier = identifier;
+    }
+
+    public String getIdentifier(){
+        return userIdentifier;
+    }
+    
+    public void setPassword(String password) {
+        userPassword =  password;
+    }
+
+    public String getPassword(){
+        return userPassword;
     }
 }
