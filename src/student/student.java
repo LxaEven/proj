@@ -24,8 +24,12 @@ public class student extends JPanel {
         ViewProfile.setFocusPainted(false);
         ViewProfile.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                CardLayout c4 = (CardLayout) mainPanel.getLayout();
-                c4.show(mainPanel, "ViewProfile");
+                ViewProfile.setBackground(Color.GREEN);
+                displayProfile profilePanel = new displayProfile(); 
+                add(profilePanel, BorderLayout.CENTER);
+                revalidate(); 
+                repaint(); 
+                
             }
         });
 
