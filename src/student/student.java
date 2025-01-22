@@ -108,7 +108,8 @@ public class student extends JPanel {
                 
                 if (response == JOptionPane.NO_OPTION) {
                     CardLayout c4 = (CardLayout) mainPanel.getLayout();
-                    refreshData();
+                    student studentPanel = new student(mainPanel);
+                    studentPanel.resetPanel();
                     c4.show(mainPanel, "student");
                 } else {
                     System.out.println("Program ended");
