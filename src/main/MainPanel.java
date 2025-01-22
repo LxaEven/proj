@@ -8,6 +8,8 @@ import login.*;
 import java.awt.*;
 import java.util.Random;
 public class MainPanel extends JPanel {
+    public static String loginUserIdentifier;
+    public static String loginUserPassword;
     private CardLayout cardLayout;
     private static String verificationCode;
     private static String userEmailOrId;
@@ -63,21 +65,5 @@ public class MainPanel extends JPanel {
 
     public static String getUserEmailOrId() {
         return userEmailOrId;
-    }
-
-    public void setIdentifier(String identifier) {
-        userIdentifier = identifier;
-    }
-
-    public String getIdentifier(){
-        return userIdentifier;
-    }
-    
-    public void setPassword(String password) {
-        userPassword =  password;
-    }
-
-    public String getPassword(){
-        return userPassword;
     }
 }

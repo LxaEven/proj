@@ -16,6 +16,7 @@ public class LoginPanel extends JPanel {
     private JTextField emailField;
     private JPasswordField passwordField;
     private MainPanel mainPanel;
+
     public LoginPanel(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
         setLayout(new BorderLayout(20, 20));
@@ -121,8 +122,8 @@ public class LoginPanel extends JPanel {
         public void actionPerformed(ActionEvent e) {
             identifier = emailField.getText();
             password = new String(passwordField.getPassword());
-            mainPanel.setIdentifier(identifier);
-            mainPanel.setPassword(password);
+            MainPanel.loginUserIdentifier = identifier;
+            MainPanel.loginUserPassword = password;
 
             if (identifier.isEmpty() || password.isEmpty()) {
                 JOptionPane.showMessageDialog(LoginPanel.this, "Please enter both identifier and password.", "Error", JOptionPane.ERROR_MESSAGE);
