@@ -9,6 +9,7 @@ import java.awt.event.*;
 
 public class student extends JPanel {
 
+    private displayProfile currentProfilePanel; 
     public student(MainPanel mainPanel){
         setLayout(new BorderLayout());
 
@@ -25,10 +26,9 @@ public class student extends JPanel {
         ViewProfile.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ViewProfile.setBackground(Color.GREEN);
-                displayProfile profilePanel = new displayProfile(); 
-                add(profilePanel, BorderLayout.CENTER);
-                revalidate(); 
-                repaint(); 
+
+                
+                updateProfilePanel(mainPanel);
                 
             }
         });
@@ -108,6 +108,7 @@ public class student extends JPanel {
                 
                 if (response == JOptionPane.NO_OPTION) {
                     CardLayout c4 = (CardLayout) mainPanel.getLayout();
+                    refreshData();
                     c4.show(mainPanel, "student");
                 } else {
                     System.out.println("Program ended");
@@ -116,35 +117,6 @@ public class student extends JPanel {
             }
         });
 
-        JButton darkMode = new JButton("Dark Mode");
-        darkMode.setFont(new Font("Arial", Font.BOLD, 12));
-        darkMode.setPreferredSize(new Dimension(130, 30));
-        darkMode.setFocusPainted(false);
-        darkMode.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    UIManager.setLookAndFeel( new FlatDarkLaf() );
-                    SwingUtilities.updateComponentTreeUI(mainPanel);
-                } catch( Exception ex ) {
-                    System.err.println( "Failed to initialize LaF" );
-                }
-            }
-        });
-
-        JButton lightMode = new JButton("Light Mode");
-        lightMode.setFont(new Font("Arial", Font.BOLD, 12));
-        lightMode.setPreferredSize(new Dimension(130, 30));
-        lightMode.setFocusPainted(false);
-        lightMode.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    UIManager.setLookAndFeel( new FlatLightLaf() );
-                    SwingUtilities.updateComponentTreeUI(mainPanel);
-                } catch( Exception ex ) {
-                    System.err.println( "Failed to initialize LaF" );
-                }
-            }
-        });
 
 
         JPanel buttonPanel = new JPanel(new BorderLayout());
@@ -181,12 +153,7 @@ public class student extends JPanel {
         JPanel ModePanel = new JPanel(new GridBagLayout());
         gbc.insets = new Insets(20, 20, 20, 20);
         ModePanel.setPreferredSize(new Dimension(180, 50));
-        gbc.gridy = 0;
-        gbc.gridx = 0;
-        ModePanel.add(darkMode, gbc);
-        gbc.gridx++;
-        ModePanel.add(lightMode, gbc);
-        ModePanel.setBackground(Color.GRAY);
+        ModePanel.setBackground(Color.CYAN);
         add(ModePanel, BorderLayout.NORTH);
 
         JPanel eastPanel = new JPanel();
@@ -199,5 +166,24 @@ public class student extends JPanel {
         southPanel.setPreferredSize(new Dimension(200, 50));
         add(southPanel, BorderLayout.SOUTH);
     
+    }
+
+    public void updateProfilePanel(MainPanel mainPanel) {
+        if (currentProfilePanel != null) {
+            remove(currentProfilePanel); // Remove the old profile panel
+        }
+        currentProfilePanel = new displayProfile(mainPanel); // Create a new profile panel
+        add(currentProfilePanel, BorderLayout.CENTER); // Add the new profile panel
+        revalidate(); // Refresh the layout
+        repaint();   // Repaint the panel
+    }
+
+    public void resetPanel() {
+        if (currentProfilePanel != null) {
+            remove(currentProfilePanel); // Remove the profile panel
+            currentProfilePanel = null;  // Clear the reference
+        }
+        revalidate(); // Refresh the layout
+        repaint();   // Repaint the panel
     }
 }

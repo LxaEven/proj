@@ -12,7 +12,7 @@ import main.MainPanel;
 public class displayProfile extends JPanel {
     private GridBagConstraints gbc = new GridBagConstraints();
 
-    public displayProfile() {
+    public displayProfile(MainPanel mainPanel) {
         setLayout(new BorderLayout());
         ProfileDisplay();
     }

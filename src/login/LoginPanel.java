@@ -2,6 +2,8 @@ package login;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import main.*;
+import student.student;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.Connection;
@@ -137,6 +139,9 @@ public class LoginPanel extends JPanel {
             } else {
                 JOptionPane.showMessageDialog(LoginPanel.this, "Invalid username/ID or password.", "Error", JOptionPane.ERROR_MESSAGE);
             }
+
+            student studentPanel = new student(mainPanel);
+            studentPanel.updateProfilePanel(mainPanel);
         }
     }
 
@@ -159,6 +164,5 @@ public class LoginPanel extends JPanel {
         }
     }
 
-    
 
 }
