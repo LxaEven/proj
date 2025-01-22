@@ -2,9 +2,7 @@ package student;
 import javax.swing.*;
 import java.awt.*;
 import com.formdev.flatlaf.*;
-
 import main.*;
-import login.*;
 
 import java.awt.event.*;
 import java.sql.*;
@@ -272,6 +270,8 @@ public class viewProfile extends JPanel{
        e.printStackTrace();
        JOptionPane.showMessageDialog(profilePanel, "Error: " + e.getMessage());
         }
+        revalidate();
+        repaint();
     }
     
     
