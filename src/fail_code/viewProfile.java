@@ -1,128 +1,35 @@
-package student;
-import java.sql.*;
+package fail_code;
 import javax.swing.*;
-import javax.swing.table.*;
-import com.formdev.flatlaf.*;
-
-import main.DBConnect;
-import main.MainPanel;
-
 import java.awt.*;
+import com.formdev.flatlaf.*;
+import main.*;
+
 import java.awt.event.*;
+import java.sql.*;
 
-public class ViewScore extends JPanel {
-    public ViewScore(MainPanel mainPanel) {
+public class viewProfile extends JPanel{
 
+    private GridBagConstraints gbc = new GridBagConstraints();
+    public viewProfile(MainPanel mainPanel){
+        
         setLayout(new BorderLayout());
+
         ImageIcon imageIcon = new ImageIcon("image//logo.jpg");
         Image resizedImage = imageIcon.getImage().getScaledInstance(160, 160, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(resizedImage);
         JLabel logoLabel = new JLabel(resizedIcon);
+        gbc = new GridBagConstraints();
         
-
-        JLabel tableLabel = new JLabel("Course Score", SwingConstants.CENTER);
-        tableLabel.setFont(new Font("Arial", Font.BOLD, 15));
-
-        DefaultTableModel tableModel = new DefaultTableModel() {
-            
-            public boolean isCellEditable(int row, int column) {
-                return false; 
-            }
-        };
-
-        JTable table = new JTable(tableModel);
-
-        try (Connection conn = DBConnect.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM student")) {
-
-            
-            tableModel.addColumn("ID");
-            tableModel.addColumn("Firstname");
-            tableModel.addColumn("Lastname");
-            tableModel.addColumn("Gender");
-            tableModel.addColumn("Birth");
-            tableModel.addColumn("Phone Number");
-            tableModel.addColumn("Score");
-
-            
-            while (rs.next()) {
-                int id = rs.getInt("student_id");
-                String studentfirstName = rs.getString("student_firstname");
-                String studentlastName = rs.getString("student_lastname");
-                String studentGender = rs.getString("gender");
-                String studentBirth = rs.getString("student_birth");
-                String studentPhoneNumber = rs.getString("phone_number");
-                float studentScore = rs.getFloat("student_score");
-                tableModel.addRow(new Object[]{"e2022"+String.format("%03d", id), studentfirstName, studentlastName, studentGender,  studentBirth, studentPhoneNumber, studentScore});
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(mainPanel, "Error: " + e.getMessage());
-        }
-        
-        table.setFont(new Font("Arial", Font.PLAIN, 16));
-        table.setRowHeight(20);
-        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 18));
-        table.getTableHeader().setBackground(Color.BLUE);
-        table.setRowHeight(30);
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-        for(int i = 0; i < table.getColumnCount(); i++) {
-            table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-        }
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-
-        TableRowSorter<DefaultTableModel> rowSorter = new TableRowSorter<>(tableModel);
-        table.setRowSorter(rowSorter);
-        table.setBackground(new Color(173, 216, 230));
-        table.setFillsViewportHeight(true);
-        
-        JLabel searchLabel = new JLabel("Search:");
-        searchLabel.setFont(new Font("Arial", Font.BOLD, 13));
-        searchLabel.setPreferredSize(new Dimension(50, 30));
-        JTextField searchField = new JTextField(20);
-        searchField.setPreferredSize(new Dimension(600, 30));
-        String placeholder = "Enter your search here...";
-        searchField.setText(placeholder);
-
-        JButton searchButton = new JButton("Search");
-        searchButton.setFont(new Font("Arial", Font.BOLD, 13));
-        searchButton.setPreferredSize(new Dimension(100, 30));
-        searchButton.setFocusPainted(false);
-        searchField.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                String searchText = searchField.getText();
-                if (searchText.trim().length() == 0) {
-                    rowSorter.setRowFilter(null); 
-                } else {
-                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + searchText)); 
-                }
-            }
-        });
-
-        searchField.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                searchField.setText("");
-            }
-        
-            public void focusLost(FocusEvent e) {
-                searchField.setText(placeholder);
-            }
-        });
+        ProfileDisplay();
+   
 
 
-        
-        JScrollPane scrollPanel = new JScrollPane(table);
-        
-        
         JButton ViewProfile = new JButton("View Profile");
         ViewProfile.setFont(new Font("Arial", Font.BOLD, 13));
         ViewProfile.setPreferredSize(new Dimension(160, 30));
         ViewProfile.setFocusPainted(false);
+        ViewProfile.setBackground(Color.GRAY);
+        ViewProfile.setForeground(Color.WHITE);
         ViewProfile.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CardLayout c4 = (CardLayout) mainPanel.getLayout();
@@ -135,8 +42,6 @@ public class ViewScore extends JPanel {
         ViewScore.setFont(new Font("Arial", Font.BOLD, 13));
         ViewScore.setPreferredSize(new Dimension(160, 30));
         ViewScore.setFocusPainted(false);
-        ViewScore.setBackground(Color.GRAY);
-        ViewScore.setForeground(Color.WHITE);
         ViewScore.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CardLayout c4 = (CardLayout) mainPanel.getLayout();
@@ -207,7 +112,7 @@ public class ViewScore extends JPanel {
                 
                 if (response == JOptionPane.NO_OPTION) {
                     CardLayout c4 = (CardLayout) mainPanel.getLayout();
-                    c4.show(mainPanel, "ViewScore");
+                    c4.show(mainPanel, "student");
                 } else {
                     System.out.println("Program ended");
                     System.exit(0);
@@ -246,7 +151,8 @@ public class ViewScore extends JPanel {
         });
 
 
-
+        
+        
         JPanel buttonPanel = new JPanel(new BorderLayout());
         buttonPanel.setBackground(Color.GRAY);
 
@@ -257,7 +163,6 @@ public class ViewScore extends JPanel {
         buttonPanel.add(logoPanel, BorderLayout.NORTH);
 
         JPanel buttonsContainer = new JPanel(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(20, 20, 20, 20);
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -277,10 +182,10 @@ public class ViewScore extends JPanel {
         buttonsContainer.setBackground(Color.GRAY);
         buttonPanel.add(buttonsContainer, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.WEST);
-        
+
         JPanel ModePanel = new JPanel(new GridBagLayout());
-        ModePanel.setPreferredSize(new Dimension(180, 50));
         gbc.insets = new Insets(20, 20, 20, 20);
+        ModePanel.setPreferredSize(new Dimension(180, 50));
         gbc.gridy = 0;
         gbc.gridx = 0;
         ModePanel.add(darkMode, gbc);
@@ -298,32 +203,76 @@ public class ViewScore extends JPanel {
         southPanel.setBackground(Color.GRAY);
         southPanel.setPreferredSize(new Dimension(200, 50));
         add(southPanel, BorderLayout.SOUTH);
+    
+    }
+    
+    void ProfileDisplay(){
+        JLabel idLabel = new JLabel("Student ID:   ");
+        idLabel.setFont(new Font("Arial", Font.BOLD, 17));
+        JLabel firstnameLabel = new JLabel("Firstname:   ");
+        firstnameLabel.setFont(new Font("Arial", Font.BOLD, 17));
+        JLabel lastnameLabel = new JLabel("Lastname:  ");
+        lastnameLabel.setFont(new Font("Arial", Font.BOLD, 17));
+        JLabel genderLabel = new JLabel("Gender:   ");
+        genderLabel.setFont(new Font("Arial", Font.BOLD, 17));
+        JLabel birthLabel = new JLabel("Birth:   ");
+        birthLabel.setFont(new Font("Arial", Font.BOLD, 17));
+        JLabel phoneNumberLabel = new JLabel("Phone Number:   ");
+        phoneNumberLabel.setFont(new Font("Arial", Font.BOLD, 17));
+        JLabel emailLabel = new JLabel("Email:   ");
+        emailLabel.setFont(new Font("Arial", Font.BOLD, 17));
 
-        JPanel SearchPanel = new JPanel(new GridBagLayout());
-        gbc.insets = new Insets(5, 5, 5, 5);
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        SearchPanel.add(searchLabel, gbc);
-        gbc.gridx++;
-        SearchPanel.add(searchField, gbc);
-        gbc.gridx++;
-        SearchPanel.add(searchButton, gbc);
-
-        JPanel TablePanel = new JPanel(new GridBagLayout());
-        // TablePanel.setBackground(new Color(173, 216, 230));
+       
+        JPanel profilePanel = new JPanel(new GridBagLayout());
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.gridwidth = 3;
+        gbc.anchor = GridBagConstraints.WEST;
+        profilePanel.add(idLabel, gbc);
+        gbc.gridy++;
+        profilePanel.add(firstnameLabel, gbc);
+        gbc.gridy++;
+        profilePanel.add(lastnameLabel, gbc);
+        gbc.gridy++;
+        profilePanel.add(genderLabel, gbc);
+        gbc.gridy++;
+        profilePanel.add(birthLabel, gbc);
+        gbc.gridy++;
+        profilePanel.add(phoneNumberLabel, gbc);
+        gbc.gridy++;
+        profilePanel.add(emailLabel, gbc);
         gbc.anchor = GridBagConstraints.CENTER;
-        TablePanel.add(SearchPanel, gbc);
-        gbc.gridy++; 
-        gbc.fill = GridBagConstraints.BOTH; 
-        gbc.weightx = 1.0; 
-        gbc.weighty = 1.0;
-        TablePanel.add(scrollPanel, gbc);
-        add(TablePanel, BorderLayout.CENTER);
+        add(profilePanel, BorderLayout.CENTER);
+
+        try (Connection conn = DBConnect.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement
+        ("SELECT * FROM student WHERE (email = ? OR phone_number = ?) AND student_password = ?")){
+
+            String identifier =MainPanel.loginUserIdentifier;
+            String password = MainPanel.loginUserPassword;
+
+            pstmt.setString(1, identifier);
+            pstmt.setString(2, identifier);
+            pstmt.setString(3, password);
+        
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    idLabel.setText("Student ID:     " + "e2022" + String.format("%03d", rs.getInt("student_id")));
+                    firstnameLabel.setText("Firstname:     " + rs.getString("student_firstname"));
+                    lastnameLabel.setText("Lastname:     " + rs.getString("student_lastname"));
+                    genderLabel.setText("Gender:     " + rs.getString("gender"));
+                    birthLabel.setText("Birth:     " + rs.getString("student_birth"));
+                    phoneNumberLabel.setText("Phone Number:     " + rs.getString("phone_number"));
+                    emailLabel.setText("Email:     " + rs.getString("email"));
+                }
+            }
+        } catch (SQLException e) {
+       e.printStackTrace();
+       JOptionPane.showMessageDialog(profilePanel, "Error: " + e.getMessage());
+        }
         revalidate();
         repaint();
     }
+    
+    
 }

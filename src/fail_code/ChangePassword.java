@@ -1,4 +1,4 @@
-package student;
+package fail_code;
 import java.sql.*;
 import javax.swing.*;
 import com.formdev.flatlaf.*;
