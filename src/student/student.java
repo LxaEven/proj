@@ -63,7 +63,6 @@ public class student extends JPanel {
                 );
                 
                 if (response == JOptionPane.YES_OPTION) {
-                    ViewProfile.setBackground(Color.WHITE);
                     CardLayout c4 = (CardLayout) mainPanel.getLayout();
                     c4.show(mainPanel, "loginScreen");
                 } else {
@@ -96,15 +95,15 @@ public class student extends JPanel {
             }
         });
 
-        JButton[] buttons = {ViewProfile, ViewScore, ViewCourse};
+        JButton[] buttons = {ViewProfile, ViewScore, ViewCourse, ChangePassword};
 
         ActionListener buttonListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (JButton button : buttons) {
-                    button.setBackground(Color.WHITE); // Reset color
+                    button.setBackground(Color.WHITE); 
                 }
-                ((JButton) e.getSource()).setBackground(Color.YELLOW); // Set clicked button's color
+                ((JButton) e.getSource()).setBackground(new Color(173, 216, 230)); 
             }
         };
 
@@ -124,6 +123,7 @@ public class student extends JPanel {
         buttonPanel.add(logoPanel, BorderLayout.NORTH);
 
         JPanel buttonsContainer = new JPanel(new GridBagLayout());
+        buttonsContainer.setPreferredSize(new Dimension(250, 500));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(20, 20, 20, 20);
         gbc.gridx = 0;

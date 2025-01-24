@@ -22,11 +22,6 @@ public class MainPanel extends JPanel {
         add(new startPanel(this), "start");
         add(new loginScreen(this), "loginScreen");
         add(new student(this), "student");
-        add(new ViewScore(this), "ViewScore");
-        add(new ChangePassword(this), "ChangePassword");
-        add(new viewProfile(this), "ViewProfile");
-        add(new ViewCourse(this), "ViewCourse");
-        add(new student(this), "student");
         
         add(new LoginPanel(this), "Login");
         add(new ForgotPasswordPanel(this), "ForgotPassword");

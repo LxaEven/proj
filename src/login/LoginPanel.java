@@ -122,8 +122,8 @@ public class LoginPanel extends JPanel {
     private class LoginButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            identifier = emailField.getText();
-            password = new String(passwordField.getPassword());
+            identifier = emailField.getText().trim();
+            password = new String(passwordField.getPassword()).trim();
             MainPanel.loginUserIdentifier = identifier;
             MainPanel.loginUserPassword = password;
 

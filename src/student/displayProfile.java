@@ -62,6 +62,7 @@ public class displayProfile extends JPanel {
 
             String identifier = MainPanel.loginUserIdentifier;
             String password = MainPanel.loginUserPassword;
+            System.out.println(password);
 
             pstmt.setString(1, identifier);
             pstmt.setString(2, identifier);
