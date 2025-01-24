@@ -22,33 +22,59 @@ public class ChangePassword extends JPanel {
         
         JLabel oldPasswordLabel = new JLabel("Old Password:");
         oldPasswordLabel.setFont(new Font("Arial", Font.BOLD, 13));
-        JTextField oldPassword = new JTextField();
-        oldPassword.setPreferredSize(new Dimension(200, 30));
-
+        JPasswordField oldPasswordField = new JPasswordField();
+        oldPasswordField.setPreferredSize(new Dimension(200, 30));
 
         JLabel newPasswordLabel = new JLabel("New Password:");
         newPasswordLabel.setFont(new Font("Arial", Font.BOLD, 13));
-        JTextField newPassword = new JTextField();
-        newPassword.setPreferredSize(new Dimension(200, 30));
+        JPasswordField newPasswordField = new JPasswordField();
+        newPasswordField.setPreferredSize(new Dimension(200, 30));
 
+        JLabel confirmPasswordLabel = new JLabel("Confirm Password:");
+        confirmPasswordLabel.setFont(new Font("Arial", Font.BOLD, 13));
+        JPasswordField confirmPasswordField = new JPasswordField();
+        confirmPasswordField.setPreferredSize(new Dimension(200, 30));
 
+        // Submit button setup
         JButton submitButton = new JButton("Submit");
         submitButton.setPreferredSize(new Dimension(100, 30));
         submitButton.setFont(new Font("Arial", Font.BOLD, 13));
         submitButton.setFocusPainted(false);
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String oldPasswordValue = oldPassword.getText();
-                String newPasswordValue = newPassword.getText();
+                String oldPassword = new String(oldPasswordField.getPassword());
+                String newPassword = new String(newPasswordField.getPassword());
+                String confirmPassword = new String(confirmPasswordField.getPassword());
+
+                if (!newPassword.equals(confirmPassword)) {
+                    JOptionPane.showMessageDialog(mainPanel, "New passwords do not match.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
                 try (Connection conn = DBConnect.getConnection();
-                     Statement stmt = conn.createStatement()) {
-                    String query = "UPDATE student SET phone_number = '" + newPasswordValue + "' WHERE phone_number = '" + oldPasswordValue + "'";
-                    stmt.executeUpdate(query);
-                    JOptionPane.showMessageDialog(mainPanel, "Password changed successfully");
+                     PreparedStatement checkStmt = conn.prepareStatement("SELECT * FROM student WHERE (email = ? OR phone_number = ?) AND student_password = ?");
+                     PreparedStatement updateStmt = conn.prepareStatement("UPDATE student SET student_password = ? WHERE (email = ? OR phone_number = ?)")) {
+
+                    String identifier = MainPanel.loginUserIdentifier;
+                    checkStmt.setString(1, identifier);
+                    checkStmt.setString(2, identifier);
+                    checkStmt.setString(3, oldPassword);
+                    ResultSet rs = checkStmt.executeQuery();
+
+                    if (rs.next()) {
+                        // Update password
+                        updateStmt.setString(1, newPassword);
+                        updateStmt.setString(2, identifier);
+                        updateStmt.setString(3, identifier);
+                        updateStmt.executeUpdate();
+
+                        JOptionPane.showMessageDialog(mainPanel, "Password changed successfully.");
+                    } else {
+                        JOptionPane.showMessageDialog(mainPanel, "Old password is incorrect.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 } catch (SQLException ex) {
                     ex.printStackTrace();
-                    JOptionPane.showMessageDialog(mainPanel, "Error: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(mainPanel, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -221,12 +247,17 @@ public class ChangePassword extends JPanel {
         gbc.gridy = 0;
         formPanel.add(oldPasswordLabel, gbc);
         gbc.gridx++;
-        formPanel.add(oldPassword, gbc);
+        formPanel.add(oldPasswordField, gbc);
         gbc.gridy++;
         gbc.gridx = 0;
         formPanel.add(newPasswordLabel, gbc);
         gbc.gridx++;
-        formPanel.add(newPassword, gbc);
+        formPanel.add(newPasswordField, gbc);
+        gbc.gridy++;
+        gbc.gridx = 0;
+        formPanel.add(confirmPasswordLabel, gbc);
+        gbc.gridx++;
+        formPanel.add(confirmPasswordField, gbc);
         gbc.gridy++;
         formPanel.add(submitButton, gbc);
         add(formPanel, BorderLayout.CENTER);

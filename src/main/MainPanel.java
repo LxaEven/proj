@@ -13,8 +13,6 @@ public class MainPanel extends JPanel {
     private CardLayout cardLayout;
     private static String verificationCode;
     private static String userEmailOrId;
-    private static String userIdentifier;
-    private static String userPassword;
 
     public MainPanel() {
         cardLayout = new CardLayout();

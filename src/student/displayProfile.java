@@ -54,6 +54,7 @@ public class displayProfile extends JPanel {
         gbc.anchor = GridBagConstraints.CENTER;
 
         add(profilePanel, BorderLayout.CENTER);
+        profilePanel.setBackground(new Color(173, 216, 230));
 
         try (Connection conn = DBConnect.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(
@@ -68,7 +69,7 @@ public class displayProfile extends JPanel {
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    idLabel.setText("Student ID:     " + "e2022" + String.format("%03d", rs.getInt("student_id")));
+                    idLabel.setText("Student ID:     " + String.format("%03d", rs.getInt("student_id")));
                     firstnameLabel.setText("Firstname:     " + rs.getString("student_firstname"));
                     lastnameLabel.setText("Lastname:     " + rs.getString("student_lastname"));
                     genderLabel.setText("Gender:     " + rs.getString("gender"));

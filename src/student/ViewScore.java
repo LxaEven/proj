@@ -323,6 +323,7 @@ public class ViewScore extends JPanel {
         gbc.weighty = 1.0;
         TablePanel.add(scrollPanel, gbc);
         add(TablePanel, BorderLayout.CENTER);
-    
+        revalidate();
+        repaint();
     }
 }
