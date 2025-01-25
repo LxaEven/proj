@@ -12,7 +12,7 @@ public class MainPanel extends JPanel {
     public static String loginUserPassword;
     private CardLayout cardLayout;
     private static String verificationCode;
-    private static String userEmailOrId;
+    private static String userEmailOrPhoneNumber;
 
     public MainPanel() {
         cardLayout = new CardLayout();
@@ -52,12 +52,12 @@ public class MainPanel extends JPanel {
         return verificationCode;
     }
 
-    public static void setUserEmailOrId(String emailOrId) {
-        userEmailOrId = emailOrId;
+    public static void setUserEmailOrId(String emailOrPhoneNumber) {
+        userEmailOrPhoneNumber = emailOrPhoneNumber;
     }
 
     public static String getUserEmailOrId() {
-        return userEmailOrId;
+        return userEmailOrPhoneNumber;
     }
 
 }

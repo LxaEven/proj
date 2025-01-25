@@ -128,7 +128,7 @@ public class LoginPanel extends JPanel {
             MainPanel.loginUserPassword = password;
 
             if (identifier.isEmpty() || password.isEmpty()) {
-                JOptionPane.showMessageDialog(LoginPanel.this, "Please enter both identifier and password.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(LoginPanel.this, "Please enter both Email/Phone Number and password.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -137,11 +137,9 @@ public class LoginPanel extends JPanel {
                 mainPanel.showScreen("student");
                 
             } else {
-                JOptionPane.showMessageDialog(LoginPanel.this, "Invalid username/ID or password.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(LoginPanel.this, "Invalid Email/Phone Number or password.", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
-            student studentPanel = new student(mainPanel);
-            studentPanel.updateProfilePanel(mainPanel);
         }
     }
 
