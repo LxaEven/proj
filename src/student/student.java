@@ -1,5 +1,7 @@
 package student;
 import javax.swing.*;
+
+import login.LoginPanel;
 import main.MainPanel;
 
 import java.awt.*;
@@ -84,6 +86,8 @@ public class student extends JPanel {
                 if (response == JOptionPane.YES_OPTION) {
                     clearMainContent();
                     clearColor(buttons);
+                    LoginPanel loginpanel = (LoginPanel) mainPanel.getComponent(3);
+                    loginpanel.clearFields();
                     mainPanel.showScreen("loginScreen");
                 } else {
                     System.out.println("Stayed logged in");

@@ -158,5 +158,10 @@ public class LoginPanel extends JPanel {
         }
     }
 
+    public void clearFields() {
+        emailField.setText("");
+        passwordField.setText("");
+    }
+
 
 }
