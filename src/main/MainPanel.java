@@ -1,8 +1,6 @@
 package main;
 
 import javax.swing.*;
-
-import fail_code.viewProfile;
 import student.*;
 import login.*;
 
@@ -19,13 +17,12 @@ public class MainPanel extends JPanel {
         cardLayout = new CardLayout();
         setLayout(cardLayout);
 
-        // Add different screens to the main panel
         add(new startPanel(this), "start");
         add(new loginScreen(this), "loginScreen");
         add(new student(this), "student");
-        add(new viewProfile(this), "viewProfile");
         
         add(new LoginPanel(this), "Login");
+        add(new AdminLogin(this), "AdminLogin");
         add(new ForgotPasswordPanel(this), "ForgotPassword");
         add(new VerificationPanel(this), "Verification");
         add(new ResetPasswordPanel(this), "ResetPassword");

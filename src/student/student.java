@@ -22,36 +22,51 @@ public class student extends JPanel {
 
 
         JButton ViewProfile = new JButton("View Profile");
-        ViewProfile.setFont(new Font("Arial", Font.BOLD, 13));
-        ViewProfile.setPreferredSize(new Dimension(160, 30));
+        ViewProfile.setFont(new Font("Arial", Font.BOLD, 15));
+        ViewProfile.setPreferredSize(new Dimension(200, 40));
         ViewProfile.setFocusPainted(false);
         ViewProfile.addActionListener(e -> updateProfilePanel(mainPanel));
 
 
         JButton ViewScore = new JButton("View Score");
-        ViewScore.setFont(new Font("Arial", Font.BOLD, 13));
-        ViewScore.setPreferredSize(new Dimension(160, 30));
+        ViewScore.setFont(new Font("Arial", Font.BOLD, 15));
+        ViewScore.setPreferredSize(new Dimension(200, 40));
         ViewScore.setFocusPainted(false);
         ViewScore.addActionListener(e->showStudentScorePanel(mainPanel));
 
 
         JButton ViewCourse = new JButton("View Course");
-        ViewCourse.setFont(new Font("Arial", Font.BOLD, 13));
-        ViewCourse.setPreferredSize(new Dimension(160, 30));
+        ViewCourse.setFont(new Font("Arial", Font.BOLD, 15));
+        ViewCourse.setPreferredSize(new Dimension(200, 40));
         ViewCourse.setFocusPainted(false);
         ViewCourse.addActionListener(e -> showStudentCoursePanel(mainPanel));
 
 
         JButton ChangePassword = new JButton("Change Password");
-        ChangePassword.setFont(new Font("Arial", Font.BOLD, 13));
-        ChangePassword.setPreferredSize(new Dimension(160, 30));
+        ChangePassword.setFont(new Font("Arial", Font.BOLD, 15));
+        ChangePassword.setPreferredSize(new Dimension(200, 40));
         ChangePassword.setFocusPainted(false);
         ChangePassword.addActionListener(e -> ChangePassword(mainPanel));
 
+        JButton[] buttons = {ViewProfile, ViewScore, ViewCourse, ChangePassword};
+        ActionListener buttonListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (JButton button : buttons) {
+                    button.setBackground(Color.WHITE);
+                }
+                ((JButton) e.getSource()).setBackground(new Color(173, 216, 230)); 
+            }
+        };
+
+        for (JButton button : buttons) {
+            button.addActionListener(buttonListener);
+        }
+
 
         JButton Logout = new JButton("Logout");
-        Logout.setFont(new Font("Arial", Font.BOLD, 13));
-        Logout.setPreferredSize(new Dimension(160, 30));
+        Logout.setFont(new Font("Arial", Font.BOLD, 15));
+        Logout.setPreferredSize(new Dimension(200, 40));
         Logout.setFocusPainted(false);
         Logout.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -63,6 +78,8 @@ public class student extends JPanel {
                 );
                 
                 if (response == JOptionPane.YES_OPTION) {
+                    clearMainContent();
+                    clearColor(buttons);
                     mainPanel.showScreen("loginScreen");
                 } else {
                     System.out.println("Stayed logged in");
@@ -72,8 +89,8 @@ public class student extends JPanel {
 
 
         JButton CloseProgram = new JButton("Exit");
-        CloseProgram.setFont(new Font("Arial", Font.BOLD, 13));
-        CloseProgram.setPreferredSize(new Dimension(160, 30));
+        CloseProgram.setFont(new Font("Arial", Font.BOLD, 15));
+        CloseProgram.setPreferredSize(new Dimension(200, 40));
         CloseProgram.setFocusPainted(false);
         CloseProgram.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -94,22 +111,8 @@ public class student extends JPanel {
             }
         });
 
-        JButton[] buttons = {ViewProfile, ViewScore, ViewCourse, ChangePassword};
 
-        ActionListener buttonListener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for (JButton button : buttons) {
-                    button.setBackground(Color.WHITE); 
-                }
-                ((JButton) e.getSource()).setBackground(new Color(173, 216, 230)); 
-            }
-        };
-
-        for (JButton button : buttons) {
-            button.addActionListener(buttonListener);
-        }
-
+        
 
 
         JPanel buttonPanel = new JPanel(new BorderLayout());
@@ -176,6 +179,11 @@ public class student extends JPanel {
         add(ChangeNewPassword, BorderLayout.CENTER);
         revalidate();
         repaint();
+    }
+    private void clearColor(JButton[] buttons) {
+        for (JButton button : buttons) {
+            button.setBackground(Color.WHITE);
+        }
     }
     
     private void clearMainContent() {
