@@ -11,9 +11,11 @@ public class student extends JPanel {
     private DisplayScore studentScorePanel;
     private displayCourse studentCoursePanel;
     private NewPassword ChangeNewPassword;
+    private JButton ViewProfile, ViewScore, ViewCourse, ChangePassword;
     
     public student(MainPanel mainPanel){
         setLayout(new BorderLayout());
+        setBackground(new Color(173, 216, 230));
 
         ImageIcon imageIcon = new ImageIcon("image//logo.jpg");
         Image resizedImage = imageIcon.getImage().getScaledInstance(160, 160, Image.SCALE_SMOOTH);
@@ -21,28 +23,28 @@ public class student extends JPanel {
         JLabel logoLabel = new JLabel(resizedIcon);
 
 
-        JButton ViewProfile = new JButton("View Profile");
+        ViewProfile = new JButton("View Profile");
         ViewProfile.setFont(new Font("Arial", Font.BOLD, 15));
         ViewProfile.setPreferredSize(new Dimension(200, 40));
         ViewProfile.setFocusPainted(false);
         ViewProfile.addActionListener(e -> updateProfilePanel(mainPanel));
 
 
-        JButton ViewScore = new JButton("View Score");
+        ViewScore = new JButton("View Score");
         ViewScore.setFont(new Font("Arial", Font.BOLD, 15));
         ViewScore.setPreferredSize(new Dimension(200, 40));
         ViewScore.setFocusPainted(false);
         ViewScore.addActionListener(e->showStudentScorePanel(mainPanel));
 
 
-        JButton ViewCourse = new JButton("View Course");
+        ViewCourse = new JButton("View Course");
         ViewCourse.setFont(new Font("Arial", Font.BOLD, 15));
         ViewCourse.setPreferredSize(new Dimension(200, 40));
         ViewCourse.setFocusPainted(false);
         ViewCourse.addActionListener(e -> showStudentCoursePanel(mainPanel));
 
 
-        JButton ChangePassword = new JButton("Change Password");
+        ChangePassword = new JButton("Change Password");
         ChangePassword.setFont(new Font("Arial", Font.BOLD, 15));
         ChangePassword.setPreferredSize(new Dimension(200, 40));
         ChangePassword.setFocusPainted(false);
@@ -54,8 +56,10 @@ public class student extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 for (JButton button : buttons) {
                     button.setBackground(Color.WHITE);
+                    button.setForeground(Color.BLACK);
                 }
-                ((JButton) e.getSource()).setBackground(new Color(173, 216, 230)); 
+                ((JButton) e.getSource()).setBackground(new Color(173, 216, 230));
+                ((JButton) e.getSource()).setForeground(new Color(82, 39, 25));
             }
         };
 
@@ -149,15 +153,15 @@ public class student extends JPanel {
     
     }
 
-    public void updateProfilePanel(MainPanel mainPanel) {
+    private void updateProfilePanel(MainPanel mainPanel) {
         clearMainContent(); 
         currentProfilePanel = new displayProfile(mainPanel); 
-        add(currentProfilePanel, BorderLayout.CENTER); 
+        add(currentProfilePanel, BorderLayout.CENTER);
         revalidate();
         repaint();
     }
     
-    public void showStudentScorePanel(MainPanel mainPanel) {
+    private void showStudentScorePanel(MainPanel mainPanel) {
         clearMainContent();
         studentScorePanel = new DisplayScore(mainPanel);
         add(studentScorePanel, BorderLayout.CENTER);
@@ -165,7 +169,7 @@ public class student extends JPanel {
         repaint();
     }
 
-    public void showStudentCoursePanel(MainPanel mainPanel){
+    private void showStudentCoursePanel(MainPanel mainPanel){
         clearMainContent();
         studentCoursePanel = new displayCourse(mainPanel);
         add(studentCoursePanel, BorderLayout.CENTER);
@@ -180,13 +184,13 @@ public class student extends JPanel {
         revalidate();
         repaint();
     }
-    private void clearColor(JButton[] buttons) {
+    public void clearColor(JButton[] buttons) {
         for (JButton button : buttons) {
             button.setBackground(Color.WHITE);
         }
     }
     
-    private void clearMainContent() {
+    public void clearMainContent() {
         if (currentProfilePanel != null) {
             remove(currentProfilePanel);
             currentProfilePanel = null;

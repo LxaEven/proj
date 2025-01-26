@@ -88,6 +88,8 @@ public class NewPassword extends JPanel {
 
                         JOptionPane.showMessageDialog(mainPanel, "Password changed successfully.\nPlease login again.", "Sucess", JOptionPane.INFORMATION_MESSAGE);
                         LoginPanel loginPanel = (LoginPanel) mainPanel.getComponent(3);
+                        student studentPanel = (student) mainPanel.getComponent(2);
+                        studentPanel.clearMainContent();
                         loginPanel.passwordField.setText(newPassword);
                         mainPanel.showScreen("loginScreen");
                     } else {
