@@ -1,198 +1,109 @@
 package fail_code;
-import javax.swing.*;
-import java.awt.*;
-import com.formdev.flatlaf.*;
-import main.*;
 
+import javax.swing.*;
+
+import main.DBConnect;
+import main.MainPanel;
+
+import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 
-public class viewProfile extends JPanel{
+public class viewProfile extends JPanel {
+    private JLabel idLabel = new JLabel("Student ID:   ");
+    private JLabel firstnameLabel = new JLabel("Firstname:   ");
+    private JLabel lastnameLabel = new JLabel("Lastname:   ");
+    private JLabel genderLabel = new JLabel("Gender:   ");
+    private JLabel birthLabel = new JLabel("Birth:   ");
+    private JLabel phoneNumberLabel = new JLabel("Phone Number:   ");
+    private JLabel emailLabel = new JLabel("Email:   ");
 
     private GridBagConstraints gbc = new GridBagConstraints();
-    public viewProfile(MainPanel mainPanel){
-        
+
+    public viewProfile(MainPanel mainPanel) {
         setLayout(new BorderLayout());
 
+        // Logo setup
         ImageIcon imageIcon = new ImageIcon("image//logo.jpg");
         Image resizedImage = imageIcon.getImage().getScaledInstance(160, 160, Image.SCALE_SMOOTH);
-        ImageIcon resizedIcon = new ImageIcon(resizedImage);
-        JLabel logoLabel = new JLabel(resizedIcon);
-        gbc = new GridBagConstraints();
-        
-        ProfileDisplay();
-   
+        JLabel logoLabel = new JLabel(new ImageIcon(resizedImage));
 
+        // Buttons
+        JButton viewProfileButton = createButton("View Profile", e -> mainPanel.showScreen("ViewProfile"));
+        JButton viewScoreButton = createButton("View Score", e -> mainPanel.showScreen("ViewScore"));
+        JButton viewCourseButton = createButton("View Course", e -> mainPanel.showScreen("ViewCourse"));
+        JButton changePasswordButton = createButton("Change Password", e -> mainPanel.showScreen("ChangePassword"));
 
-        JButton ViewProfile = new JButton("View Profile");
-        ViewProfile.setFont(new Font("Arial", Font.BOLD, 13));
-        ViewProfile.setPreferredSize(new Dimension(160, 30));
-        ViewProfile.setFocusPainted(false);
-        ViewProfile.setBackground(Color.GRAY);
-        ViewProfile.setForeground(Color.WHITE);
-        ViewProfile.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                CardLayout c4 = (CardLayout) mainPanel.getLayout();
-                c4.show(mainPanel, "ViewProfile");
+        JButton logoutButton = createButton("Logout", e -> {
+            int response = JOptionPane.showConfirmDialog(
+                this,
+                "Do you want to log out?",
+                "Log Out",
+                JOptionPane.YES_NO_OPTION
+            );
+            if (response == JOptionPane.YES_OPTION) {
+                mainPanel.showScreen("loginScreen");
             }
         });
 
-
-        JButton ViewScore = new JButton("View Score");
-        ViewScore.setFont(new Font("Arial", Font.BOLD, 13));
-        ViewScore.setPreferredSize(new Dimension(160, 30));
-        ViewScore.setFocusPainted(false);
-        ViewScore.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                CardLayout c4 = (CardLayout) mainPanel.getLayout();
-                c4.show(mainPanel, "ViewScore");
+        JButton closeProgramButton = createButton("Exit", e -> {
+            int response = JOptionPane.showConfirmDialog(
+                this,
+                "Do you want to exit the program?",
+                "Exit Program",
+                JOptionPane.YES_NO_OPTION
+            );
+            if (response == JOptionPane.YES_OPTION) {
+                System.exit(0);
             }
         });
 
+        // Profile info panel
+        JPanel profilePanel = new JPanel(new GridBagLayout());
+        profilePanel.setBackground(Color.WHITE);
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
 
-        JButton ViewCourse = new JButton("View Course");
-        ViewCourse.setFont(new Font("Arial", Font.BOLD, 13));
-        ViewCourse.setPreferredSize(new Dimension(160, 30));
-        ViewCourse.setFocusPainted(false);
-        ViewCourse.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                CardLayout c4 = (CardLayout) mainPanel.getLayout();
-                c4.show(mainPanel, "ViewCourse");
-            }
-        });
+        addLabel(profilePanel, idLabel);
+        addLabel(profilePanel, firstnameLabel);
+        addLabel(profilePanel, lastnameLabel);
+        addLabel(profilePanel, genderLabel);
+        addLabel(profilePanel, birthLabel);
+        addLabel(profilePanel, phoneNumberLabel);
+        addLabel(profilePanel, emailLabel);
 
-
-        JButton ChangePassword = new JButton("Change Password");
-        ChangePassword.setFont(new Font("Arial", Font.BOLD, 13));
-        ChangePassword.setPreferredSize(new Dimension(160, 30));
-        ChangePassword.setFocusPainted(false);
-        ChangePassword.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                CardLayout c4 = (CardLayout) mainPanel.getLayout();
-                c4.show(mainPanel, "ChangePassword");
-            }
-        });
-
-
-        JButton Logout = new JButton("Logout");
-        Logout.setFont(new Font("Arial", Font.BOLD, 13));
-        Logout.setPreferredSize(new Dimension(160, 30));
-        Logout.setFocusPainted(false);
-        Logout.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                int response = JOptionPane.showConfirmDialog(
-                    null, 
-                    "Do you want to log out?", 
-                    "Log Out", 
-                    JOptionPane.YES_NO_OPTION
-                );
-                
-                if (response == JOptionPane.YES_OPTION) {
-                    CardLayout c4 = (CardLayout) mainPanel.getLayout();
-                    c4.show(mainPanel, "loginScreen");
-                } else {
-                    System.out.println("Stayed logged in");
-                }
-            }
-        });
-
-
-        JButton CloseProgram = new JButton("Exit");
-        CloseProgram.setFont(new Font("Arial", Font.BOLD, 13));
-        CloseProgram.setPreferredSize(new Dimension(160, 30));
-        CloseProgram.setFocusPainted(false);
-        CloseProgram.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                int response = JOptionPane.showConfirmDialog(
-                    null, 
-                    "Do you want to Exit the program?", 
-                    "Exit the program", 
-                    JOptionPane.YES_NO_OPTION
-                );
-                
-                if (response == JOptionPane.NO_OPTION) {
-                    CardLayout c4 = (CardLayout) mainPanel.getLayout();
-                    c4.show(mainPanel, "student");
-                } else {
-                    System.out.println("Program ended");
-                    System.exit(0);
-                }
-            }
-        });
-
-        JButton darkMode = new JButton("Dark Mode");
-        darkMode.setFont(new Font("Arial", Font.BOLD, 12));
-        darkMode.setPreferredSize(new Dimension(130, 30));
-        darkMode.setFocusPainted(false);
-        darkMode.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    UIManager.setLookAndFeel( new FlatDarkLaf() );
-                    SwingUtilities.updateComponentTreeUI(mainPanel);
-                } catch( Exception ex ) {
-                    System.err.println( "Failed to initialize LaF" );
-                }
-            }
-        });
-
-        JButton lightMode = new JButton("Light Mode");
-        lightMode.setFont(new Font("Arial", Font.BOLD, 12));
-        lightMode.setPreferredSize(new Dimension(130, 30));
-        lightMode.setFocusPainted(false);
-        lightMode.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    UIManager.setLookAndFeel( new FlatLightLaf() );
-                    SwingUtilities.updateComponentTreeUI(mainPanel);
-                } catch( Exception ex ) {
-                    System.err.println( "Failed to initialize LaF" );
-                }
-            }
-        });
-
-
-        
-        
+        // Button panel
         JPanel buttonPanel = new JPanel(new BorderLayout());
         buttonPanel.setBackground(Color.GRAY);
 
         JPanel logoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        logoPanel.add(logoLabel);
         logoPanel.setBackground(Color.GRAY);
-
-        buttonPanel.add(logoPanel, BorderLayout.NORTH);
+        logoPanel.add(logoLabel);
 
         JPanel buttonsContainer = new JPanel(new GridBagLayout());
-        gbc.insets = new Insets(20, 20, 20, 20);
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-
-        buttonsContainer.add(ViewProfile, gbc);
-        gbc.gridy++;
-        buttonsContainer.add(ViewScore, gbc);
-        gbc.gridy++;
-        buttonsContainer.add(ViewCourse, gbc);
-        gbc.gridy++;
-        buttonsContainer.add(ChangePassword, gbc);
-        gbc.gridy++;
-        buttonsContainer.add(Logout, gbc);
-        gbc.gridy++;
-        buttonsContainer.add(CloseProgram, gbc);
-
         buttonsContainer.setBackground(Color.GRAY);
-        buttonPanel.add(buttonsContainer, BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.WEST);
-
-        JPanel ModePanel = new JPanel(new GridBagLayout());
         gbc.insets = new Insets(20, 20, 20, 20);
-        ModePanel.setPreferredSize(new Dimension(180, 50));
         gbc.gridy = 0;
-        gbc.gridx = 0;
-        ModePanel.add(darkMode, gbc);
-        gbc.gridx++;
-        ModePanel.add(lightMode, gbc);
-        ModePanel.setBackground(Color.GRAY);
-        add(ModePanel, BorderLayout.NORTH);
+
+        buttonsContainer.add(viewProfileButton, gbc);
+        gbc.gridy++;
+        buttonsContainer.add(viewScoreButton, gbc);
+        gbc.gridy++;
+        buttonsContainer.add(viewCourseButton, gbc);
+        gbc.gridy++;
+        buttonsContainer.add(changePasswordButton, gbc);
+        gbc.gridy++;
+        buttonsContainer.add(logoutButton, gbc);
+        gbc.gridy++;
+        buttonsContainer.add(closeProgramButton, gbc);
+
+        buttonPanel.add(logoPanel, BorderLayout.NORTH);
+        buttonPanel.add(buttonsContainer, BorderLayout.CENTER);
+
+        // Adding panels
+        add(buttonPanel, BorderLayout.WEST);
+        add(profilePanel, BorderLayout.CENTER);
 
         JPanel eastPanel = new JPanel();
         eastPanel.setBackground(Color.GRAY);
@@ -203,61 +114,41 @@ public class viewProfile extends JPanel{
         southPanel.setBackground(Color.GRAY);
         southPanel.setPreferredSize(new Dimension(200, 50));
         add(southPanel, BorderLayout.SOUTH);
-    
     }
-    
-    void ProfileDisplay(){
-        JLabel idLabel = new JLabel("Student ID:   ");
-        idLabel.setFont(new Font("Arial", Font.BOLD, 17));
-        JLabel firstnameLabel = new JLabel("Firstname:   ");
-        firstnameLabel.setFont(new Font("Arial", Font.BOLD, 17));
-        JLabel lastnameLabel = new JLabel("Lastname:  ");
-        lastnameLabel.setFont(new Font("Arial", Font.BOLD, 17));
-        JLabel genderLabel = new JLabel("Gender:   ");
-        genderLabel.setFont(new Font("Arial", Font.BOLD, 17));
-        JLabel birthLabel = new JLabel("Birth:   ");
-        birthLabel.setFont(new Font("Arial", Font.BOLD, 17));
-        JLabel phoneNumberLabel = new JLabel("Phone Number:   ");
-        phoneNumberLabel.setFont(new Font("Arial", Font.BOLD, 17));
-        JLabel emailLabel = new JLabel("Email:   ");
-        emailLabel.setFont(new Font("Arial", Font.BOLD, 17));
 
-       
-        JPanel profilePanel = new JPanel(new GridBagLayout());
-        gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.gridx = 0;
-        gbc.gridy = 0;
+    private JButton createButton(String text, ActionListener actionListener) {
+        JButton button = new JButton(text);
+        button.setFont(new Font("Arial", Font.BOLD, 13));
+        button.setPreferredSize(new Dimension(160, 30));
+        button.setFocusPainted(false);
+        button.setBackground(Color.GRAY);
+        button.setForeground(Color.WHITE);
+        button.addActionListener(actionListener);
+        return button;
+    }
+
+    private void addLabel(JPanel panel, JLabel label) {
+        label.setFont(new Font("Arial", Font.BOLD, 17));
         gbc.anchor = GridBagConstraints.WEST;
-        profilePanel.add(idLabel, gbc);
+        panel.add(label, gbc);
         gbc.gridy++;
-        profilePanel.add(firstnameLabel, gbc);
-        gbc.gridy++;
-        profilePanel.add(lastnameLabel, gbc);
-        gbc.gridy++;
-        profilePanel.add(genderLabel, gbc);
-        gbc.gridy++;
-        profilePanel.add(birthLabel, gbc);
-        gbc.gridy++;
-        profilePanel.add(phoneNumberLabel, gbc);
-        gbc.gridy++;
-        profilePanel.add(emailLabel, gbc);
-        gbc.anchor = GridBagConstraints.CENTER;
-        add(profilePanel, BorderLayout.CENTER);
+    }
 
+    public void loadData(MainPanel mainPanel) {
         try (Connection conn = DBConnect.getConnection();
-        PreparedStatement pstmt = conn.prepareStatement
-        ("SELECT * FROM student WHERE (email = ? OR phone_number = ?) AND student_password = ?")){
+             PreparedStatement pstmt = conn.prepareStatement(
+                 "SELECT * FROM student WHERE (email = ? OR phone_number = ?) AND student_password = ?")) {
 
-            String identifier =MainPanel.loginUserIdentifier;
+            String identifier = MainPanel.loginUserIdentifier;
             String password = MainPanel.loginUserPassword;
 
             pstmt.setString(1, identifier);
             pstmt.setString(2, identifier);
             pstmt.setString(3, password);
-        
+
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    idLabel.setText("Student ID:     " + "e2022" + String.format("%03d", rs.getInt("student_id")));
+                    idLabel.setText("Student ID:     e2022" + String.format("%03d", rs.getInt("student_id")));
                     firstnameLabel.setText("Firstname:     " + rs.getString("student_firstname"));
                     lastnameLabel.setText("Lastname:     " + rs.getString("student_lastname"));
                     genderLabel.setText("Gender:     " + rs.getString("gender"));
@@ -267,12 +158,11 @@ public class viewProfile extends JPanel{
                 }
             }
         } catch (SQLException e) {
-       e.printStackTrace();
-       JOptionPane.showMessageDialog(profilePanel, "Error: " + e.getMessage());
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
+
         revalidate();
         repaint();
     }
-    
-    
 }

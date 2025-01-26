@@ -2,6 +2,7 @@ package main;
 
 import javax.swing.*;
 
+import fail_code.viewProfile;
 import student.*;
 import login.*;
 
@@ -22,6 +23,7 @@ public class MainPanel extends JPanel {
         add(new startPanel(this), "start");
         add(new loginScreen(this), "loginScreen");
         add(new student(this), "student");
+        add(new viewProfile(this), "viewProfile");
         
         add(new LoginPanel(this), "Login");
         add(new ForgotPasswordPanel(this), "ForgotPassword");

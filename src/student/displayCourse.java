@@ -3,17 +3,16 @@ package student;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
-
 import javax.swing.*;
 import javax.swing.table.*;
-
 import main.*;
 
 public class displayCourse extends JPanel{
     GridBagConstraints gbc = new GridBagConstraints();
     MainPanel mainPanel = new MainPanel();
 
-    public displayCourse(){
+    public displayCourse(MainPanel mainPanel){
+        this.mainPanel = mainPanel;
         setLayout(new BorderLayout());
         CourseDisplay();
     }
@@ -44,7 +43,12 @@ public class displayCourse extends JPanel{
                     String subject = rs.getString("subject");
                     String HrsPerWeek = rs.getString("per_week");
                     String HrsPerSem = rs.getString("per_semester");
-                    CourseTableModel.addRow(new Object[]{no, subject, HrsPerWeek, HrsPerSem});
+                    CourseTableModel.addRow(new Object[]{
+                        no,
+                        subject,
+                        HrsPerWeek,
+                        HrsPerSem
+                    });
                 }
 
         } catch (SQLException e) {

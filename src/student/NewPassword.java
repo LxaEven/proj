@@ -5,7 +5,7 @@ import java.sql.*;
 import  java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-
+import login.*;
 import main.*;
 
 public class NewPassword extends JPanel {
@@ -20,19 +20,22 @@ public class NewPassword extends JPanel {
     void newPassword(){
         JPasswordField oldPasswordField = new JPasswordField();
         oldPasswordField.setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createLineBorder(Color.GRAY), "Old Password:", TitledBorder.LEFT, TitledBorder.TOP, new Font("Arial", Font.PLAIN, 20)));
+             BorderFactory.createLineBorder(Color.GRAY), "Old Password",
+             TitledBorder.LEFT, TitledBorder.TOP, new Font("Arial", Font.PLAIN, 20)));
         oldPasswordField.setPreferredSize(new Dimension(500, 60));
         oldPasswordField.setFont(new Font("Arial", Font.PLAIN, 20));
 
         JPasswordField newPasswordField = new JPasswordField();
         newPasswordField.setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createLineBorder(Color.GRAY), "New Password:", TitledBorder.LEFT, TitledBorder.TOP, new Font("Arial", Font.PLAIN, 20)));
+             BorderFactory.createLineBorder(Color.GRAY), "New Password",
+             TitledBorder.LEFT, TitledBorder.TOP, new Font("Arial", Font.PLAIN, 20)));
         newPasswordField.setPreferredSize(new Dimension(500, 60));
         newPasswordField.setFont(new Font("Arial", Font.PLAIN, 20));
 
         JPasswordField confirmPasswordField = new JPasswordField();
         confirmPasswordField.setBorder(BorderFactory.createTitledBorder(
-            BorderFactory.createLineBorder(Color.GRAY), "Confirm Password:", TitledBorder.LEFT, TitledBorder.TOP, new Font("Arial", Font.PLAIN, 20)));
+             BorderFactory.createLineBorder(Color.GRAY), "Confirm Password",
+             TitledBorder.LEFT, TitledBorder.TOP, new Font("Arial", Font.PLAIN, 20)));
         confirmPasswordField.setPreferredSize(new Dimension(500, 60));
         confirmPasswordField.setFont(new Font("Arial", Font.PLAIN, 20));
 
@@ -78,13 +81,14 @@ public class NewPassword extends JPanel {
                     ResultSet rs = checkStmt.executeQuery();
 
                     if (rs.next()) {
-                        // Update password
                         updateStmt.setString(1, newPassword);
                         updateStmt.setString(2, identifier);
                         updateStmt.setString(3, identifier);
                         updateStmt.executeUpdate();
 
-                        JOptionPane.showMessageDialog(mainPanel, "Password changed successfully.\nPlease login again.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(mainPanel, "Password changed successfully.\nPlease login again.", "Sucess", JOptionPane.INFORMATION_MESSAGE);
+                        LoginPanel loginPanel = (LoginPanel) mainPanel.getComponent(3);
+                        loginPanel.passwordField.setText(newPassword);
                         mainPanel.showScreen("loginScreen");
                     } else {
                         JOptionPane.showMessageDialog(mainPanel, "Old password is incorrect.", "Error", JOptionPane.ERROR_MESSAGE);

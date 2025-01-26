@@ -2,21 +2,17 @@ package login;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import main.*;
-import student.student;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 public class LoginPanel extends JPanel {
     private static String identifier;
     private static String password;
 
 
-    private JTextField emailField;
-    private JPasswordField passwordField;
+    public JTextField emailField;
+    public JPasswordField passwordField;
     private MainPanel mainPanel;
 
     public LoginPanel(MainPanel mainPanel) {
