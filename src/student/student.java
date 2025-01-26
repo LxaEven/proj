@@ -13,7 +13,7 @@ public class student extends JPanel {
     private DisplayScore studentScorePanel;
     private displayCourse studentCoursePanel;
     private NewPassword ChangeNewPassword;
-    private JButton ViewProfile, ViewScore, ViewCourse, ChangePassword;
+    public JButton ViewProfile, ViewScore, ViewCourse, ChangePassword;
     
     public student(MainPanel mainPanel){
         setLayout(new BorderLayout());
@@ -85,7 +85,7 @@ public class student extends JPanel {
                 
                 if (response == JOptionPane.YES_OPTION) {
                     clearMainContent();
-                    clearColor(buttons);
+                    clearColor();
                     LoginPanel loginpanel = (LoginPanel) mainPanel.getComponent(3);
                     loginpanel.clearFields();
                     mainPanel.showScreen("loginScreen");
@@ -146,14 +146,20 @@ public class student extends JPanel {
         buttonsContainer.add(ViewCourse, gbc);
         gbc.gridy++;
         buttonsContainer.add(ChangePassword, gbc);
-        gbc.gridy++;
-        buttonsContainer.add(Logout, gbc);
-        gbc.gridy++;
-        buttonsContainer.add(CloseProgram, gbc);
 
         buttonsContainer.setBackground(Color.CYAN);
         buttonPanel.add(buttonsContainer, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.WEST);
+
+        JPanel logoutAndClosePanel = new JPanel(new GridBagLayout());
+        logoutAndClosePanel.setBackground(Color.CYAN);
+        gbc.insets = new Insets(20, 20, 20, 20);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        logoutAndClosePanel.add(Logout, gbc);
+        gbc.gridx++;
+        logoutAndClosePanel.add(CloseProgram, gbc);
+        add(logoutAndClosePanel, BorderLayout.SOUTH);
     
     }
 
@@ -188,7 +194,8 @@ public class student extends JPanel {
         revalidate();
         repaint();
     }
-    public void clearColor(JButton[] buttons) {
+    public void clearColor() {
+        JButton[] buttons = {ViewProfile, ViewScore, ViewCourse, ChangePassword};
         for (JButton button : buttons) {
             button.setBackground(Color.WHITE);
         }

@@ -93,6 +93,7 @@ public class NewPassword extends JPanel {
                         LoginPanel loginPanel = (LoginPanel) mainPanel.getComponent(3);
                         student studentPanel = (student) mainPanel.getComponent(2);
                         studentPanel.clearMainContent();
+                        studentPanel.clearColor();
                         loginPanel.passwordField.setText(newPassword);
                         mainPanel.showScreen("Login");
                     } else {
