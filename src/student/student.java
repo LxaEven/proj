@@ -165,7 +165,7 @@ public class student extends JPanel {
 
     public void showStudentCoursePanel(MainPanel mainPanel){
         clearMainContent();
-        studentCoursePanel = new displayCourse();
+        studentCoursePanel = new displayCourse(mainPanel);
         add(studentCoursePanel, BorderLayout.CENTER);
         revalidate();
         repaint();
