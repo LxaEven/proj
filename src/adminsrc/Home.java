@@ -43,10 +43,10 @@ public class Home extends JPanel {
         int totalDepartments = getDepartmentCount();
 
         // Recreate dashboard panels with updated data
-        panel.add(createPanel("Students", totalStudents, "D:/Assignments/I3/Testing/JDBC/Admin/src/Icon/student_total.png"));
-        panel.add(createPanel("Females", totalFemales, "D:/Assignments/I3/Testing/JDBC/Admin/src/Icon/Female.png"));
-        panel.add(createPanel("Courses", totalCourses, "D:/Assignments/I3/Testing/JDBC/Admin/src/Icon/courses.png"));
-        panel.add(createPanel("Departments", totalDepartments, "D:/Assignments/I3/Testing/JDBC/Admin/src/Icon/department.png"));
+        panel.add(createPanel("Students", totalStudents, "image/student_total.png"));
+        panel.add(createPanel("Females", totalFemales, "image/Female.png"));
+        panel.add(createPanel("Courses", totalCourses, "image/courses.png"));
+        panel.add(createPanel("Departments", totalDepartments, "image/department.png"));
 
         panel.revalidate(); // Recalculate layout
         panel.repaint();   // Refresh the UI

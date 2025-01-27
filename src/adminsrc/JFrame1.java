@@ -126,7 +126,7 @@ public final class JFrame1 extends JFrame{
 
         // Home
         homeMenu =  new JMenu("Home");
-        ImageIcon homeIcon = new ImageIcon("D:/Assignments/I3/Testing/JDBC/Admin/src/Icon/home.png");
+        ImageIcon homeIcon = new ImageIcon("image/home.png");
         homeMenu.setIcon(homeIcon);
 
         newMenuItem = new JMenuItem("Home");
@@ -136,7 +136,7 @@ public final class JFrame1 extends JFrame{
 
         // Student
         studentMenu =  new JMenu("Student");
-        ImageIcon studentIcon = new ImageIcon("D:/Assignments/I3/Testing/JDBC/Admin/src/Icon/student.png");
+        ImageIcon studentIcon = new ImageIcon("image/student.png");
         studentMenu.setIcon(studentIcon);
         viewStudent = new JMenuItem("View");
         viewStudent.addActionListener(e -> cardLayout.show(midPanel, "ViewSts"));
@@ -152,7 +152,7 @@ public final class JFrame1 extends JFrame{
 
         // Course
         courseMenu =  new JMenu("Course");
-        ImageIcon courseIcon = new ImageIcon("D:/Assignments/I3/Testing/JDBC/Admin/src/Icon/course.png");
+        ImageIcon courseIcon = new ImageIcon("image/course.png");
         courseMenu.setIcon(courseIcon);
         viewCourse = new JMenuItem("View");
         viewCourse.addActionListener(e -> cardLayout.show(midPanel, "ViewCourse"));
@@ -165,7 +165,7 @@ public final class JFrame1 extends JFrame{
 
         // Setting
         settingMenu =  new JMenu("Setting");
-        ImageIcon settingIcon = new ImageIcon("D:/Assignments/I3/Testing/JDBC/Admin/src/Icon/course.png");
+        ImageIcon settingIcon = new ImageIcon("image/course.png");
         settingMenu.setIcon(settingIcon);
         darkMenu = new JMenuItem("Dark mode");
         lightMenu = new JMenuItem("Light mode");
@@ -224,7 +224,7 @@ public final class JFrame1 extends JFrame{
         profilePanel.setPreferredSize(new Dimension(250, 100));
 
         // Profile picture
-        ImageIcon profileIcon = new ImageIcon("D:/Assignments/I3/Testing/JDBC/Admin/src/Icon/profile.png");
+        ImageIcon profileIcon = new ImageIcon("image/profile.png");
         profileIcon.setImage(profileIcon.getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT));
         JLabel profileLabel = new JLabel(profileIcon);
 
@@ -249,7 +249,7 @@ public final class JFrame1 extends JFrame{
         label1.setFont(new Font("Arial", Font.BOLD, 35));
         label1.setForeground(Color.blue);
 
-        ImageIcon labelIcon = new ImageIcon("D:/Assignments/I3/Testing/JDBC/Admin/src/Icon/Logo.png");
+        ImageIcon labelIcon = new ImageIcon("image/Logo.png");
         labelIcon.setImage(labelIcon.getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
         label1.setIcon(labelIcon);
         label1.setIconTextGap(10);
