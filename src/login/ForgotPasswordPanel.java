@@ -11,33 +11,40 @@ import java.sql.SQLException;
 
 public class ForgotPasswordPanel extends JPanel {
 
+    private MainPanel mainPanel;
+    private JLabel logoLabel = createLogoLabel("image/logo.jpg", 300, 300); // Portable image path
+    private JLabel instructionLabel = createInstructionLabel();
+    private JTextField emailField = createEmailField();
+    private JPanel buttonPanel;
+
     public ForgotPasswordPanel(MainPanel mainPanel) {
+        this.mainPanel = mainPanel; // Ensure mainPanel is properly assigned
         configurePanelLayout();
 
         // Create components
-        JLabel logoLabel = createLogoLabel("image\\logo.jpg", 300, 300);
-        JLabel instructionLabel = createInstructionLabel();
-        JTextField emailField = createEmailField();
-        JPanel buttonPanel = createButtonPanel(mainPanel, emailField);
+        buttonPanel = createButtonPanel();
 
         // Assemble input panel
         JPanel inputPanel = new JPanel(new GridBagLayout());
         inputPanel.setBackground(new Color(173, 216, 230));
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        inputPanel.add(instructionLabel, gbc);
-        gbc.gridy++;
-        inputPanel.add(emailField, gbc);
-        gbc.gridy++;
-        inputPanel.add(buttonPanel, gbc);
+        GridBagConstraints inputGbc = new GridBagConstraints();
+        inputGbc.insets = new Insets(10, 10, 10, 10);
+        inputGbc.gridx = 0;
+        inputGbc.gridy = 0;
+        inputPanel.add(instructionLabel, inputGbc);
+        inputGbc.gridy++;
+        inputPanel.add(emailField, inputGbc);
+        inputGbc.gridy++;
+        inputPanel.add(buttonPanel, inputGbc);
 
         // Assemble logo panel
         JPanel logoPanel = new JPanel(new GridBagLayout());
         logoPanel.setBackground(Color.CYAN);
         logoPanel.setPreferredSize(new Dimension(400, 200));
-        logoPanel.add(logoLabel, gbc);
+        GridBagConstraints logoGbc = new GridBagConstraints();
+        logoGbc.gridx = 0;
+        logoGbc.gridy = 0;
+        logoPanel.add(logoLabel, logoGbc);
 
         // Add panels to the main layout
         add(inputPanel, BorderLayout.CENTER);
@@ -56,7 +63,7 @@ public class ForgotPasswordPanel extends JPanel {
     }
 
     private JLabel createInstructionLabel() {
-        JLabel label = new JLabel("Enter your email to reset your password", SwingConstants.CENTER);
+        JLabel label = new JLabel("Enter your email or phone number to reset your password", SwingConstants.CENTER);
         label.setFont(new Font("Arial", Font.PLAIN, 20));
         label.setForeground(Color.BLUE);
         return label;
@@ -66,19 +73,20 @@ public class ForgotPasswordPanel extends JPanel {
         JTextField emailField = new JTextField();
         emailField.setPreferredSize(new Dimension(500, 60));
         emailField.setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createLineBorder(Color.GRAY), "Email", TitledBorder.LEFT, TitledBorder.TOP,
+                BorderFactory.createLineBorder(Color.GRAY), "Email or Phone Number", TitledBorder.LEFT,
+                TitledBorder.TOP,
                 new Font("Arial", Font.PLAIN, 20)));
         emailField.setFont(new Font("Arial", Font.PLAIN, 20));
         return emailField;
     }
 
-    private JPanel createButtonPanel(MainPanel mainPanel, JTextField emailField) {
+    private JPanel createButtonPanel() {
         JPanel buttonPanel = new JPanel(new GridBagLayout());
         buttonPanel.setBackground(new Color(173, 216, 230));
 
         JButton backButton = createButton("Back", new Color(255, 102, 102), e -> mainPanel.showScreen("Login"));
         JButton sendCodeButton = createButton("Send Code", new Color(144, 238, 144),
-                e -> handleSendCode(mainPanel, emailField));
+                e -> handleSendCode());
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
@@ -99,17 +107,15 @@ public class ForgotPasswordPanel extends JPanel {
         return button;
     }
 
-    private void handleSendCode(MainPanel mainPanel, JTextField emailField) {
+    private void handleSendCode() {
         String email = emailField.getText().trim();
         if (email.isEmpty()) {
-            JOptionPane.showMessageDialog(mainPanel, "Email field cannot be empty!", "Error",
-                    JOptionPane.ERROR_MESSAGE);
+            showMessage("Email field cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         if (!isEmailRegistered(email)) {
-            JOptionPane.showMessageDialog(mainPanel, "Email is not registered!", "Error",
-                    JOptionPane.ERROR_MESSAGE);
+            showMessage("Email not found!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -117,17 +123,18 @@ public class ForgotPasswordPanel extends JPanel {
         MainPanel.setVerificationCode(verificationCode);
         MainPanel.setUserEmailOrId(email);
 
-        JOptionPane.showMessageDialog(mainPanel, "Verification code sent to " + email + ": " + verificationCode,
-                "Info", JOptionPane.INFORMATION_MESSAGE);
+        showMessage("Verification code sent to " + email + ": " + verificationCode, "Info",
+                JOptionPane.INFORMATION_MESSAGE);
         mainPanel.showScreen("Verification");
     }
 
     private boolean isEmailRegistered(String email) {
-        String query = "SELECT 1 FROM student WHERE email = ?";
+        String query = "SELECT 1 FROM student WHERE email = ? OR phone_number = ?";
 
         try (Connection conn = DBConnectionEmail.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, email);
+            stmt.setString(2, email);
             try (ResultSet rs = stmt.executeQuery()) {
                 return rs.next();
             }
@@ -135,5 +142,9 @@ public class ForgotPasswordPanel extends JPanel {
             e.printStackTrace();
             return false;
         }
+    }
+
+    private void showMessage(String message, String title, int messageType) {
+        SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(mainPanel, message, title, messageType));
     }
 }

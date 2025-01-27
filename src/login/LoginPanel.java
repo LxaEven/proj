@@ -34,7 +34,7 @@ public class LoginPanel extends JPanel {
         emailField = new JTextField();
         emailField.setPreferredSize(new Dimension(500, 60));
         emailField.setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createLineBorder(Color.GRAY), "Phone Number or Email", TitledBorder.LEFT,
+                BorderFactory.createLineBorder(Color.GRAY), "Email or Phone Number", TitledBorder.LEFT,
                 TitledBorder.TOP,
                 new Font("Arial", Font.PLAIN, 20)));
         emailField.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -55,16 +55,16 @@ public class LoginPanel extends JPanel {
         });
 
         // Buttons
-        JButton loginButton = createStyledButton("Log In", new Color(60, 179, 113)); // Medium Sea Green
+        JButton loginButton = createStyledButton("Log In", new Color(144, 238, 144)); // Medium Sea Green
         JButton forgotPasswordButton = createStyledButton("Forgot Password?", new Color(255, 160, 122)); // Light Salmon
-        JButton backButton = createStyledButton("Back", new Color(240, 128, 128)); // Light Coral
+        JButton backButton = createStyledButton("Back", new Color(255, 102, 102)); // Light Coral
 
         // Add components to the panel
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
 
         JPanel buttonPanel = new JPanel(new GridBagLayout());
-        buttonPanel.setBackground(new Color(176, 224, 230));
+        buttonPanel.setBackground(new Color(173, 216, 230));
         gbc.gridx = 0;
         gbc.gridy = 0;
         buttonPanel.add(loginButton, gbc);
@@ -153,4 +153,10 @@ public class LoginPanel extends JPanel {
             return false;
         }
     }
+
+    public void clearFields() {
+        emailField.setText("");
+        passwordField.setText("");
+    }
+
 }

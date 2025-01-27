@@ -68,6 +68,9 @@ public class NewPassword extends JPanel {
                 if (!newPassword.equals(confirmPassword)) {
                     JOptionPane.showMessageDialog(mainPanel, "New passwords do not match.", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
+                }if(newPassword.isEmpty() || confirmPassword.isEmpty() || oldPassword.isEmpty()){
+                    JOptionPane.showMessageDialog(mainPanel, "Please fill all the fields.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
                 }
 
                 try (Connection conn = DBConnect.getConnection();
@@ -88,8 +91,11 @@ public class NewPassword extends JPanel {
 
                         JOptionPane.showMessageDialog(mainPanel, "Password changed successfully.\nPlease login again.", "Sucess", JOptionPane.INFORMATION_MESSAGE);
                         LoginPanel loginPanel = (LoginPanel) mainPanel.getComponent(3);
+                        student studentPanel = (student) mainPanel.getComponent(2);
+                        studentPanel.clearMainContent();
+                        studentPanel.clearColor();
                         loginPanel.passwordField.setText(newPassword);
-                        mainPanel.showScreen("loginScreen");
+                        mainPanel.showScreen("Login");
                     } else {
                         JOptionPane.showMessageDialog(mainPanel, "Old password is incorrect.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
