@@ -8,7 +8,7 @@ import main.DBConnect;
 
 
 
-public final class JFrame1 extends JFrame{
+public final class JFrame1 extends JPanel{
     private Connection connection;
 
     private JPanel mainPanel;
@@ -68,11 +68,11 @@ public final class JFrame1 extends JFrame{
     }
  
     public void initialize() {
-        setTitle("Admin");
-        setSize(1080, 1080);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLayout(new BorderLayout());
-        setLocationRelativeTo(null);
+        // setTitle("Admin");
+        // setSize(1080, 1080);
+        // setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        // setLayout(new BorderLayout());
+        // setLocationRelativeTo(null);
 
 
         mainPanel = new JPanel(new BorderLayout());
