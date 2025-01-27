@@ -1,8 +1,6 @@
 package main;
 import javax.swing.*;
 
-import com.formdev.flatlaf.FlatLightLaf;
-
 import java.awt.*;
 import java.awt.event.*;
 
@@ -37,15 +35,13 @@ public class loginScreen extends JPanel {
         
         adminButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                CardLayout cl = (CardLayout) mainPanel.getLayout();
-                cl.show(mainPanel, "Admin");
+                mainPanel.showScreen("AdminLogin");
             }
         });
         
         studentButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                    CardLayout c3 = (CardLayout) mainPanel.getLayout();
-                    c3.show(mainPanel, "Login");
+                    mainPanel.showScreen("Login");
                 
                 
             }
@@ -103,11 +99,6 @@ public class loginScreen extends JPanel {
         add(buttonPanel, BorderLayout.CENTER);
         add(LogoPanel, BorderLayout.WEST);
         
-        try {
-            UIManager.setLookAndFeel( new FlatLightLaf() );
-        } catch( Exception ex ) {
-            System.err.println( "Failed to initialize LaF" );
-        }
     }
 
 }

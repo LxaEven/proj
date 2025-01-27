@@ -1,6 +1,7 @@
-package student;
+package fail_code;
 import java.sql.*;
 import javax.swing.*;
+import javax.swing.table.*;
 import com.formdev.flatlaf.*;
 
 import main.DBConnect;
@@ -9,51 +10,70 @@ import main.MainPanel;
 import java.awt.*;
 import java.awt.event.*;
 
-public class ChangePassword extends JPanel {
-    public ChangePassword(MainPanel mainPanel) {
-        setLayout(new BorderLayout());
-        
+public class ViewCourse extends JPanel {
+    public ViewCourse(MainPanel mainPanel) {
 
+
+        setLayout(new BorderLayout());
         ImageIcon imageIcon = new ImageIcon("image//logo.jpg");
         Image resizedImage = imageIcon.getImage().getScaledInstance(160, 160, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(resizedImage);
         JLabel logoLabel = new JLabel(resizedIcon);
-
         
-        JLabel oldPasswordLabel = new JLabel("Old Password:");
-        oldPasswordLabel.setFont(new Font("Arial", Font.BOLD, 13));
-        JTextField oldPassword = new JTextField();
-        oldPassword.setPreferredSize(new Dimension(200, 30));
 
+        JLabel tableLabel = new JLabel("Student Score", SwingConstants.CENTER);
+        tableLabel.setFont(new Font("Arial", Font.BOLD, 15));
 
-        JLabel newPasswordLabel = new JLabel("New Password:");
-        newPasswordLabel.setFont(new Font("Arial", Font.BOLD, 13));
-        JTextField newPassword = new JTextField();
-        newPassword.setPreferredSize(new Dimension(200, 30));
-
-
-        JButton submitButton = new JButton("Submit");
-        submitButton.setPreferredSize(new Dimension(100, 30));
-        submitButton.setFont(new Font("Arial", Font.BOLD, 13));
-        submitButton.setFocusPainted(false);
-        submitButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String oldPasswordValue = oldPassword.getText();
-                String newPasswordValue = newPassword.getText();
-
-                try (Connection conn = DBConnect.getConnection();
-                     Statement stmt = conn.createStatement()) {
-                    String query = "UPDATE student SET phone_number = '" + newPasswordValue + "' WHERE phone_number = '" + oldPasswordValue + "'";
-                    stmt.executeUpdate(query);
-                    JOptionPane.showMessageDialog(mainPanel, "Password changed successfully");
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(mainPanel, "Error: " + ex.getMessage());
-                }
+        DefaultTableModel tableModel = new DefaultTableModel() {
+            
+            public boolean isCellEditable(int row, int column) {
+                return false; 
             }
-        });
+        };
 
+        JTable table = new JTable(tableModel);
 
+        try (Connection conn = DBConnect.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM course")) {
+
+            
+            tableModel.addColumn("No.");
+            tableModel.addColumn("subject");
+            tableModel.addColumn("Hours per Week");
+            tableModel.addColumn("Hours per semester");
+
+            
+            while (rs.next()) {
+                int no = rs.getInt("subject_No");
+                String subject = rs.getString("subject");
+                String HrsPerWeek = rs.getString("per_week");
+                String HrsPerSem = rs.getString("per_semester");
+                tableModel.addRow(new Object[]{no, subject, HrsPerWeek, HrsPerSem});
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(mainPanel, "Error: " + e.getMessage());
+        }
+        
+        table.setFont(new Font("Arial", Font.PLAIN, 17));
+        table.setRowHeight(20);
+        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 20));
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        for(int i = 0; i < table.getColumnCount(); i++) {
+            table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        table.setRowHeight(30);
+        TableRowSorter<DefaultTableModel> rowSorter = new TableRowSorter<>(tableModel);
+        table.setRowSorter(rowSorter);
+        table.setFillsViewportHeight(true);
+        JScrollPane scrollPanel = new JScrollPane(table);
+        
+        
+        
         JButton ViewProfile = new JButton("View Profile");
         ViewProfile.setFont(new Font("Arial", Font.BOLD, 13));
         ViewProfile.setPreferredSize(new Dimension(160, 30));
@@ -81,6 +101,8 @@ public class ChangePassword extends JPanel {
         JButton ViewCourse = new JButton("View Course");
         ViewCourse.setFont(new Font("Arial", Font.BOLD, 13));
         ViewCourse.setPreferredSize(new Dimension(160, 30));
+        ViewCourse.setBackground(Color.GRAY);
+        ViewCourse.setForeground(Color.WHITE);
         ViewCourse.setFocusPainted(false);
         ViewCourse.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -94,8 +116,6 @@ public class ChangePassword extends JPanel {
         ChangePassword.setFont(new Font("Arial", Font.BOLD, 13));
         ChangePassword.setPreferredSize(new Dimension(160, 30));
         ChangePassword.setFocusPainted(false);
-        ChangePassword.setBackground(Color.GRAY);
-        ChangePassword.setForeground(Color.WHITE);
         ChangePassword.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CardLayout c4 = (CardLayout) mainPanel.getLayout();
@@ -142,7 +162,7 @@ public class ChangePassword extends JPanel {
                 
                 if (response == JOptionPane.NO_OPTION) {
                     CardLayout c4 = (CardLayout) mainPanel.getLayout();
-                    c4.show(mainPanel, "ChangePassword");
+                    c4.show(mainPanel, "ViewScore");
                 } else {
                     System.out.println("Program ended");
                     System.exit(0);
@@ -212,28 +232,10 @@ public class ChangePassword extends JPanel {
         buttonsContainer.setBackground(Color.GRAY);
         buttonPanel.add(buttonsContainer, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.WEST);
-
-
-        JPanel formPanel = new JPanel(new GridBagLayout());
-        buttonPanel.setPreferredSize(new Dimension(200, 300));
-        gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        formPanel.add(oldPasswordLabel, gbc);
-        gbc.gridx++;
-        formPanel.add(oldPassword, gbc);
-        gbc.gridy++;
-        gbc.gridx = 0;
-        formPanel.add(newPasswordLabel, gbc);
-        gbc.gridx++;
-        formPanel.add(newPassword, gbc);
-        gbc.gridy++;
-        formPanel.add(submitButton, gbc);
-        add(formPanel, BorderLayout.CENTER);
-
+        
         JPanel ModePanel = new JPanel(new GridBagLayout());
-        gbc.insets = new Insets(20, 20, 20, 20);
         ModePanel.setPreferredSize(new Dimension(180, 50));
+        gbc.insets = new Insets(20, 20, 20, 20);
         gbc.gridy = 0;
         gbc.gridx = 0;
         ModePanel.add(darkMode, gbc);
@@ -251,5 +253,17 @@ public class ChangePassword extends JPanel {
         southPanel.setBackground(Color.GRAY);
         southPanel.setPreferredSize(new Dimension(200, 50));
         add(southPanel, BorderLayout.SOUTH);
+
+        JPanel TablePanel = new JPanel(new GridBagLayout());
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 3;
+        gbc.fill = GridBagConstraints.BOTH; 
+        gbc.weightx = 1.0; 
+        gbc.weighty = 1.0;
+        TablePanel.add(scrollPanel, gbc);
+        add(TablePanel, BorderLayout.CENTER);
+    
     }
 }

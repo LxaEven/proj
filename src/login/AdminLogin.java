@@ -1,4 +1,5 @@
 package login;
+
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import main.*;
@@ -6,7 +7,7 @@ import main.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
-public class LoginPanel extends JPanel {
+public class AdminLogin extends JPanel {
     private static String identifier;
     private static String password;
 
@@ -15,7 +16,7 @@ public class LoginPanel extends JPanel {
     public JPasswordField passwordField;
     private MainPanel mainPanel;
 
-    public LoginPanel(MainPanel mainPanel) {
+    public AdminLogin(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
         setLayout(new BorderLayout(20, 20));
         setBackground(new Color(173, 216, 230)); // Light Blue background
@@ -27,9 +28,7 @@ public class LoginPanel extends JPanel {
 
 
         // Create the input panel for email and password
-        JPanel inputPanel = new JPanel(new GridBagLayout());
-        inputPanel.setBackground(new Color(173, 216, 230));
-        inputPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Add padding
+         // Add padding
 
         emailField = new JTextField();
         emailField.setPreferredSize(new Dimension(500, 60));
@@ -49,9 +48,9 @@ public class LoginPanel extends JPanel {
         showPasswordCheckBox.setFont(new Font("Arial", Font.PLAIN, 18));
         showPasswordCheckBox.addActionListener(e -> {
             if (showPasswordCheckBox.isSelected()) {
-                passwordField.setEchoChar((char) 0); // Show password
+                passwordField.setEchoChar((char) 0);
             } else {
-                passwordField.setEchoChar('•'); // Hide password
+                passwordField.setEchoChar('•');
             }
         });
 
@@ -61,16 +60,15 @@ public class LoginPanel extends JPanel {
         loginButton.setPreferredSize(new Dimension(200, 50));
         loginButton.setFont(new Font("Arial", Font.PLAIN, 18));
         loginButton.setBackground(new Color(144, 238, 144)); // Light Green
-        JButton forgotPasswordButton = new JButton("Forgot Password?");
-        forgotPasswordButton.setPreferredSize(new Dimension(200, 50));
-        forgotPasswordButton.setFont(new Font("Arial", Font.PLAIN, 18));
-        forgotPasswordButton.setBackground(new Color(255, 200, 100)); // Orange
         JButton backButton = new JButton("Back");
         backButton.setPreferredSize(new Dimension(200, 50));
         backButton.setFont(new Font("Arial", Font.PLAIN, 18));
         backButton.setBackground(new Color(255, 102, 102));
 
         GridBagConstraints gbc = new GridBagConstraints();
+        JPanel inputPanel = new JPanel(new GridBagLayout());
+        inputPanel.setBackground(new Color(173, 216, 230));
+        inputPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         gbc.insets= new Insets(10,10,10,10);
             JPanel buttonPanel = new JPanel(new GridBagLayout());
             buttonPanel.setBackground(new Color(173, 216, 230));
@@ -78,7 +76,7 @@ public class LoginPanel extends JPanel {
             gbc.gridy = 0;
             buttonPanel.add(loginButton, gbc);
             gbc.gridx++;
-            buttonPanel.add(forgotPasswordButton, gbc);
+            buttonPanel.add(backButton, gbc);
         gbc.gridx = 0;
         gbc.gridy = 0;
         inputPanel.add(emailField, gbc);
@@ -90,8 +88,6 @@ public class LoginPanel extends JPanel {
         gbc.gridy++;
         gbc.anchor = GridBagConstraints.CENTER;
         inputPanel.add(buttonPanel, gbc);
-        gbc.gridy++;
-        inputPanel.add(backButton, gbc);
 
 
         JPanel LogoPanel = new JPanel(new GridBagLayout());
@@ -106,13 +102,13 @@ public class LoginPanel extends JPanel {
 
         add(inputPanel, BorderLayout.CENTER);
         add(LogoPanel, BorderLayout.WEST);
-
-        // Add action listener for the login button
-        backButton.addActionListener(e -> mainPanel.showScreen("loginScreen"));
         loginButton.addActionListener(new LoginButtonListener());
-
-        // Add action listener for the forgot password button
-        forgotPasswordButton.addActionListener(e -> mainPanel.showScreen("ForgotPassword"));
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainPanel.showScreen("loginScreen");
+            }
+        });
     }
 
     private class LoginButtonListener implements ActionListener {
@@ -124,16 +120,16 @@ public class LoginPanel extends JPanel {
             MainPanel.loginUserPassword = password;
 
             if (identifier.isEmpty() || password.isEmpty()) {
-                JOptionPane.showMessageDialog(LoginPanel.this, "Please enter both Email/Phone Number and password.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(AdminLogin.this, "Please enter both Email/Phone Number and password.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             if (authenticateUser(identifier, password)) {
-                JOptionPane.showMessageDialog(LoginPanel.this, "Login successfully");
+                JOptionPane.showMessageDialog(AdminLogin.this, "Login successfully");
                 mainPanel.showScreen("student");
                 
             } else {
-                JOptionPane.showMessageDialog(LoginPanel.this, "Invalid Email/Phone Number or password.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(AdminLogin.this, "Invalid Email/Phone Number or password.", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
         }
@@ -156,11 +152,6 @@ public class LoginPanel extends JPanel {
             e.printStackTrace();
             return false;
         }
-    }
-
-    public void clearFields() {
-        emailField.setText("");
-        passwordField.setText("");
     }
 
 

@@ -1,7 +1,7 @@
 package student;
 import javax.swing.*;
-import com.formdev.flatlaf.*;
 
+import login.LoginPanel;
 import main.MainPanel;
 
 import java.awt.*;
@@ -9,8 +9,15 @@ import java.awt.event.*;
 
 public class student extends JPanel {
 
+    private displayProfile currentProfilePanel; 
+    private DisplayScore studentScorePanel;
+    private displayCourse studentCoursePanel;
+    private NewPassword ChangeNewPassword;
+    public JButton ViewProfile, ViewScore, ViewCourse, ChangePassword;
+    
     public student(MainPanel mainPanel){
         setLayout(new BorderLayout());
+        setBackground(new Color(173, 216, 230));
 
         ImageIcon imageIcon = new ImageIcon("image//logo.jpg");
         Image resizedImage = imageIcon.getImage().getScaledInstance(160, 160, Image.SCALE_SMOOTH);
@@ -18,57 +25,54 @@ public class student extends JPanel {
         JLabel logoLabel = new JLabel(resizedIcon);
 
 
-        JButton ViewProfile = new JButton("View Profile");
-        ViewProfile.setFont(new Font("Arial", Font.BOLD, 13));
-        ViewProfile.setPreferredSize(new Dimension(160, 30));
+        ViewProfile = new JButton("View Profile");
+        ViewProfile.setFont(new Font("Arial", Font.BOLD, 15));
+        ViewProfile.setPreferredSize(new Dimension(200, 40));
         ViewProfile.setFocusPainted(false);
-        ViewProfile.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                CardLayout c4 = (CardLayout) mainPanel.getLayout();
-                c4.show(mainPanel, "ViewProfile");
-            }
-        });
+        ViewProfile.addActionListener(e -> updateProfilePanel(mainPanel));
 
 
-        JButton ViewScore = new JButton("View Score");
-        ViewScore.setFont(new Font("Arial", Font.BOLD, 13));
-        ViewScore.setPreferredSize(new Dimension(160, 30));
+        ViewScore = new JButton("View Score");
+        ViewScore.setFont(new Font("Arial", Font.BOLD, 15));
+        ViewScore.setPreferredSize(new Dimension(200, 40));
         ViewScore.setFocusPainted(false);
-        ViewScore.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                CardLayout c4 = (CardLayout) mainPanel.getLayout();
-                c4.show(mainPanel, "ViewScore");
-            }
-        });
+        ViewScore.addActionListener(e->showStudentScorePanel(mainPanel));
 
 
-        JButton ViewCourse = new JButton("View Course");
-        ViewCourse.setFont(new Font("Arial", Font.BOLD, 13));
-        ViewCourse.setPreferredSize(new Dimension(160, 30));
+        ViewCourse = new JButton("View Course");
+        ViewCourse.setFont(new Font("Arial", Font.BOLD, 15));
+        ViewCourse.setPreferredSize(new Dimension(200, 40));
         ViewCourse.setFocusPainted(false);
-        ViewCourse.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                CardLayout c4 = (CardLayout) mainPanel.getLayout();
-                c4.show(mainPanel, "ViewCourse");
-            }
-        });
+        ViewCourse.addActionListener(e -> showStudentCoursePanel(mainPanel));
 
 
-        JButton ChangePassword = new JButton("Change Password");
-        ChangePassword.setFont(new Font("Arial", Font.BOLD, 13));
-        ChangePassword.setPreferredSize(new Dimension(160, 30));
+        ChangePassword = new JButton("Change Password");
+        ChangePassword.setFont(new Font("Arial", Font.BOLD, 15));
+        ChangePassword.setPreferredSize(new Dimension(200, 40));
         ChangePassword.setFocusPainted(false);
-        ChangePassword.addActionListener(new ActionListener() {
+        ChangePassword.addActionListener(e -> ChangePassword(mainPanel));
+
+        JButton[] buttons = {ViewProfile, ViewScore, ViewCourse, ChangePassword};
+        ActionListener buttonListener = new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                CardLayout c4 = (CardLayout) mainPanel.getLayout();
-                c4.show(mainPanel, "ChangePassword");
+                for (JButton button : buttons) {
+                    button.setBackground(Color.WHITE);
+                    button.setForeground(Color.BLACK);
+                }
+                ((JButton) e.getSource()).setBackground(new Color(173, 216, 230));
+                ((JButton) e.getSource()).setForeground(new Color(82, 39, 25));
             }
-        });
+        };
+
+        for (JButton button : buttons) {
+            button.addActionListener(buttonListener);
+        }
 
 
         JButton Logout = new JButton("Logout");
-        Logout.setFont(new Font("Arial", Font.BOLD, 13));
-        Logout.setPreferredSize(new Dimension(160, 30));
+        Logout.setFont(new Font("Arial", Font.BOLD, 15));
+        Logout.setPreferredSize(new Dimension(200, 40));
         Logout.setFocusPainted(false);
         Logout.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -80,8 +84,11 @@ public class student extends JPanel {
                 );
                 
                 if (response == JOptionPane.YES_OPTION) {
-                    CardLayout c4 = (CardLayout) mainPanel.getLayout();
-                    c4.show(mainPanel, "loginScreen");
+                    clearMainContent();
+                    clearColor();
+                    LoginPanel loginpanel = (LoginPanel) mainPanel.getComponent(3);
+                    loginpanel.clearFields();
+                    mainPanel.showScreen("loginScreen");
                 } else {
                     System.out.println("Stayed logged in");
                 }
@@ -90,8 +97,8 @@ public class student extends JPanel {
 
 
         JButton CloseProgram = new JButton("Exit");
-        CloseProgram.setFont(new Font("Arial", Font.BOLD, 13));
-        CloseProgram.setPreferredSize(new Dimension(160, 30));
+        CloseProgram.setFont(new Font("Arial", Font.BOLD, 15));
+        CloseProgram.setPreferredSize(new Dimension(200, 40));
         CloseProgram.setFocusPainted(false);
         CloseProgram.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -112,47 +119,21 @@ public class student extends JPanel {
             }
         });
 
-        JButton darkMode = new JButton("Dark Mode");
-        darkMode.setFont(new Font("Arial", Font.BOLD, 12));
-        darkMode.setPreferredSize(new Dimension(130, 30));
-        darkMode.setFocusPainted(false);
-        darkMode.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    UIManager.setLookAndFeel( new FlatDarkLaf() );
-                    SwingUtilities.updateComponentTreeUI(mainPanel);
-                } catch( Exception ex ) {
-                    System.err.println( "Failed to initialize LaF" );
-                }
-            }
-        });
 
-        JButton lightMode = new JButton("Light Mode");
-        lightMode.setFont(new Font("Arial", Font.BOLD, 12));
-        lightMode.setPreferredSize(new Dimension(130, 30));
-        lightMode.setFocusPainted(false);
-        lightMode.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    UIManager.setLookAndFeel( new FlatLightLaf() );
-                    SwingUtilities.updateComponentTreeUI(mainPanel);
-                } catch( Exception ex ) {
-                    System.err.println( "Failed to initialize LaF" );
-                }
-            }
-        });
+        
 
 
         JPanel buttonPanel = new JPanel(new BorderLayout());
-        buttonPanel.setBackground(Color.GRAY);
+        buttonPanel.setBackground(Color.CYAN);
 
         JPanel logoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         logoPanel.add(logoLabel);
-        logoPanel.setBackground(Color.GRAY);
+        logoPanel.setBackground(Color.CYAN);
 
         buttonPanel.add(logoPanel, BorderLayout.NORTH);
 
         JPanel buttonsContainer = new JPanel(new GridBagLayout());
+        buttonsContainer.setPreferredSize(new Dimension(250, 500));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(20, 20, 20, 20);
         gbc.gridx = 0;
@@ -165,35 +146,78 @@ public class student extends JPanel {
         buttonsContainer.add(ViewCourse, gbc);
         gbc.gridy++;
         buttonsContainer.add(ChangePassword, gbc);
-        gbc.gridy++;
-        buttonsContainer.add(Logout, gbc);
-        gbc.gridy++;
-        buttonsContainer.add(CloseProgram, gbc);
 
-        buttonsContainer.setBackground(Color.GRAY);
+        buttonsContainer.setBackground(Color.CYAN);
         buttonPanel.add(buttonsContainer, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.WEST);
 
-        JPanel ModePanel = new JPanel(new GridBagLayout());
+        JPanel logoutAndClosePanel = new JPanel(new GridBagLayout());
+        logoutAndClosePanel.setBackground(Color.CYAN);
         gbc.insets = new Insets(20, 20, 20, 20);
-        ModePanel.setPreferredSize(new Dimension(180, 50));
-        gbc.gridy = 0;
         gbc.gridx = 0;
-        ModePanel.add(darkMode, gbc);
+        gbc.gridy = 0;
+        logoutAndClosePanel.add(Logout, gbc);
         gbc.gridx++;
-        ModePanel.add(lightMode, gbc);
-        ModePanel.setBackground(Color.GRAY);
-        add(ModePanel, BorderLayout.NORTH);
-
-        JPanel eastPanel = new JPanel();
-        eastPanel.setBackground(Color.GRAY);
-        eastPanel.setPreferredSize(new Dimension(50, 300));
-        add(eastPanel, BorderLayout.EAST);
-
-        JPanel southPanel = new JPanel();
-        southPanel.setBackground(Color.GRAY);
-        southPanel.setPreferredSize(new Dimension(200, 50));
-        add(southPanel, BorderLayout.SOUTH);
+        logoutAndClosePanel.add(CloseProgram, gbc);
+        add(logoutAndClosePanel, BorderLayout.SOUTH);
     
     }
+
+    private void updateProfilePanel(MainPanel mainPanel) {
+        clearMainContent(); 
+        currentProfilePanel = new displayProfile(mainPanel); 
+        add(currentProfilePanel, BorderLayout.CENTER);
+        revalidate();
+        repaint();
+    }
+    
+    private void showStudentScorePanel(MainPanel mainPanel) {
+        clearMainContent();
+        studentScorePanel = new DisplayScore(mainPanel);
+        add(studentScorePanel, BorderLayout.CENTER);
+        revalidate();
+        repaint();
+    }
+
+    private void showStudentCoursePanel(MainPanel mainPanel){
+        clearMainContent();
+        studentCoursePanel = new displayCourse(mainPanel);
+        add(studentCoursePanel, BorderLayout.CENTER);
+        revalidate();
+        repaint();
+    }
+
+    private void ChangePassword(MainPanel mainPanel) {
+        clearMainContent();
+        ChangeNewPassword = new NewPassword(mainPanel);
+        add(ChangeNewPassword, BorderLayout.CENTER);
+        revalidate();
+        repaint();
+    }
+    public void clearColor() {
+        JButton[] buttons = {ViewProfile, ViewScore, ViewCourse, ChangePassword};
+        for (JButton button : buttons) {
+            button.setBackground(Color.WHITE);
+        }
+    }
+    
+    public void clearMainContent() {
+        if (currentProfilePanel != null) {
+            remove(currentProfilePanel);
+            currentProfilePanel = null;
+        }
+        if (studentScorePanel != null) {
+            remove(studentScorePanel);
+            studentScorePanel = null;
+        }
+        if (studentCoursePanel != null) {
+            remove(studentCoursePanel);
+            studentCoursePanel = null;
+        }
+        if (ChangeNewPassword != null) {
+            remove(ChangeNewPassword);
+            ChangeNewPassword = null;
+        }
+    }
+
 }
