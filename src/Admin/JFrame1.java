@@ -39,8 +39,8 @@ public final class JFrame1 extends JFrame{
     //course
     private JMenu courseMenu;
     private JMenuItem viewCourse;
+    private JMenuItem addCourse;
     private JMenuItem updateCourse;
-    private JMenuItem searchCourse;
     private JMenuItem deleteCourse;
 
     //setting
@@ -103,12 +103,19 @@ public final class JFrame1 extends JFrame{
         // JPanel addSts_panel = EnrollmentPanel();
         // JPanel updateSts_panel = UpdateStudentPanel();
         // JPanel deletePanel = DeleteStudentPanel();
-
         midPanel.add(homePanel.homePanel(), "Home");
-        midPanel.add(viewPanel.ViewStudentPanel(), "View");
+
+        // Student Panel
+        midPanel.add(viewPanel.ViewStudentPanel(), "ViewSts");
         midPanel.add(enrollPanel.getEnrollPanel(), "Enroll");
-        midPanel.add(updatePanel.createUpdateStudentPanel(), "Update");
-        // midPanel.add(deletePanel, "Delete");
+        midPanel.add(updatePanel.createUpdateStudentPanel(), "UpdateSts");
+        midPanel.add(deletePanel.createDeleteStudentPanel(), "DeleteSts");
+
+        // Course Panel
+        midPanel.add(new View_courses(connection).ViewCoursePanel(), "ViewCourse");
+        midPanel.add(new AddCourse(connection).getAddCoursePanel(), "AddCourse");
+        midPanel.add(new UpdateCourse(connection).getUpdateCoursePanel(), "UpdateCourse");
+        midPanel.add(new DeleteCourse(connection).createDeleteCoursePanel(), "DeleteCourse");
 
 
 
@@ -116,7 +123,7 @@ public final class JFrame1 extends JFrame{
 
         // Home
         homeMenu =  new JMenu("Home");
-        ImageIcon homeIcon = new ImageIcon("image//home.png");
+        ImageIcon homeIcon = new ImageIcon("D:/Assignments/I3/Testing/JDBC/Admin/src/Icon/home.png");
         homeMenu.setIcon(homeIcon);
 
         newMenuItem = new JMenuItem("Home");
@@ -126,39 +133,43 @@ public final class JFrame1 extends JFrame{
 
         // Student
         studentMenu =  new JMenu("Student");
-        ImageIcon studentIcon = new ImageIcon("image//student.png");
+        ImageIcon studentIcon = new ImageIcon("D:/Assignments/I3/Testing/JDBC/Admin/src/Icon/student.png");
         studentMenu.setIcon(studentIcon);
         viewStudent = new JMenuItem("View");
-        viewStudent.addActionListener(e -> cardLayout.show(midPanel, "View"));
+        viewStudent.addActionListener(e -> cardLayout.show(midPanel, "ViewSts"));
         
         addStudent = new JMenuItem("Enroll");
         addStudent.addActionListener(e -> cardLayout.show(midPanel, "Enroll"));
         updateStudent = new JMenuItem("Update");
-        updateStudent.addActionListener(e -> cardLayout.show(midPanel, "Update"));
+        updateStudent.addActionListener(e -> cardLayout.show(midPanel, "UpdateSts"));
         deleteStudent = new JMenuItem("Delete");
-        deleteStudent.addActionListener(e -> cardLayout.show(midPanel, "Delete"));
+        deleteStudent.addActionListener(e -> cardLayout.show(midPanel, "DeleteSts"));
 
 
 
         // Course
         courseMenu =  new JMenu("Course");
-        ImageIcon courseIcon = new ImageIcon("image//course.png");
+        ImageIcon courseIcon = new ImageIcon("D:/Assignments/I3/Testing/JDBC/Admin/src/Icon/course.png");
         courseMenu.setIcon(courseIcon);
         viewCourse = new JMenuItem("View");
+        viewCourse.addActionListener(e -> cardLayout.show(midPanel, "ViewCourse"));
+        addCourse = new JMenuItem("Add");
+        addCourse.addActionListener(e -> cardLayout.show(midPanel, "AddCourse"));
         updateCourse = new JMenuItem("Update");
-        searchCourse = new JMenuItem("Search");
+        updateCourse.addActionListener(e -> cardLayout.show(midPanel, "UpdateCourse"));
         deleteCourse = new JMenuItem("Delete");
+        deleteCourse.addActionListener(e -> cardLayout.show(midPanel, "DeleteCourse"));
 
         // Setting
         settingMenu =  new JMenu("Setting");
-        ImageIcon settingIcon = new ImageIcon("image//course.png");
+        ImageIcon settingIcon = new ImageIcon("D:/Assignments/I3/Testing/JDBC/Admin/src/Icon/course.png");
         settingMenu.setIcon(settingIcon);
         darkMenu = new JMenuItem("Dark mode");
         lightMenu = new JMenuItem("Light mode");
         exitMenu = new JMenuItem("Exit");
 
 
-        JMenuItem[] item = {homeMenu, studentMenu, newMenuItem, courseMenu, saveMenuItem, logOutMenuItem, viewStudent, addStudent, updateStudent, deleteStudent,viewCourse, updateCourse, searchCourse, deleteCourse};
+        JMenuItem[] item = {homeMenu, studentMenu, newMenuItem, courseMenu, saveMenuItem, logOutMenuItem, viewStudent, addStudent, updateStudent, deleteStudent,viewCourse, updateCourse, addCourse, deleteCourse};
         for (JMenuItem item1 : item) {
             item1.setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
@@ -178,8 +189,8 @@ public final class JFrame1 extends JFrame{
         studentMenu.add(deleteStudent);
 
         courseMenu.add(viewCourse);
+        courseMenu.add(addCourse);
         courseMenu.add(updateCourse);
-        courseMenu.add(searchCourse);
         courseMenu.add(deleteCourse);
 
         settingMenu.add(darkMenu);
@@ -210,7 +221,7 @@ public final class JFrame1 extends JFrame{
         profilePanel.setPreferredSize(new Dimension(250, 100));
 
         // Profile picture
-        ImageIcon profileIcon = new ImageIcon("image//profile.png");
+        ImageIcon profileIcon = new ImageIcon("D:/Assignments/I3/Testing/JDBC/Admin/src/Icon/profile.png");
         profileIcon.setImage(profileIcon.getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT));
         JLabel profileLabel = new JLabel(profileIcon);
 
@@ -235,7 +246,7 @@ public final class JFrame1 extends JFrame{
         label1.setFont(new Font("Arial", Font.BOLD, 35));
         label1.setForeground(Color.blue);
 
-        ImageIcon labelIcon = new ImageIcon("image//Logo.png");
+        ImageIcon labelIcon = new ImageIcon("D:/Assignments/I3/Testing/JDBC/Admin/src/Icon/Logo.png");
         labelIcon.setImage(labelIcon.getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
         label1.setIcon(labelIcon);
         label1.setIconTextGap(10);
@@ -261,73 +272,6 @@ public final class JFrame1 extends JFrame{
  
 
     }
-
-       // Method to show the view_sts content
-    // private JPanel ViewStudentPanel() {
-    //     //midPanel.removeAll(); // Clear the midPanel
-    //     midPanel.add(new DisplayStudent(), BorderLayout.CENTER); // Placeholder for the view_sts content
-    //     //midPanel.revalidate(); // Refresh the panel
-    //     //midPanel.repaint(); // Repaint the panel
-    
-    //     return midPanel;
-    // }
-
-
-    // private class LogOut{
-    //     JButton Logout = new JButton("Log out");
-    //     Logout.setFont(new Font("Arial", Font.BOLD, 13));
-    //     Logout.setPreferredSize(new Dimension(160, 30));
-    //     Logout.addActionListener(new ActionListener() {
-    //         public void actionPerformed(ActionEvent e) {
-    //             int response = JOptionPane.showConfirmDialog(null, "Do you want to log out?", "Log Out", JOptionPane.YES_NO_OPTION);
-                
-    //             if (response == JOptionPane.YES_OPTION) {
-    //                 CardLayout c4 = (CardLayout) mainPanel.getLayout();
-    //                 c4.show(mainPanel, "loginScreen");
-    //             } else {
-    //                 System.out.println("Stayed logged in");
-    //             }
-    //         }
-    //     });
-    // }
-
-
-    
-    // public void reloadData() {
-    //     System.out.println("ReloadData called");
-    //     try {
-    //         Statement stmt = connection.createStatement();
-    //         ResultSet rs = stmt.executeQuery("SELECT * FROM student_db.students");
-    //         tableModel.setRowCount(0); // Clear existing rows
-    //         while (rs.next()) {
-    //             tableModel.addRow(new Object[]{
-    //                 rs.getInt("id"),
-    //                 rs.getString("first_name"),
-    //                 rs.getString("last_name"),
-    //                 rs.getString("gender"),
-    //                 rs.getDate("dob"),
-    //                 rs.getString("email"),
-    //                 rs.getString("address"),
-    //                 rs.getString("phone_number")
-    //             });
-    //         }
-    //     } catch (SQLException e) {
-    //         JOptionPane.showMessageDialog(this, "Failed to load data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    //     }
-    // }
-    
-    
-    
-
-    // private JPanel createViewStudentPanel() {
-    //     return new view_sts(connection); // Pass the connection to the view_sts panel
-    // }
-    
-    // private JPanel createViewStudentPanel() {
-    //     JPanel panel = new JPanel();
-    //     panel.add(new JLabel("View Student Panel"));
-    //     return panel;
-    // }
  
 
 }
