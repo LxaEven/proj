@@ -29,36 +29,32 @@ public class DisplayScore extends JPanel {
 
         try (Connection conn = DBConnect.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM student")) {
+             ResultSet rs = stmt.executeQuery("SELECT * FROM student INNER JOIN department ON student.department = department.department_id")) {
 
             
-            tableModel.addColumn("ID");
-            tableModel.addColumn("Firstname");
-            tableModel.addColumn("Lastname");
-            tableModel.addColumn("Gender");
-            tableModel.addColumn("Birth");
-            tableModel.addColumn("Phone Number");
-            tableModel.addColumn("Score");
+                tableModel.addColumn("No");
+                tableModel.addColumn("ID");
+                tableModel.addColumn("First Name");
+                tableModel.addColumn("Last Name");
+                tableModel.addColumn("Gender");
+                tableModel.addColumn("Date of Birth");
+                tableModel.addColumn("Department");
+                tableModel.addColumn("Score");
 
             
             while (rs.next()) {
+                int No = tableModel.getRowCount() + 1;
                 int id = rs.getInt("student_id");
-                String studentFirstName = rs.getString("student_firstname");
-                String studentLastName = rs.getString("student_lastname");
+                String studentfirstName = rs.getString("student_firstname");
+                String studentlastName = rs.getString("student_lastname");
                 String studentGender = rs.getString("gender");
                 String studentBirth = rs.getString("student_birth");
-                String studentPhoneNumber = rs.getString("phone_number");
-                float studentScore = rs.getFloat("student_score");
-                tableModel.addRow(new Object[]{
-                    String.format("%03d", id), 
-                    studentFirstName, 
-                    studentLastName, 
-                    studentGender, 
-                    studentBirth, 
-                    studentPhoneNumber, 
-                    studentScore
-                });
-            }
+                String studentdepartment = rs.getString("department_name");
+                String studentScore = rs.getString("student_score");
+        tableModel.addRow(new Object[]{No, "e2022"+String.format("%03d", id), studentfirstName, studentlastName, studentGender,  studentBirth, studentdepartment, studentScore}
+        
+        );
+    }
 
         } catch (SQLException e) {
             e.printStackTrace();
