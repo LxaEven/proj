@@ -58,7 +58,7 @@ public class displayProfile extends JPanel {
 
         try (Connection conn = DBConnect.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(
-                     "SELECT * FROM student WHERE (email = ? OR phone_number = ?) AND student_password = ?")) {
+                     "SELECT * FROM student WHERE (student_email = ? OR phone_number = ?) AND student_password = ?")) {
 
             String identifier = MainPanel.loginUserIdentifier;
             String password = MainPanel.loginUserPassword;
@@ -75,7 +75,7 @@ public class displayProfile extends JPanel {
                     genderLabel.setText("Gender:     " + rs.getString("gender"));
                     birthLabel.setText("Birth:     " + rs.getString("student_birth"));
                     phoneNumberLabel.setText("Phone Number:     " + rs.getString("phone_number"));
-                    emailLabel.setText("Email:     " + rs.getString("email"));
+                    emailLabel.setText("Email:     " + rs.getString("student_email"));
                 }
             }
         } catch (SQLException e) {

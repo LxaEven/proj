@@ -74,8 +74,8 @@ public class NewPassword extends JPanel {
                 }
 
                 try (Connection conn = DBConnect.getConnection();
-                     PreparedStatement checkStmt = conn.prepareStatement("SELECT * FROM student WHERE (email = ? OR phone_number = ?) AND student_password = ?");
-                     PreparedStatement updateStmt = conn.prepareStatement("UPDATE student SET student_password = ? WHERE (email = ? OR phone_number = ?)")) {
+                     PreparedStatement checkStmt = conn.prepareStatement("SELECT * FROM student WHERE (student_email = ? OR phone_number = ?) AND student_password = ?");
+                     PreparedStatement updateStmt = conn.prepareStatement("UPDATE student SET student_password = ? WHERE (student_email = ? OR phone_number = ?)")) {
 
                     String identifier = MainPanel.loginUserIdentifier;
                     checkStmt.setString(1, identifier);

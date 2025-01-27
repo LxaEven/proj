@@ -129,9 +129,9 @@ public class ForgotPasswordPanel extends JPanel {
     }
 
     private boolean isEmailRegistered(String email) {
-        String query = "SELECT 1 FROM student WHERE email = ? OR phone_number = ?";
+        String query = "SELECT 1 FROM student WHERE student_email = ? OR phone_number = ?";
 
-        try (Connection conn = DBConnectionEmail.getConnection();
+        try (Connection conn = DBConnect.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, email);
             stmt.setString(2, email);

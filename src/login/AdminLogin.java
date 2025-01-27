@@ -136,7 +136,7 @@ public class AdminLogin extends JPanel {
     }
 
     private boolean authenticateUser(String identifier, String password) {
-        String query = "SELECT * FROM student WHERE (email = ? OR phone_number = ?) AND student_password = ?";
+        String query = "SELECT * FROM student WHERE (student_email = ? OR phone_number = ?) AND student_password = ?";
         
         try (Connection conn = DBConnect.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
