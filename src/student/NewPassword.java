@@ -90,11 +90,10 @@ public class NewPassword extends JPanel {
                         updateStmt.executeUpdate();
 
                         JOptionPane.showMessageDialog(mainPanel, "Password changed successfully.\nPlease login again.", "Sucess", JOptionPane.INFORMATION_MESSAGE);
-                        LoginPanel loginPanel = (LoginPanel) mainPanel.getComponent(3);
                         student studentPanel = (student) mainPanel.getComponent(2);
+                        
                         studentPanel.clearMainContent();
                         studentPanel.clearColor();
-                        loginPanel.passwordField.setText(newPassword);
                         mainPanel.showScreen("Login");
                     } else {
                         JOptionPane.showMessageDialog(mainPanel, "Old password is incorrect.", "Error", JOptionPane.ERROR_MESSAGE);

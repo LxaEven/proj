@@ -4,8 +4,7 @@ import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import main.DBConnect;
-
+import main.*;
 
 
 public final class JFrame1 extends JPanel{
@@ -53,7 +52,7 @@ public final class JFrame1 extends JPanel{
     private JMenuItem exitMenu;
 
 
-    public JFrame1() {
+    public JFrame1(MainPanel mainPanel) {
         initializeDatabaseConnection();
         initialize();
     }

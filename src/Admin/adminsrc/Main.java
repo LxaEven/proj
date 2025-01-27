@@ -17,8 +17,8 @@ public class Main {
             break;
             }
             }
-            JFrame1 frame = new JFrame1();
-            frame.setVisible(true);
+            //JFrame1 frame = new JFrame1();
+            //frame.setVisible(true);
 
         });
     }

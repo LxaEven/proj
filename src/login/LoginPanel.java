@@ -128,6 +128,7 @@ public class LoginPanel extends JPanel {
             if (authenticateUser(identifier, password)) {
                 JOptionPane.showMessageDialog(LoginPanel.this, "Login successfully");
                 mainPanel.showScreen("student");
+                clearFields();
             } else {
                 JOptionPane.showMessageDialog(LoginPanel.this, "Invalid Email/Phone Number or password.", "Error",
                         JOptionPane.ERROR_MESSAGE);

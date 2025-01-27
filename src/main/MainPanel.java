@@ -22,7 +22,7 @@ public class MainPanel extends JPanel {
         add(new startPanel(this), "start");
         add(new loginScreen(this), "loginScreen");
         add(new student(this), "student");
-        add(new JFrame1(), "admin");
+        add(new JFrame1(this), "admin");
         
         add(new LoginPanel(this), "Login");
         add(new AdminLogin(this), "AdminLogin");
