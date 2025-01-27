@@ -58,6 +58,7 @@ public final class JFrame1 extends JPanel{
     }
 
     private void initializeDatabaseConnection() {
+        setLayout(new BorderLayout());
         try {
             DBConnect.getConnection();
         } catch (SQLException e) {
@@ -85,7 +86,7 @@ public final class JFrame1 extends JPanel{
 
         // Middle panel (Content Area)
         midPanel.setBackground(Color.black);
-        midPanel.setPreferredSize(new Dimension(600, 600));
+        midPanel.setPreferredSize(new Dimension(1080, 600));
         mainPanel.add(midPanel, BorderLayout.SOUTH);
 
         menuBar = new JMenuBar();
@@ -203,7 +204,7 @@ public final class JFrame1 extends JPanel{
         menuBar.add(studentMenu);
         menuBar.add(courseMenu);
         menuBar.add(settingMenu);
-        add(menuBar, BorderLayout.SOUTH);
+        
 
 
 
@@ -212,7 +213,7 @@ public final class JFrame1 extends JPanel{
 
 
         // Top panel
-        JPanel top_panel = new JPanel();
+        JPanel top_panel = new JPanel(new BorderLayout());
         top_panel.setBackground(Color.white);
         top_panel.setLayout(new FlowLayout(FlowLayout.LEFT,10,20));
 
@@ -265,11 +266,11 @@ public final class JFrame1 extends JPanel{
 
         
 
-
         
-
-        add(top_panel, BorderLayout.NORTH);
-        add(mainPanel,BorderLayout.CENTER);
+        
+        this.add(top_panel, BorderLayout.NORTH);
+        this.add(mainPanel,BorderLayout.CENTER);
+        this.add(menuBar, BorderLayout.SOUTH);
         setVisible(true);
  
 
