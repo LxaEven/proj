@@ -118,7 +118,7 @@ public class LoginPanel extends JPanel {
             password = new String(passwordField.getPassword()).trim();
             MainPanel.loginUserIdentifier = identifier;
             MainPanel.loginUserPassword = password;
-
+            
             if (identifier.isEmpty() || password.isEmpty()) {
                 JOptionPane.showMessageDialog(LoginPanel.this, "Please enter both Email/Phone Number and password.",
                         "Error", JOptionPane.ERROR_MESSAGE);
