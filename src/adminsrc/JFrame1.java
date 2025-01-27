@@ -1,7 +1,10 @@
+package adminsrc;
 import java.awt.*;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
+import main.DBConnect;
 
 
 
@@ -57,7 +60,7 @@ public final class JFrame1 extends JFrame{
 
     private void initializeDatabaseConnection() {
         try {
-            DriverManager.getConnection("jdbc:mysql://localhost:3306/student_db", "root", "");
+            DBConnect.getConnection();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Database connection failed: " + e.getMessage());
             System.exit(1);

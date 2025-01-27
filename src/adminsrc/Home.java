@@ -1,6 +1,9 @@
+package adminsrc;
 import java.awt.*;
 import java.sql.*;
 import javax.swing.*;
+
+import main.DBConnect;
 
 public class Home extends JPanel {
     private Connection connection;

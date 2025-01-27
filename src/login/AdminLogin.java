@@ -126,7 +126,7 @@ public class AdminLogin extends JPanel {
 
             if (authenticateUser(identifier, password)) {
                 JOptionPane.showMessageDialog(AdminLogin.this, "Login successfully");
-                mainPanel.showScreen("student");
+                mainPanel.showScreen("admin");
                 
             } else {
                 JOptionPane.showMessageDialog(AdminLogin.this, "Invalid Email/Phone Number or password.", "Error", JOptionPane.ERROR_MESSAGE);
