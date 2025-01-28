@@ -1,6 +1,8 @@
 package main;
 import javax.swing.*;
 
+import login.MainPanel;
+
 import java.awt.*;
 import java.awt.event.*;
 

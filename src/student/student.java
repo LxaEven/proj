@@ -2,7 +2,8 @@ package student;
 import javax.swing.*;
 
 import login.LoginPanel;
-import main.MainPanel;
+import login.MainPanel;
+import main.project_i3;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -15,7 +16,7 @@ public class student extends JPanel {
     private NewPassword ChangeNewPassword;
     public JButton ViewProfile, ViewScore, ViewCourse, ChangePassword;
     
-    public student(MainPanel mainPanel){
+    public student(JPanel mainPanel){
         setLayout(new BorderLayout());
         setBackground(new Color(173, 216, 230));
 
@@ -84,9 +85,13 @@ public class student extends JPanel {
                 );
                 
                 if (response == JOptionPane.YES_OPTION) {
+                    student.this.setVisible(false);
+                    project_i3 project = new project_i3();
+                    project.showLoginScreen();
+                    project.setVisible(true);
+
                     clearMainContent();
                     clearColor();
-                    mainPanel.showScreen("loginScreen");
                 } else {
                     System.out.println("Stayed logged in");
                 }
@@ -161,33 +166,33 @@ public class student extends JPanel {
     
     }
 
-    private void updateProfilePanel(MainPanel mainPanel) {
-        clearMainContent(); 
-        currentProfilePanel = new displayProfile(mainPanel); 
+    private void updateProfilePanel(JPanel mainPanel) {
+            clearMainContent(); 
+            currentProfilePanel = new displayProfile(mainPanel); 
         add(currentProfilePanel, BorderLayout.CENTER);
         revalidate();
         repaint();
     }
     
-    private void showStudentScorePanel(MainPanel mainPanel) {
-        clearMainContent();
-        studentScorePanel = new DisplayScore(mainPanel);
+    private void showStudentScorePanel(JPanel mainPanel) {
+            clearMainContent();
+            studentScorePanel = new DisplayScore(mainPanel);
         add(studentScorePanel, BorderLayout.CENTER);
         revalidate();
         repaint();
     }
 
-    private void showStudentCoursePanel(MainPanel mainPanel){
-        clearMainContent();
-        studentCoursePanel = new displayCourse(mainPanel);
+    private void showStudentCoursePanel(JPanel mainPanel){
+            clearMainContent();
+            studentCoursePanel = new displayCourse(mainPanel);
         add(studentCoursePanel, BorderLayout.CENTER);
         revalidate();
         repaint();
     }
 
-    private void ChangePassword(MainPanel mainPanel) {
-        clearMainContent();
-        ChangeNewPassword = new NewPassword(mainPanel);
+    private void ChangePassword(JPanel mainPanel) {
+            clearMainContent();
+            ChangeNewPassword = new NewPassword(mainPanel);
         add(ChangeNewPassword, BorderLayout.CENTER);
         revalidate();
         repaint();

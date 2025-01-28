@@ -5,14 +5,15 @@ import java.awt.event.*;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.*;
+
+import login.MainPanel;
 import main.*;
 
 public class DisplayScore extends JPanel {
     private MainPanel mainPanel;
     private GridBagConstraints gbc = new GridBagConstraints();
 
-    public DisplayScore(MainPanel mainPanel) {
-        this.mainPanel = mainPanel;
+    public DisplayScore(JPanel mainPanel) {
         setLayout(new BorderLayout());
         studentDisplay();
     }

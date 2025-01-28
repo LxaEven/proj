@@ -4,8 +4,8 @@ import javax.swing.*;
 import javax.swing.table.*;
 import com.formdev.flatlaf.*;
 
+import login.MainPanel;
 import main.DBConnect;
-import main.MainPanel;
 
 import java.awt.*;
 import java.awt.event.*;

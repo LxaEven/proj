@@ -1,13 +1,10 @@
-package main;
+package login;
 
 import javax.swing.*;
-
-import adminsrc.JFrame1;
-import student.*;
-import login.*;
-
+import main.*;
 import java.awt.*;
 import java.util.Random;
+
 public class MainPanel extends JPanel {
     public static String loginUserIdentifier;
     public static String loginUserPassword;
@@ -21,8 +18,6 @@ public class MainPanel extends JPanel {
 
         add(new startPanel(this), "start");
         add(new loginScreen(this), "loginScreen");
-        add(new student(this), "student");
-        add(new JFrame1(this), "admin");
         
         add(new LoginPanel(this), "Login");
         add(new AdminLogin(this), "AdminLogin");

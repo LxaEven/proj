@@ -1,18 +1,18 @@
 package student;
 
 import javax.swing.*;
+import login.MainPanel;
 import java.awt.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import main.DBConnect;
-import main.MainPanel;
 
 public class displayProfile extends JPanel {
     private GridBagConstraints gbc = new GridBagConstraints();
 
-    public displayProfile(MainPanel mainPanel) {
+    public displayProfile(JPanel mainPanel) {
         setLayout(new BorderLayout());
         ProfileDisplay();
     }

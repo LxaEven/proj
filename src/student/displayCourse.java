@@ -5,14 +5,15 @@ import java.awt.event.*;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.*;
+
+import login.MainPanel;
 import main.*;
 
 public class displayCourse extends JPanel{
     GridBagConstraints gbc = new GridBagConstraints();
     MainPanel mainPanel = new MainPanel();
 
-    public displayCourse(MainPanel mainPanel){
-        this.mainPanel = mainPanel;
+    public displayCourse(JPanel mainPanel){
         setLayout(new BorderLayout());
         CourseDisplay();
     }

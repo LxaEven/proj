@@ -3,8 +3,8 @@ import java.sql.*;
 import javax.swing.*;
 import com.formdev.flatlaf.*;
 
+import login.MainPanel;
 import main.DBConnect;
-import main.MainPanel;
 
 import java.awt.*;
 import java.awt.event.*;

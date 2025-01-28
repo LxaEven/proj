@@ -2,8 +2,8 @@ package fail_code;
 
 import javax.swing.*;
 
+import login.MainPanel;
 import main.DBConnect;
-import main.MainPanel;
 
 import java.awt.*;
 import java.awt.event.*;

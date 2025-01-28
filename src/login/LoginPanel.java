@@ -3,6 +3,8 @@ package login;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import main.*;
+import student.studentFrame;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
@@ -127,7 +129,10 @@ public class LoginPanel extends JPanel {
 
             if (authenticateUser(identifier, password)) {
                 JOptionPane.showMessageDialog(LoginPanel.this, "Login successfully");
-                mainPanel.showScreen("student");
+                LoginPanel.this.setVisible(false);
+                studentFrame studentFrame = new studentFrame();
+                studentFrame.setVisible(true);
+
                 clearFields();
             } else {
                 JOptionPane.showMessageDialog(LoginPanel.this, "Invalid Email/Phone Number or password.", "Error",

@@ -1,4 +1,4 @@
-package main;
+package login;
 import javax.swing.*;
 
 import com.formdev.flatlaf.FlatLightLaf;

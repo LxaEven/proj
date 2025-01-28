@@ -1,6 +1,9 @@
 package main;
 import javax.swing.*;
 
+import adminsrc.Main;
+import login.MainPanel;
+
 
 
 public class project_i3 extends JFrame {
@@ -16,5 +19,11 @@ public class project_i3 extends JFrame {
         frame.setVisible(true);
         
 
+    }
+
+    public void showLoginScreen() {
+        // TODO Auto-generated method stub
+        MainPanel mainPanel = new MainPanel();
+        mainPanel.showScreen("loginScreen");
     }
 } 

@@ -11,8 +11,7 @@ import main.*;
 public class NewPassword extends JPanel {
     private MainPanel mainPanel;
     GridBagConstraints gbc = new GridBagConstraints();
-    public NewPassword(MainPanel mainPanel) {
-        this.mainPanel = mainPanel;
+    public NewPassword(JPanel mainPanel) {
         setLayout(new BorderLayout());
         newPassword();
     }
