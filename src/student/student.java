@@ -1,22 +1,27 @@
 package student;
+
 import javax.swing.*;
 
-import login.LoginPanel;
 import login.MainPanel;
-import main.project_i3;
 
 import java.awt.*;
 import java.awt.event.*;
 
-public class student extends JPanel {
+public class student extends JFrame {
 
     private displayProfile currentProfilePanel; 
     private DisplayScore studentScorePanel;
     private displayCourse studentCoursePanel;
     private NewPassword ChangeNewPassword;
     public JButton ViewProfile, ViewScore, ViewCourse, ChangePassword;
-    
-    public student(JPanel mainPanel){
+    private JPanel Panel;
+    public student(){
+        setTitle("Student Management System");
+        setSize(1500, 800);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
+        setLocationRelativeTo(null);
+
         setLayout(new BorderLayout());
         setBackground(new Color(173, 216, 230));
 
@@ -30,28 +35,28 @@ public class student extends JPanel {
         ViewProfile.setFont(new Font("Arial", Font.BOLD, 15));
         ViewProfile.setPreferredSize(new Dimension(200, 40));
         ViewProfile.setFocusPainted(false);
-        ViewProfile.addActionListener(e -> updateProfilePanel(mainPanel));
+        ViewProfile.addActionListener(e -> updateProfilePanel(Panel));
 
 
         ViewScore = new JButton("View Score");
         ViewScore.setFont(new Font("Arial", Font.BOLD, 15));
         ViewScore.setPreferredSize(new Dimension(200, 40));
         ViewScore.setFocusPainted(false);
-        ViewScore.addActionListener(e->showStudentScorePanel(mainPanel));
+        ViewScore.addActionListener(e->showStudentScorePanel(Panel));
 
 
         ViewCourse = new JButton("View Course");
         ViewCourse.setFont(new Font("Arial", Font.BOLD, 15));
         ViewCourse.setPreferredSize(new Dimension(200, 40));
         ViewCourse.setFocusPainted(false);
-        ViewCourse.addActionListener(e -> showStudentCoursePanel(mainPanel));
+        ViewCourse.addActionListener(e -> showStudentCoursePanel(Panel));
 
 
         ChangePassword = new JButton("Change Password");
         ChangePassword.setFont(new Font("Arial", Font.BOLD, 15));
         ChangePassword.setPreferredSize(new Dimension(200, 40));
         ChangePassword.setFocusPainted(false);
-        ChangePassword.addActionListener(e -> ChangePassword(mainPanel));
+        ChangePassword.addActionListener(e -> ChangePassword(Panel));
 
         JButton[] buttons = {ViewProfile, ViewScore, ViewCourse, ChangePassword};
         ActionListener buttonListener = new ActionListener() {
@@ -85,11 +90,9 @@ public class student extends JPanel {
                 );
                 
                 if (response == JOptionPane.YES_OPTION) {
-                    student.this.setVisible(false);
-                    project_i3 project = new project_i3();
-                    project.showLoginScreen();
-                    project.setVisible(true);
-
+                    MainPanel mainPanel = new MainPanel();
+                    mainPanel.setVisible(true);
+                    setVisible(false);
                     clearMainContent();
                     clearColor();
                 } else {
@@ -113,8 +116,6 @@ public class student extends JPanel {
                 );
                 
                 if (response == JOptionPane.NO_OPTION) {
-                    CardLayout c4 = (CardLayout) mainPanel.getLayout();
-                    c4.show(mainPanel, "student");
                 } else {
                     System.out.println("Program ended");
                     System.exit(0);
@@ -166,33 +167,33 @@ public class student extends JPanel {
     
     }
 
-    private void updateProfilePanel(JPanel mainPanel) {
+    private void updateProfilePanel(JPanel Panel) {
             clearMainContent(); 
-            currentProfilePanel = new displayProfile(mainPanel); 
+            currentProfilePanel = new displayProfile(Panel); 
         add(currentProfilePanel, BorderLayout.CENTER);
         revalidate();
         repaint();
     }
     
-    private void showStudentScorePanel(JPanel mainPanel) {
+    private void showStudentScorePanel(JPanel Panel) {
             clearMainContent();
-            studentScorePanel = new DisplayScore(mainPanel);
+            studentScorePanel = new DisplayScore(Panel);
         add(studentScorePanel, BorderLayout.CENTER);
         revalidate();
         repaint();
     }
 
-    private void showStudentCoursePanel(JPanel mainPanel){
+    private void showStudentCoursePanel(JPanel Panel){
             clearMainContent();
-            studentCoursePanel = new displayCourse(mainPanel);
+            studentCoursePanel = new displayCourse(Panel);
         add(studentCoursePanel, BorderLayout.CENTER);
         revalidate();
         repaint();
     }
 
-    private void ChangePassword(JPanel mainPanel) {
+    private void ChangePassword(JPanel Panel) {
             clearMainContent();
-            ChangeNewPassword = new NewPassword(mainPanel);
+            ChangeNewPassword = new NewPassword(Panel);
         add(ChangeNewPassword, BorderLayout.CENTER);
         revalidate();
         repaint();

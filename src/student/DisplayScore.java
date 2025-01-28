@@ -10,7 +10,7 @@ import login.MainPanel;
 import main.*;
 
 public class DisplayScore extends JPanel {
-    private MainPanel mainPanel;
+    private JPanel Panel;
     private GridBagConstraints gbc = new GridBagConstraints();
 
     public DisplayScore(JPanel mainPanel) {
@@ -59,7 +59,7 @@ public class DisplayScore extends JPanel {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(mainPanel, "Error: " + e.getMessage());
+            JOptionPane.showMessageDialog(Panel, "Error: " + e.getMessage());
         }
 
         

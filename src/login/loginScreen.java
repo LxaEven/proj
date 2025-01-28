@@ -1,7 +1,5 @@
-package main;
+package login;
 import javax.swing.*;
-
-import login.MainPanel;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -13,7 +11,7 @@ public class loginScreen extends JPanel {
 
         setLayout(new BorderLayout());
         ImageIcon imageIcon = new ImageIcon("image\\logo.jpg");
-        Image resizedImage = imageIcon.getImage().getScaledInstance(300, 300, Image.SCALE_SMOOTH);
+        Image resizedImage = imageIcon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(resizedImage);
         JLabel logoLabel = new JLabel(resizedIcon);
 
@@ -63,8 +61,6 @@ public class loginScreen extends JPanel {
                 );
                 
                 if (response == JOptionPane.NO_OPTION) {
-                    CardLayout c4 = (CardLayout) mainPanel.getLayout();
-                    c4.show(mainPanel, "login");
                 } else {
                     System.exit(0);
                 }
@@ -92,7 +88,7 @@ public class loginScreen extends JPanel {
 
         JPanel LogoPanel = new JPanel(new GridBagLayout());
         LogoPanel.setBackground(Color.CYAN);
-        LogoPanel.setPreferredSize(new Dimension(400, 200));
+        LogoPanel.setPreferredSize(new Dimension(200, 0));
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridx = 0;
         gbc.gridy = 0;

@@ -8,7 +8,7 @@ import login.MainPanel;
 import main.*;
 
 
-public final class JFrame1 extends JPanel{
+public final class JFrame1 extends JFrame{
     private Connection connection;
 
     private JPanel mainPanel;
@@ -53,7 +53,7 @@ public final class JFrame1 extends JPanel{
     private JMenuItem exitMenu;
 
 
-    public JFrame1(MainPanel mainPanel) {
+    public JFrame1() {
         initializeDatabaseConnection();
         initialize();
     }
@@ -69,11 +69,11 @@ public final class JFrame1 extends JPanel{
     }
  
     public void initialize() {
-        // setTitle("Admin");
-        // setSize(1080, 1080);
-        // setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        // setLayout(new BorderLayout());
-        // setLocationRelativeTo(null);
+        setTitle("Admin");
+        setSize(1080, 1080);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLayout(new BorderLayout());
+        setLocationRelativeTo(null);
 
 
         mainPanel = new JPanel(new BorderLayout());

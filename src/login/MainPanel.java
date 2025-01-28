@@ -1,38 +1,46 @@
 package login;
 
 import javax.swing.*;
-import main.*;
+
 import java.awt.*;
 import java.util.Random;
 
-public class MainPanel extends JPanel {
+public class MainPanel extends JFrame {
     public static String loginUserIdentifier;
     public static String loginUserPassword;
     private CardLayout cardLayout;
+    private JPanel mainPanel; // Container for card layout
     private static String verificationCode;
     private static String userEmailOrPhoneNumber;
 
     public MainPanel() {
+        // Set JFrame properties
+        setTitle("Login System");
+        setSize(800, 500);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
+        setLocationRelativeTo(null);
+
+        // Initialize CardLayout and main panel
         cardLayout = new CardLayout();
-        setLayout(cardLayout);
+        mainPanel = new JPanel(cardLayout);
 
-        add(new startPanel(this), "start");
-        add(new loginScreen(this), "loginScreen");
-        
-        add(new LoginPanel(this), "Login");
-        add(new AdminLogin(this), "AdminLogin");
-        add(new ForgotPasswordPanel(this), "ForgotPassword");
-        add(new VerificationPanel(this), "Verification");
-        add(new ResetPasswordPanel(this), "ResetPassword");
-        // Remove the package declaration at the top of the file
+        // Add panels to the main panel
+        mainPanel.add(new loginScreen(this), "loginScreen");
+        mainPanel.add(new LoginPanel(this), "Login");
+        mainPanel.add(new AdminLogin(this), "AdminLogin");
+        mainPanel.add(new ForgotPasswordPanel(this), "ForgotPassword");
+        mainPanel.add(new VerificationPanel(this), "Verification");
+        mainPanel.add(new ResetPasswordPanel(this), "ResetPassword");
 
-        // Show the login screen by default
-        showScreen("start");
+        add(mainPanel);
+
+        showScreen("loginScreen");
     }
 
     public void showScreen(String screenName) {
-        // Show the specified screen in the card layout
-        cardLayout.show(this, screenName);
+        
+        cardLayout.show(mainPanel, screenName);
     }
 
     public static String generateVerificationCode() {
@@ -56,5 +64,6 @@ public class MainPanel extends JPanel {
     public static String getUserEmailOrId() {
         return userEmailOrPhoneNumber;
     }
+
 
 }

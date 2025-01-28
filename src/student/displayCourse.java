@@ -5,15 +5,13 @@ import java.awt.event.*;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.*;
-
-import login.MainPanel;
 import main.*;
 
 public class displayCourse extends JPanel{
     GridBagConstraints gbc = new GridBagConstraints();
-    MainPanel mainPanel = new MainPanel();
+    JPanel Panel;
 
-    public displayCourse(JPanel mainPanel){
+    public displayCourse(JPanel Panel){
         setLayout(new BorderLayout());
         CourseDisplay();
     }
@@ -54,7 +52,7 @@ public class displayCourse extends JPanel{
 
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(mainPanel, "Error: " + e.getMessage());
+            JOptionPane.showMessageDialog(Panel, "Error: " + e.getMessage());
         }
 
         

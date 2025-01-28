@@ -10,7 +10,7 @@ public class ResetPasswordPanel extends JPanel {
         setBackground(new Color(173, 216, 230));
 
         ImageIcon imageIcon = new ImageIcon("image\\logo.jpg");
-        Image resizedImage = imageIcon.getImage().getScaledInstance(300, 300, Image.SCALE_SMOOTH);
+        Image resizedImage = imageIcon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(resizedImage);
         JLabel logoLabel = new JLabel(resizedIcon);
 
@@ -71,7 +71,7 @@ public class ResetPasswordPanel extends JPanel {
 
         JPanel LogoPanel = new JPanel(new GridBagLayout());
         LogoPanel.setBackground(Color.CYAN);
-        LogoPanel.setPreferredSize(new Dimension(400, 200));
+        LogoPanel.setPreferredSize(new Dimension(200, 0));
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.gridx = 0;

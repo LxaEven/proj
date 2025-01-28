@@ -2,9 +2,9 @@ package login;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-import main.*;
-import student.studentFrame;
 
+import main.*;
+import student.student;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
@@ -12,10 +12,10 @@ import java.sql.*;
 public class LoginPanel extends JPanel {
     private static String identifier;
     private static String password;
-
     public JTextField emailField;
     public JPasswordField passwordField;
-    private MainPanel mainPanel;
+    MainPanel mainPanel;
+    student studentFrame = new student();
 
     public LoginPanel(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
@@ -24,7 +24,7 @@ public class LoginPanel extends JPanel {
 
         // Logo setup
         ImageIcon imageIcon = new ImageIcon("image\\logo.jpg");
-        Image resizedImage = imageIcon.getImage().getScaledInstance(300, 300, Image.SCALE_SMOOTH);
+        Image resizedImage = imageIcon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(resizedImage);
         JLabel logoLabel = new JLabel(resizedIcon);
 
@@ -90,7 +90,7 @@ public class LoginPanel extends JPanel {
         // Logo panel
         JPanel logoPanel = new JPanel(new GridBagLayout());
         logoPanel.setBackground(new Color(135, 206, 250)); // Light Sky Blue
-        logoPanel.setPreferredSize(new Dimension(400, 200));
+        logoPanel.setPreferredSize(new Dimension(200, 0));
         logoPanel.add(logoLabel);
 
         add(inputPanel, BorderLayout.CENTER);
@@ -129,10 +129,9 @@ public class LoginPanel extends JPanel {
 
             if (authenticateUser(identifier, password)) {
                 JOptionPane.showMessageDialog(LoginPanel.this, "Login successfully");
-                LoginPanel.this.setVisible(false);
-                studentFrame studentFrame = new studentFrame();
+                
                 studentFrame.setVisible(true);
-
+                mainPanel.setVisible(false);
                 clearFields();
             } else {
                 JOptionPane.showMessageDialog(LoginPanel.this, "Invalid Email/Phone Number or password.", "Error",

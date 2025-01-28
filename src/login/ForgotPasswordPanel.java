@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class ForgotPasswordPanel extends JPanel {
 
     private MainPanel mainPanel;
-    private JLabel logoLabel = createLogoLabel("image/logo.jpg", 300, 300); // Portable image path
+    private JLabel logoLabel = createLogoLabel("image/logo.jpg", 150, 150); // Portable image path
     private JLabel instructionLabel = createInstructionLabel();
     private JTextField emailField = createEmailField();
     private JPanel buttonPanel;
@@ -40,7 +40,7 @@ public class ForgotPasswordPanel extends JPanel {
         // Assemble logo panel
         JPanel logoPanel = new JPanel(new GridBagLayout());
         logoPanel.setBackground(Color.CYAN);
-        logoPanel.setPreferredSize(new Dimension(400, 200));
+        logoPanel.setPreferredSize(new Dimension(200, 0));
         GridBagConstraints logoGbc = new GridBagConstraints();
         logoGbc.gridx = 0;
         logoGbc.gridy = 0;

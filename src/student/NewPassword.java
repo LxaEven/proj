@@ -9,9 +9,9 @@ import login.*;
 import main.*;
 
 public class NewPassword extends JPanel {
-    private MainPanel mainPanel;
+    private JPanel Panel;
     GridBagConstraints gbc = new GridBagConstraints();
-    public NewPassword(JPanel mainPanel) {
+    public NewPassword(JPanel Panel) {
         setLayout(new BorderLayout());
         newPassword();
     }
@@ -65,10 +65,10 @@ public class NewPassword extends JPanel {
                 String confirmPassword = new String(confirmPasswordField.getPassword());
 
                 if (!newPassword.equals(confirmPassword)) {
-                    JOptionPane.showMessageDialog(mainPanel, "New passwords do not match.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(Panel, "New passwords do not match.", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }if(newPassword.isEmpty() || confirmPassword.isEmpty() || oldPassword.isEmpty()){
-                    JOptionPane.showMessageDialog(mainPanel, "Please fill all the fields.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(Panel, "Please fill all the fields.", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
@@ -88,18 +88,17 @@ public class NewPassword extends JPanel {
                         updateStmt.setString(3, identifier);
                         updateStmt.executeUpdate();
 
-                        JOptionPane.showMessageDialog(mainPanel, "Password changed successfully.\nPlease login again.", "Sucess", JOptionPane.INFORMATION_MESSAGE);
-                        student studentPanel = (student) mainPanel.getComponent(2);
-                        
-                        studentPanel.clearMainContent();
-                        studentPanel.clearColor();
-                        mainPanel.showScreen("Login");
+                        JOptionPane.showMessageDialog(Panel, "Password changed successfully.\nPlease login again.", "Sucess", JOptionPane.INFORMATION_MESSAGE);
+                        MainPanel mainPanel = new MainPanel();
+                        student studentFrame = new student();
+                        mainPanel.setVisible(true);
+                        studentFrame.setVisible(false);
                     } else {
-                        JOptionPane.showMessageDialog(mainPanel, "Old password is incorrect.", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(Panel, "Old password is incorrect.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (SQLException ex) {
                     ex.printStackTrace();
-                    JOptionPane.showMessageDialog(mainPanel, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(Panel, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
