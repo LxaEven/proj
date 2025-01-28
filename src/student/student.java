@@ -56,7 +56,7 @@ public class student extends JFrame {
         ChangePassword.setFont(new Font("Arial", Font.BOLD, 15));
         ChangePassword.setPreferredSize(new Dimension(200, 40));
         ChangePassword.setFocusPainted(false);
-        ChangePassword.addActionListener(e -> ChangePassword(Panel));
+        ChangePassword.addActionListener(e -> ChangePassword(Panel, this));
 
         JButton[] buttons = {ViewProfile, ViewScore, ViewCourse, ChangePassword};
         ActionListener buttonListener = new ActionListener() {
@@ -191,9 +191,9 @@ public class student extends JFrame {
         repaint();
     }
 
-    private void ChangePassword(JPanel Panel) {
+    private void ChangePassword(JPanel Panel, student studentFrame) {
             clearMainContent();
-            ChangeNewPassword = new NewPassword(Panel);
+            ChangeNewPassword = new NewPassword(Panel, this);
         add(ChangeNewPassword, BorderLayout.CENTER);
         revalidate();
         repaint();

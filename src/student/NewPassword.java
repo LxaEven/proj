@@ -10,8 +10,10 @@ import main.*;
 
 public class NewPassword extends JPanel {
     private JPanel Panel;
+    private student studentFrame;
     GridBagConstraints gbc = new GridBagConstraints();
-    public NewPassword(JPanel Panel) {
+    public NewPassword(JPanel Panel, student studentFrame) {
+        this.studentFrame = studentFrame;
         setLayout(new BorderLayout());
         newPassword();
     }
@@ -90,7 +92,6 @@ public class NewPassword extends JPanel {
 
                         JOptionPane.showMessageDialog(Panel, "Password changed successfully.\nPlease login again.", "Sucess", JOptionPane.INFORMATION_MESSAGE);
                         MainPanel mainPanel = new MainPanel();
-                        student studentFrame = new student();
                         mainPanel.setVisible(true);
                         studentFrame.setVisible(false);
                     } else {

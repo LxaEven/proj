@@ -19,7 +19,7 @@ public class LoginPanel extends JPanel {
 
     public LoginPanel(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
-        setLayout(new BorderLayout(20, 20));
+        setLayout(new BorderLayout());
         setBackground(new Color(135, 206, 235)); // Sky Blue background
 
         // Logo setup
@@ -89,7 +89,7 @@ public class LoginPanel extends JPanel {
 
         // Logo panel
         JPanel logoPanel = new JPanel(new GridBagLayout());
-        logoPanel.setBackground(new Color(135, 206, 250)); // Light Sky Blue
+        logoPanel.setBackground(Color.CYAN);
         logoPanel.setPreferredSize(new Dimension(200, 0));
         logoPanel.add(logoLabel);
 

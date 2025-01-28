@@ -2,6 +2,8 @@ package login;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+
+import adminsrc.JFrame1;
 import main.*;
 
 import java.awt.*;
@@ -22,7 +24,7 @@ public class AdminLogin extends JPanel {
         setBackground(new Color(173, 216, 230)); // Light Blue background
 
         ImageIcon imageIcon = new ImageIcon("image\\logo.jpg");
-        Image resizedImage = imageIcon.getImage().getScaledInstance(300, 300, Image.SCALE_SMOOTH);
+        Image resizedImage = imageIcon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(resizedImage);
         JLabel logoLabel = new JLabel(resizedIcon);
 
@@ -92,7 +94,7 @@ public class AdminLogin extends JPanel {
 
         JPanel LogoPanel = new JPanel(new GridBagLayout());
         LogoPanel.setBackground(Color.CYAN);
-        LogoPanel.setPreferredSize(new Dimension(400, 200));
+        LogoPanel.setPreferredSize(new Dimension(200, 0));
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.gridx = 0;
@@ -126,7 +128,9 @@ public class AdminLogin extends JPanel {
 
             if (authenticateUser(identifier, password)) {
                 JOptionPane.showMessageDialog(AdminLogin.this, "Login successfully");
-                mainPanel.showScreen("admin");
+                JFrame1 frame1 = new JFrame1();
+                frame1.setVisible(true);
+                mainPanel.setVisible(false);
                 
             } else {
                 JOptionPane.showMessageDialog(AdminLogin.this, "Invalid Email/Phone Number or password.", "Error", JOptionPane.ERROR_MESSAGE);
