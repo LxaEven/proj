@@ -19,7 +19,7 @@ public class student extends JFrame {
         setTitle("Student Management System");
         setSize(1500, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
+        setResizable(true);
         setLocationRelativeTo(null);
 
         setLayout(new BorderLayout());
