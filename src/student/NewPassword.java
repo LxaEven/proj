@@ -92,6 +92,7 @@ public class NewPassword extends JPanel {
 
                         JOptionPane.showMessageDialog(Panel, "Password changed successfully.\nPlease login again.", "Sucess", JOptionPane.INFORMATION_MESSAGE);
                         MainPanel mainPanel = new MainPanel();
+                        mainPanel.showScreen("Login");
                         mainPanel.setVisible(true);
                         studentFrame.setVisible(false);
                     } else {

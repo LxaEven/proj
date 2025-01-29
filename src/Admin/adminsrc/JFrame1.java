@@ -1,5 +1,7 @@
 package adminsrc;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -48,8 +50,6 @@ public final class JFrame1 extends JFrame{
 
     //setting
     private JMenu settingMenu;
-    private JMenuItem darkMenu;
-    private JMenuItem lightMenu;
     private JMenuItem exitMenu;
 
 
@@ -134,6 +134,21 @@ public final class JFrame1 extends JFrame{
         newMenuItem.addActionListener(e -> cardLayout.show(midPanel, "Home"));
         saveMenuItem = new JMenuItem("Save");
         logOutMenuItem = new JMenuItem("Log out");
+        logOutMenuItem.addActionListener(e -> {
+            int response = JOptionPane.showConfirmDialog(
+                null, 
+                "Do you want to Log out?", 
+                "Log out", 
+                JOptionPane.YES_NO_OPTION
+            );
+            
+            if (response == JOptionPane.NO_OPTION) {
+            } else {
+                MainPanel mainPanel = new MainPanel();
+                mainPanel.setVisible(true);
+                dispose();
+            }
+        });
 
         // Student
         studentMenu =  new JMenu("Student");
@@ -168,9 +183,23 @@ public final class JFrame1 extends JFrame{
         settingMenu =  new JMenu("Setting");
         ImageIcon settingIcon = new ImageIcon("image/course.png");
         settingMenu.setIcon(settingIcon);
-        darkMenu = new JMenuItem("Dark mode");
-        lightMenu = new JMenuItem("Light mode");
         exitMenu = new JMenuItem("Exit");
+        exitMenu.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int response = JOptionPane.showConfirmDialog(
+                    null, 
+                    "Do you want to Exit the program?", 
+                    "Exit the program", 
+                    JOptionPane.YES_NO_OPTION
+                );
+                
+                if (response == JOptionPane.NO_OPTION) {
+                } else {
+                    System.out.println("Program ended");
+                    System.exit(0);
+                }
+            }
+        });
 
 
         JMenuItem[] item = {homeMenu, studentMenu, newMenuItem, courseMenu, saveMenuItem, logOutMenuItem, viewStudent, addStudent, updateStudent, deleteStudent,viewCourse, updateCourse, addCourse, deleteCourse};
@@ -197,8 +226,6 @@ public final class JFrame1 extends JFrame{
         courseMenu.add(updateCourse);
         courseMenu.add(deleteCourse);
 
-        settingMenu.add(darkMenu);
-        settingMenu.add(lightMenu);
         settingMenu.add(exitMenu);
 
         menuBar.add(homeMenu);
