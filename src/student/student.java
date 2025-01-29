@@ -18,7 +18,7 @@ public class student extends JFrame {
     private JPanel Panel;
     public student(){
         setTitle("Student");
-        setSize(1500, 800);
+        setSize(1300, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
         setLocationRelativeTo(null);
