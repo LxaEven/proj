@@ -17,7 +17,7 @@ public class student extends JFrame {
     public JButton ViewProfile, ViewScore, ViewCourse, ChangePassword;
     private JPanel Panel;
     public student(){
-        setTitle("Student Management System");
+        setTitle("Student");
         setSize(1500, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
