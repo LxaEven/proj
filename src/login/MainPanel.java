@@ -2,6 +2,8 @@ package login;
 
 import javax.swing.*;
 
+import com.formdev.flatlaf.*;
+
 import java.awt.*;
 import java.util.Random;
 
@@ -9,7 +11,7 @@ public class MainPanel extends JFrame {
     public static String loginUserIdentifier;
     public static String loginUserPassword;
     private CardLayout cardLayout;
-    private JPanel mainPanel; // Container for card layout
+    private JPanel mainPanel;
     private static String verificationCode;
     private static String userEmailOrPhoneNumber;
 
@@ -20,6 +22,11 @@ public class MainPanel extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
+        try {
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
 
         // Initialize CardLayout and main panel
         cardLayout = new CardLayout();

@@ -3,6 +3,7 @@ package student;
 import javax.swing.*;
 
 import login.MainPanel;
+import com.formdev.flatlaf.*;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -21,9 +22,13 @@ public class student extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
         setLocationRelativeTo(null);
+        try {
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
 
         setLayout(new BorderLayout());
-        setBackground(new Color(173, 216, 230));
 
         ImageIcon imageIcon = new ImageIcon("image//logo.jpg");
         Image resizedImage = imageIcon.getImage().getScaledInstance(160, 160, Image.SCALE_SMOOTH);
@@ -64,10 +69,8 @@ public class student extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 for (JButton button : buttons) {
                     button.setBackground(Color.WHITE);
-                    button.setForeground(Color.BLACK);
                 }
-                ((JButton) e.getSource()).setBackground(new Color(173, 216, 230));
-                ((JButton) e.getSource()).setForeground(new Color(82, 39, 25));
+                ((JButton) e.getSource()).setBackground(Color.CYAN);
             }
         };
 

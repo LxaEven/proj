@@ -12,6 +12,5 @@ public class project_i3 extends JFrame {
         MainPanel mainPanel = new MainPanel();
         mainPanel.setVisible(true);
         
-
     }
 } 

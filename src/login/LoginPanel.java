@@ -107,9 +107,7 @@ public class LoginPanel extends JPanel {
         button.setPreferredSize(new Dimension(200, 50));
         button.setFont(new Font("Arial", Font.PLAIN, 18));
         button.setBackground(backgroundColor);
-        button.setForeground(Color.WHITE);
         button.setFocusPainted(false);
-        button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
         return button;
     }
 

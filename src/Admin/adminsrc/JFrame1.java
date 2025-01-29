@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import com.formdev.flatlaf.*;
 
 import login.MainPanel;
 import main.*;
@@ -74,6 +75,11 @@ public final class JFrame1 extends JFrame{
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
         setLocationRelativeTo(null);
+        try {
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
 
 
         mainPanel = new JPanel(new BorderLayout());
