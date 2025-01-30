@@ -23,21 +23,20 @@ public class displayCourse extends JPanel{
             }
         };
 
-        // Table Setup
-        DefaultTableModel tableModel = new DefaultTableModel();
-        tableModel.addColumn("subject_ID");
-        tableModel.addColumn("subject");
-        tableModel.addColumn("hour/week");
-        tableModel.addColumn("hour/semester");
-
-        JTable CourseTable = new JTable(tableModel);
+        JTable CourseTable = new JTable(CourseTableModel);
         
         try (Connection conn = main.DBConnect.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT * FROM `course`")) {
+            
+            DefaultTableModel tableModel = new DefaultTableModel();
+            CourseTableModel.addColumn("subject_ID");
+            CourseTableModel.addColumn("subject");
+            CourseTableModel.addColumn("hour/week");
+            CourseTableModel.addColumn("hour/semester");
 
             while (rs.next()) {
-                tableModel.addRow(new Object[]{
+                CourseTableModel.addRow(new Object[]{
                     rs.getString("subject_ID"),
                     rs.getString("subject"),
                     rs.getString("hour_per_week"),
@@ -63,8 +62,8 @@ public class displayCourse extends JPanel{
         }
         CourseTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
-        TableRowSorter<DefaultTableModel> rowSorter = new TableRowSorter<>(tableModel);
-        CourseTable.setRowSorter(rowSorter);
+        TableRowSorter<DefaultTableModel> rowSorter = new TableRowSorter<>(CourseTableModel);
+        CourseTable.setRowSorter(rowSorter); 
         CourseTable.setBackground(new Color(173, 216, 230));
         CourseTable.setFillsViewportHeight(true);
 
