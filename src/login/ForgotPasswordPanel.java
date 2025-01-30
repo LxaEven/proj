@@ -123,7 +123,7 @@ public class ForgotPasswordPanel extends JPanel {
         MainPanel.setVerificationCode(verificationCode);
         MainPanel.setUserEmailOrId(email);
 
-        showMessage("Verification code sent to " + email + ": " + verificationCode, "Info",
+        JOptionPane.showMessageDialog(mainPanel, "Verification code sent to " + email + ": " + verificationCode, "Info",
                 JOptionPane.INFORMATION_MESSAGE);
         mainPanel.showScreen("Verification");
     }

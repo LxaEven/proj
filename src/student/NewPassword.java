@@ -62,9 +62,9 @@ public class NewPassword extends JPanel {
         submitButton.setBackground(new Color(144, 238, 144));
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String oldPassword = new String(oldPasswordField.getPassword());
-                String newPassword = new String(newPasswordField.getPassword());
-                String confirmPassword = new String(confirmPasswordField.getPassword());
+                String oldPassword = new String(oldPasswordField.getPassword()).trim();
+                String newPassword = new String(newPasswordField.getPassword()).trim();
+                String confirmPassword = new String(confirmPasswordField.getPassword()).trim();
 
                 if (!newPassword.equals(confirmPassword)) {
                     JOptionPane.showMessageDialog(Panel, "New passwords do not match.", "Error", JOptionPane.ERROR_MESSAGE);
