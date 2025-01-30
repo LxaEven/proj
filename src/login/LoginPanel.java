@@ -1,13 +1,11 @@
 package login;
 
-import javax.swing.*;
-import javax.swing.border.TitledBorder;
-
-import main.*;
-import student.student;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
+import student.student;
 
 public class LoginPanel extends JPanel {
     private static String identifier;
@@ -23,7 +21,7 @@ public class LoginPanel extends JPanel {
         setBackground(new Color(135, 206, 235)); // Sky Blue background
 
         // Logo setup
-        ImageIcon imageIcon = new ImageIcon("image\\logo.jpg");
+        ImageIcon imageIcon = new ImageIcon("Icon/Logo.png");
         Image resizedImage = imageIcon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(resizedImage);
         JLabel logoLabel = new JLabel(resizedIcon);
@@ -141,7 +139,7 @@ public class LoginPanel extends JPanel {
     private boolean authenticateUser(String identifier, String password) {
         String query = "SELECT * FROM student WHERE (student_email = ? OR phone_number = ?) AND student_password = ?";
 
-        try (Connection conn = DBConnect.getConnection();
+        try (Connection conn = main.DBConnect.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, identifier);

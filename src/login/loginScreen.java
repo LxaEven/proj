@@ -1,8 +1,7 @@
 package login;
-import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
 
 
 public class loginScreen extends JPanel {
@@ -10,7 +9,7 @@ public class loginScreen extends JPanel {
     public loginScreen(MainPanel mainPanel) {
 
         setLayout(new BorderLayout());
-        ImageIcon imageIcon = new ImageIcon("image\\logo.jpg");
+        ImageIcon imageIcon = new ImageIcon("Icon/Logo.png");
         Image resizedImage = imageIcon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(resizedImage);
         JLabel logoLabel = new JLabel(resizedIcon);

@@ -2,8 +2,8 @@ package student;
 
 import javax.swing.*;
 
-import login.MainPanel;
-import com.formdev.flatlaf.*;
+import login.*;
+import com.formdev.flatlaf.FlatLightLaf;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -16,7 +16,7 @@ public class student extends JFrame {
     private NewPassword ChangeNewPassword;
     public JButton ViewProfile, ViewScore, ViewCourse, ChangePassword;
     private JPanel Panel;
-    public student() {
+    public student(){
         setTitle("Student");
         setSize(1300, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,13 +24,13 @@ public class student extends JFrame {
         setLocationRelativeTo(null);
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
-        } catch (UnsupportedLookAndFeelException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         setLayout(new BorderLayout());
 
-        ImageIcon imageIcon = new ImageIcon("image//logo.jpg");
+        ImageIcon imageIcon = new ImageIcon("Icon/Logo.png");
         Image resizedImage = imageIcon.getImage().getScaledInstance(160, 160, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(resizedImage);
         JLabel logoLabel = new JLabel(resizedIcon);

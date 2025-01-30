@@ -1,4 +1,4 @@
-package adminsrc;
+package Adminsrc;
 import java.awt.*;
 import java.sql.*;
 import javax.swing.*;
@@ -43,10 +43,10 @@ public class Home extends JPanel {
         int totalDepartments = getDepartmentCount();
 
         // Recreate dashboard panels with updated data
-        panel.add(createPanel("Students", totalStudents, "image/student_total.png"));
-        panel.add(createPanel("Females", totalFemales, "image/Female.png"));
-        panel.add(createPanel("Courses", totalCourses, "image/courses.png"));
-        panel.add(createPanel("Departments", totalDepartments, "image/department.png"));
+        panel.add(createPanel("Students", totalStudents, "D:/Assignments/I3/Testing/JDBC/Admin/src/Icon/student_total.png"));
+        panel.add(createPanel("Females", totalFemales, "D:/Assignments/I3/Testing/JDBC/Admin/src/Icon/Female.png"));
+        panel.add(createPanel("Courses", totalCourses, "D:/Assignments/I3/Testing/JDBC/Admin/src/Icon/courses.png"));
+        panel.add(createPanel("Departments", totalDepartments, "D:/Assignments/I3/Testing/JDBC/Admin/src/Icon/department.png"));
 
         panel.revalidate(); // Recalculate layout
         panel.repaint();   // Refresh the UI
@@ -74,16 +74,10 @@ public class Home extends JPanel {
         IconLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
         IconLabel.setIcon(new ImageIcon(img));
 
-        JButton moreInfoButton = new JButton("More info");
-        moreInfoButton.addActionListener(e -> {
-            CardLayout c = (CardLayout) panel.getLayout();
-            c.show(panel, "View");
-        });
 
         panel.add(IconLabel, BorderLayout.EAST);
         panel.add(countLabel, BorderLayout.CENTER);
         panel.add(titleLabel, BorderLayout.NORTH);
-        panel.add(moreInfoButton, BorderLayout.SOUTH);
 
         return panel;
     }

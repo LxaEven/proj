@@ -1,4 +1,4 @@
-package adminsrc;
+package Adminsrc;
 import java.awt.*;
 import java.sql.*;
 import javax.swing.*;

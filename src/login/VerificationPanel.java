@@ -1,14 +1,14 @@
 package login;
+import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-import java.awt.*;
 
 public class VerificationPanel extends JPanel {
     public VerificationPanel(MainPanel mainPanel) {
         setLayout(new BorderLayout(20, 20));
         setBackground(new Color(173, 216, 230));
 
-        ImageIcon imageIcon = new ImageIcon("image\\logo.jpg");
+        ImageIcon imageIcon = new ImageIcon("Icon/Logo.png");
         Image resizedImage = imageIcon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(resizedImage);
         JLabel logoLabel = new JLabel(resizedIcon);

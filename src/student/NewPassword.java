@@ -1,12 +1,11 @@
 package student;
 
 import java.awt.*;
-import java.sql.*;
-import  java.awt.event.*;
+import java.awt.event.*;
+import  java.sql.*;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import login.*;
-import main.*;
 
 public class NewPassword extends JPanel {
     private JPanel Panel;
@@ -62,9 +61,9 @@ public class NewPassword extends JPanel {
         submitButton.setBackground(new Color(144, 238, 144));
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String oldPassword = new String(oldPasswordField.getPassword()).trim();
-                String newPassword = new String(newPasswordField.getPassword()).trim();
-                String confirmPassword = new String(confirmPasswordField.getPassword()).trim();
+                String oldPassword = new String(oldPasswordField.getPassword());
+                String newPassword = new String(newPasswordField.getPassword());
+                String confirmPassword = new String(confirmPasswordField.getPassword());
 
                 if (!newPassword.equals(confirmPassword)) {
                     JOptionPane.showMessageDialog(Panel, "New passwords do not match.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -73,8 +72,16 @@ public class NewPassword extends JPanel {
                     JOptionPane.showMessageDialog(Panel, "Please fill all the fields.", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
+                if(newPassword.length() < 8){
+                    JOptionPane.showMessageDialog(Panel, "Password must be at least 8 characters long.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                if(newPassword.equals(oldPassword)){
+                    JOptionPane.showMessageDialog(Panel, "New password cannot be same as old password.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
-                try (Connection conn = DBConnect.getConnection();
+                try (Connection conn = main.DBConnect.getConnection();
                      PreparedStatement checkStmt = conn.prepareStatement("SELECT * FROM student WHERE (student_email = ? OR phone_number = ?) AND student_password = ?");
                      PreparedStatement updateStmt = conn.prepareStatement("UPDATE student SET student_password = ? WHERE (student_email = ? OR phone_number = ?)")) {
 

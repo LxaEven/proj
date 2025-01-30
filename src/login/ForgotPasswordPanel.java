@@ -1,18 +1,17 @@
 package login;
 
-import javax.swing.*;
-import javax.swing.border.TitledBorder;
-import main.*;
 import java.awt.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
 
 public class ForgotPasswordPanel extends JPanel {
 
     private MainPanel mainPanel;
-    private JLabel logoLabel = createLogoLabel("image/logo.jpg", 150, 150); // Portable image path
+    private JLabel logoLabel = createLogoLabel("Icon/Logo.png", 150, 150); // Portable image path
     private JLabel instructionLabel = createInstructionLabel();
     private JTextField emailField = createEmailField();
     private JPanel buttonPanel;
@@ -123,7 +122,7 @@ public class ForgotPasswordPanel extends JPanel {
         MainPanel.setVerificationCode(verificationCode);
         MainPanel.setUserEmailOrId(email);
 
-        JOptionPane.showMessageDialog(mainPanel, "Verification code sent to " + email + ": " + verificationCode, "Info",
+        showMessage("Verification code sent to " + email + ": " + verificationCode, "Info",
                 JOptionPane.INFORMATION_MESSAGE);
         mainPanel.showScreen("Verification");
     }
@@ -131,7 +130,7 @@ public class ForgotPasswordPanel extends JPanel {
     private boolean isEmailRegistered(String email) {
         String query = "SELECT 1 FROM student WHERE student_email = ? OR phone_number = ?";
 
-        try (Connection conn = DBConnect.getConnection();
+    try (Connection conn = main.DBConnect.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, email);
             stmt.setString(2, email);

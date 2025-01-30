@@ -5,7 +5,6 @@ import java.awt.event.*;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.*;
-import main.*;
 
 public class displayCourse extends JPanel{
     GridBagConstraints gbc = new GridBagConstraints();
@@ -24,31 +23,27 @@ public class displayCourse extends JPanel{
             }
         };
 
-        JTable CourseTable = new JTable(CourseTableModel);
+        // Table Setup
+        DefaultTableModel tableModel = new DefaultTableModel();
+        tableModel.addColumn("subject_ID");
+        tableModel.addColumn("subject");
+        tableModel.addColumn("hour/week");
+        tableModel.addColumn("hour/semester");
 
-        try (Connection conn = DBConnect.getConnection();
+        JTable CourseTable = new JTable(tableModel);
+        
+        try (Connection conn = main.DBConnect.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM course")) {
+             ResultSet rs = stmt.executeQuery("SELECT * FROM `course`")) {
 
-            
-                CourseTableModel.addColumn("No.");
-                CourseTableModel.addColumn("subject");
-                CourseTableModel.addColumn("Hours per Week");
-                CourseTableModel.addColumn("Hours per semester");
-
-            
-                while (rs.next()) {
-                    String subject_ID = rs.getString("subject_ID");
-                    String subject = rs.getString("subject");
-                    int HrsPerWeek = rs.getInt("hour_per_week");
-                    int HrsPerSem = rs.getInt("hour_per_semester");
-                    CourseTableModel.addRow(new Object[]{
-                        subject_ID,
-                        subject,
-                        HrsPerWeek,
-                        HrsPerSem
-                    });
-                }
+            while (rs.next()) {
+                tableModel.addRow(new Object[]{
+                    rs.getString("subject_ID"),
+                    rs.getString("subject"),
+                    rs.getString("hour_per_week"),
+                    rs.getString("hour_per_semester")
+                });
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -68,7 +63,7 @@ public class displayCourse extends JPanel{
         }
         CourseTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
-        TableRowSorter<DefaultTableModel> rowSorter = new TableRowSorter<>(CourseTableModel);
+        TableRowSorter<DefaultTableModel> rowSorter = new TableRowSorter<>(tableModel);
         CourseTable.setRowSorter(rowSorter);
         CourseTable.setBackground(new Color(173, 216, 230));
         CourseTable.setFillsViewportHeight(true);

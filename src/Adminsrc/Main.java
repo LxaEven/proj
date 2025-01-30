@@ -1,8 +1,9 @@
-package adminsrc;
+package Adminsrc;
+
 import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
 
-public class Main {
+public class Main extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -17,8 +18,9 @@ public class Main {
             break;
             }
             }
-            //JFrame1 frame = new JFrame1();
-            //frame.setVisible(true);
+             //MainPanel frame01 = new MainPanel();
+               // frame01.setVisible(true);
+           
 
         });
     }

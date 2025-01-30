@@ -19,19 +19,19 @@ public class displayProfile extends JPanel {
 
     public void ProfileDisplay() {
         JLabel idLabel = new JLabel("Student ID:   ");
-        idLabel.setFont(new Font("Arial", Font.BOLD, 19));
+        idLabel.setFont(new Font("Arial", Font.BOLD, 17));
         JLabel firstnameLabel = new JLabel("Firstname:   ");
-        firstnameLabel.setFont(new Font("Arial", Font.BOLD, 19));
+        firstnameLabel.setFont(new Font("Arial", Font.BOLD, 17));
         JLabel lastnameLabel = new JLabel("Lastname:  ");
-        lastnameLabel.setFont(new Font("Arial", Font.BOLD, 19));
+        lastnameLabel.setFont(new Font("Arial", Font.BOLD, 17));
         JLabel genderLabel = new JLabel("Gender:   ");
-        genderLabel.setFont(new Font("Arial", Font.BOLD, 19));
+        genderLabel.setFont(new Font("Arial", Font.BOLD, 17));
         JLabel birthLabel = new JLabel("Birth:   ");
-        birthLabel.setFont(new Font("Arial", Font.BOLD, 19));
+        birthLabel.setFont(new Font("Arial", Font.BOLD, 17));
         JLabel phoneNumberLabel = new JLabel("Phone Number:   ");
-        phoneNumberLabel.setFont(new Font("Arial", Font.BOLD, 19));
+        phoneNumberLabel.setFont(new Font("Arial", Font.BOLD, 17));
         JLabel emailLabel = new JLabel("Email:   ");
-        emailLabel.setFont(new Font("Arial", Font.BOLD, 19));
+        emailLabel.setFont(new Font("Arial", Font.BOLD, 17));
 
         JPanel profilePanel = new JPanel(new GridBagLayout());
         gbc.insets = new Insets(10, 10, 10, 10);
@@ -69,7 +69,7 @@ public class displayProfile extends JPanel {
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    idLabel.setText("Student ID:     " + String.format("%03d", rs.getInt("student_id")));
+                    idLabel.setText("Student ID:     " + String.format("e2022" + "%03d", rs.getInt("student_id")));
                     firstnameLabel.setText("Firstname:     " + rs.getString("student_firstname"));
                     lastnameLabel.setText("Lastname:     " + rs.getString("student_lastname"));
                     genderLabel.setText("Gender:     " + rs.getString("gender"));

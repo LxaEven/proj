@@ -1,4 +1,4 @@
-package adminsrc;
+package Adminsrc;
 import java.awt.*;
 import java.sql.*;
 import javax.swing.*;
@@ -32,7 +32,7 @@ public class Enroll extends JPanel {
         JTextField txtAddress = new JTextField();
         JTextField txtEmail = new JTextField();
         JTextField txtPhoneNumber = new JTextField();
-        JComboBox<String> cbDepartment = new JComboBox<>(new String[]{"D001", "D002", "D003", "D004", "D005"});
+        JComboBox<String> cbDepartment = new JComboBox<>(new String[]{"D001", "D002", "D003", "D004", "D005", " "});
         JButton btnSubmit = new JButton("Submit");
         btnSubmit.setBackground(Color.green);
 

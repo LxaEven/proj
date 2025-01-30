@@ -1,4 +1,4 @@
-package adminsrc;
+package Adminsrc;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
@@ -9,26 +9,20 @@ import javax.swing.table.TableRowSorter;
 
 import main.DBConnect;
 
-public class view_sts extends JPanel {
+public class View_courses extends JPanel {
     private Connection connection;
 
-    public view_sts(Connection connection) {
+    public View_courses(Connection connection) {
         this.connection = connection;
     }
-    JPanel ViewStudentPanel() {
+    JPanel ViewCoursePanel() {
          // Table Setup
          DefaultTableModel tableModel = new DefaultTableModel();
-         tableModel.addColumn("No");
-         tableModel.addColumn("ID");
-         tableModel.addColumn("First Name");
-         tableModel.addColumn("Last Name");
-         tableModel.addColumn("Gender");
-         tableModel.addColumn("Date of Birth");
-         tableModel.addColumn("Address");
-         tableModel.addColumn("Email");
-         tableModel.addColumn("Phone Number");
-         tableModel.addColumn("Password");
-         tableModel.addColumn("Department");
+         tableModel.addColumn("subject_ID");
+         tableModel.addColumn("subject");
+         tableModel.addColumn("hour/week");
+         tableModel.addColumn("hour/semester");
+
          JTable table = new JTable(tableModel);
  
          JPanel panel = new JPanel();
@@ -109,28 +103,19 @@ public class view_sts extends JPanel {
             public void componentShown(ComponentEvent e) {
                 try (Connection conn = DBConnect.getConnection();
                     Statement stmt = conn.createStatement();
-                    ResultSet rs = stmt.executeQuery("SELECT * FROM student INNER JOIN department ON student.department = department.department_id")) 
-                    {
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM course")) {
 
                     tableModel.setRowCount(0);
 
                     // Populate table with data
                     while (rs.next()) {
-                        int No = tableModel.getRowCount() + 1;
-                        int id = rs.getInt("student_id");
-                        String studentfirstName = rs.getString("student_firstname");
-                        String studentlastName = rs.getString("student_lastname");
-                        String studentGender = rs.getString("gender");
-                        String studentBirth = rs.getString("student_birth");
-                        String studentAddress = rs.getString("student_address");
-                        String studentEmail = rs.getString("student_email");
-                        String studentPhoneNumber = rs.getString("phone_number");
-                        String studentPassword = rs.getString("student_password");
-                        String studentdepartment = rs.getString("department_name");
-                tableModel.addRow(new Object[]{No, "e2022"+String.format("%03d", id), studentfirstName, studentlastName, studentGender,  studentBirth, studentAddress, studentEmail, studentPhoneNumber, studentPassword, studentdepartment}
-                
-                );
-            }
+                        tableModel.addRow(new Object[]{
+                        rs.getString("subject_ID"),
+                        rs.getString("subject"),
+                        rs.getString("hour_per_week"),
+                        rs.getString("hour_per_semester")
+                        });
+                    }
 
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());

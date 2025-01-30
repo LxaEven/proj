@@ -1,26 +1,21 @@
-package adminsrc;
+package Adminsrc;
 import java.awt.*;
 import java.sql.*;
 import javax.swing.*;
 
 import main.DBConnect;
 
+public class UpdateScore extends JPanel {
 
-
-public class UpdateCourse extends JPanel {
     private Connection connection;
 
-    public UpdateCourse(Connection connection) {
+    public UpdateScore(Connection connection) {
         this.connection = connection;
     }
 
-    public JPanel getUpdateCoursePanel() {
-        return createUpdateCoursePanel();
-    }
-
-    private JPanel createUpdateCoursePanel() {
+    public JPanel createUpdateScorePanel() {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(6, 2, 10, 10));
+        panel.setLayout(new GridLayout(7, 2, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         // Fonts for UI elements
@@ -29,20 +24,20 @@ public class UpdateCourse extends JPanel {
         Font buttonFont = new Font("Arial", Font.BOLD, 16);
 
         // Input fields
-        JTextField txtSub_ID = new JTextField();
+        JTextField txtStudent_id = new JTextField();
+        JTextField txtDepartment = new JTextField();
         JTextField txtSubject = new JTextField();
-        JTextField txtHour_week = new JTextField();
-        JTextField txtHour_semester = new JTextField();
+        JTextField txtScore = new JTextField();
 
         // Buttons
         JButton btnSearch = new JButton("Search");
         JButton btnUpdate = new JButton("Update");
 
         // Set fonts for input fields and buttons
-        txtSub_ID.setFont(inputFont);
+        txtStudent_id.setFont(inputFont);
+        txtDepartment.setFont(inputFont);
         txtSubject.setFont(inputFont);
-        txtHour_week.setFont(inputFont);
-        txtHour_semester.setFont(inputFont);
+        txtScore.setFont(inputFont);
 
         btnSearch.setFont(buttonFont);
         btnSearch.setBackground(Color.CYAN);
@@ -50,12 +45,13 @@ public class UpdateCourse extends JPanel {
         btnUpdate.setBackground(Color.GREEN);
 
         // Create and style labels
-        JLabel lblSub_ID = new JLabel("Subject ID:");
+        JLabel lblStudent_id = new JLabel("Student ID:");
+        JLabel lblDepartment = new JLabel("Department:");
         JLabel lblSubject = new JLabel("Subject:");
-        JLabel lblHour_week = new JLabel("Hour per Week:");
-        JLabel lblHour_semester = new JLabel("Hour per Semester:");
+        JLabel lblScore = new JLabel("Score:");
 
-        JLabel[] labels = {lblSub_ID, lblSubject, lblHour_week, lblHour_semester};
+
+        JLabel[] labels = {lblStudent_id, lblDepartment, lblSubject, lblScore};
 
         for (JLabel label : labels) {
             label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -63,29 +59,30 @@ public class UpdateCourse extends JPanel {
         }
 
         // Add components to the panel
-        panel.add(lblSub_ID);
-        panel.add(txtSub_ID);
+        panel.add(lblStudent_id);
+        panel.add(txtStudent_id);
+        panel.add(lblDepartment);
+        panel.add(txtDepartment);
         panel.add(lblSubject);
         panel.add(txtSubject);
-        panel.add(lblHour_week);
-        panel.add(txtHour_week);
-        panel.add(lblHour_semester);
-        panel.add(txtHour_semester);
+        panel.add(lblScore);
+        panel.add(txtScore);
+
         panel.add(btnSearch);
         panel.add(btnUpdate);
 
         // Search Action
         btnSearch.addActionListener(e -> {
-            String query = "SELECT * FROM course WHERE subject_ID = ?";
+            String query = "SELECT * FROM score WHERE student_id = ?";
             try (Connection conn = DBConnect.getConnection();
                  PreparedStatement pst = conn.prepareStatement(query)) {
-           
-                pst.setString(1, txtSub_ID.getText());
+                pst.setInt(1, Integer.parseInt(txtStudent_id.getText()));
                 ResultSet rs = pst.executeQuery();
                 if (rs.next()) {
-                    txtSubject.setText(rs.getString("subject"));
-                    txtHour_week.setText(String.valueOf(rs.getInt("hour_per_week")));
-                    txtHour_semester.setText(String.valueOf(rs.getInt("hour_per_semester")));
+                    txtStudent_id.setText(rs.getString("student_id"));
+                    txtDepartment.setText(rs.getString("department_id"));
+                    txtSubject.setText(rs.getString("subject_id"));
+                    txtScore.setText(rs.getString("student_score"));
                 } else {
                     JOptionPane.showMessageDialog(panel, "Student not found!");
                 }
@@ -95,20 +92,18 @@ public class UpdateCourse extends JPanel {
         });
 
         // Update Action
-         btnUpdate.addActionListener(e -> {
-            String query = "UPDATE course SET subject = ?, hour_per_week = ?, hour_per_semester = ? WHERE subject_ID = ?";
+        btnUpdate.addActionListener(e -> {
+            String query = "UPDATE score SET department_id = ?, subject_id = ?, student_score = ? WHERE student_id = ?";
             try (Connection conn = DBConnect.getConnection();
                  PreparedStatement pst = conn.prepareStatement(query)) {
 
-                pst.setString(1, txtSubject.getText());
-                pst.setString(2, txtHour_week.getText());
-                pst.setString(3, txtHour_semester.getText());
-                pst.setString(4, txtSub_ID.getText());
-
-
+                pst.setString(1, txtDepartment.getText());
+                pst.setString(2, txtSubject.getText());
+                pst.setString(3, txtScore.getText());
+                pst.setInt(4, Integer.parseInt(txtStudent_id.getText()));
                 int rowsAffected = pst.executeUpdate();
                 if (rowsAffected > 0) {
-                    JOptionPane.showMessageDialog(panel, "Student updated successfully!");
+                    JOptionPane.showMessageDialog(panel, "Score updated successfully!");
                 } else {
                     JOptionPane.showMessageDialog(panel, "No records were updated!");
                 }
@@ -117,14 +112,13 @@ public class UpdateCourse extends JPanel {
             }
 
             // Clear the fields after submission
-            txtSub_ID.setText("");
+            txtStudent_id.setText("");
+            txtDepartment.setText("");
             txtSubject.setText("");
-            txtHour_week.setText("");
-            txtHour_semester.setText("");
+            txtScore.setText("");
 
         });
 
         return panel;
     }
 }
-
