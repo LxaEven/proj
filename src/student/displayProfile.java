@@ -19,19 +19,19 @@ public class displayProfile extends JPanel {
 
     public void ProfileDisplay() {
         JLabel idLabel = new JLabel("Student ID:   ");
-        idLabel.setFont(new Font("Arial", Font.BOLD, 17));
+        idLabel.setFont(new Font("Arial", Font.BOLD, 19));
         JLabel firstnameLabel = new JLabel("Firstname:   ");
-        firstnameLabel.setFont(new Font("Arial", Font.BOLD, 17));
+        firstnameLabel.setFont(new Font("Arial", Font.BOLD, 19));
         JLabel lastnameLabel = new JLabel("Lastname:  ");
-        lastnameLabel.setFont(new Font("Arial", Font.BOLD, 17));
+        lastnameLabel.setFont(new Font("Arial", Font.BOLD, 19));
         JLabel genderLabel = new JLabel("Gender:   ");
-        genderLabel.setFont(new Font("Arial", Font.BOLD, 17));
+        genderLabel.setFont(new Font("Arial", Font.BOLD, 19));
         JLabel birthLabel = new JLabel("Birth:   ");
-        birthLabel.setFont(new Font("Arial", Font.BOLD, 17));
+        birthLabel.setFont(new Font("Arial", Font.BOLD, 19));
         JLabel phoneNumberLabel = new JLabel("Phone Number:   ");
-        phoneNumberLabel.setFont(new Font("Arial", Font.BOLD, 17));
+        phoneNumberLabel.setFont(new Font("Arial", Font.BOLD, 19));
         JLabel emailLabel = new JLabel("Email:   ");
-        emailLabel.setFont(new Font("Arial", Font.BOLD, 17));
+        emailLabel.setFont(new Font("Arial", Font.BOLD, 19));
 
         JPanel profilePanel = new JPanel(new GridBagLayout());
         gbc.insets = new Insets(10, 10, 10, 10);

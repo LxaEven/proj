@@ -16,7 +16,7 @@ public class student extends JFrame {
     private NewPassword ChangeNewPassword;
     public JButton ViewProfile, ViewScore, ViewCourse, ChangePassword;
     private JPanel Panel;
-    public student(MainPanel mainPanel) {
+    public student() {
         setTitle("Student");
         setSize(1300, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

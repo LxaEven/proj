@@ -15,7 +15,7 @@ public class LoginPanel extends JPanel {
     public JTextField emailField;
     public JPasswordField passwordField;
     MainPanel mainPanel;
-    student studentFrame = new student(mainPanel);
+    student studentFrame = new student();
 
     public LoginPanel(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
@@ -66,7 +66,7 @@ public class LoginPanel extends JPanel {
         gbc.insets = new Insets(10, 10, 10, 10);
 
         JPanel buttonPanel = new JPanel(new GridBagLayout());
-        buttonPanel.setBackground(new Color(173, 216, 230));
+        buttonPanel.setBackground(new Color(176, 224, 230));
         gbc.gridx = 0;
         gbc.gridy = 0;
         buttonPanel.add(loginButton, gbc);
