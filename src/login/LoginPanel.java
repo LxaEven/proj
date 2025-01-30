@@ -15,7 +15,7 @@ public class LoginPanel extends JPanel {
     public JTextField emailField;
     public JPasswordField passwordField;
     MainPanel mainPanel;
-    student studentFrame = new student();
+    student studentFrame = new student(mainPanel);
 
     public LoginPanel(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
