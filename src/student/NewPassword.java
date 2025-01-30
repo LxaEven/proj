@@ -64,12 +64,17 @@ public class NewPassword extends JPanel {
                 String oldPassword = new String(oldPasswordField.getPassword());
                 String newPassword = new String(newPasswordField.getPassword());
                 String confirmPassword = new String(confirmPasswordField.getPassword());
-
-                if (!newPassword.equals(confirmPassword)) {
-                    JOptionPane.showMessageDialog(Panel, "New passwords do not match.", "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }if(newPassword.isEmpty() || confirmPassword.isEmpty() || oldPassword.isEmpty()){
+                if(oldPassword.isEmpty()){
                     JOptionPane.showMessageDialog(Panel, "Please fill all the fields.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }if(newPassword.isEmpty()){
+                    JOptionPane.showMessageDialog(Panel, "Please fill all the fields.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }if(confirmPassword.isEmpty()){
+                    JOptionPane.showMessageDialog(Panel, "Please fill all the fields.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }if (!newPassword.equals(confirmPassword)) {
+                    JOptionPane.showMessageDialog(Panel, "New passwords do not match.", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 if(newPassword.length() < 8){
