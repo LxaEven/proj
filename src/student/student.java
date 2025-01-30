@@ -1,10 +1,8 @@
 package student;
 
 import javax.swing.*;
-
 import login.*;
 import com.formdev.flatlaf.FlatLightLaf;
-
 import java.awt.*;
 import java.awt.event.*;
 
@@ -22,6 +20,7 @@ public class student extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
         setLocationRelativeTo(null);
+
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
         } catch (Exception e) {
@@ -40,27 +39,25 @@ public class student extends JFrame {
         ViewProfile.setFont(new Font("Arial", Font.BOLD, 15));
         ViewProfile.setPreferredSize(new Dimension(200, 40));
         ViewProfile.setFocusPainted(false);
-        ViewProfile.addActionListener(e -> updateProfilePanel(Panel));
-
-
+        
         ViewScore = new JButton("View Score");
         ViewScore.setFont(new Font("Arial", Font.BOLD, 15));
         ViewScore.setPreferredSize(new Dimension(200, 40));
         ViewScore.setFocusPainted(false);
-        ViewScore.addActionListener(e->showStudentScorePanel(Panel));
-
 
         ViewCourse = new JButton("View Course");
         ViewCourse.setFont(new Font("Arial", Font.BOLD, 15));
         ViewCourse.setPreferredSize(new Dimension(200, 40));
         ViewCourse.setFocusPainted(false);
-        ViewCourse.addActionListener(e -> showStudentCoursePanel(Panel));
-
 
         ChangePassword = new JButton("Change Password");
         ChangePassword.setFont(new Font("Arial", Font.BOLD, 15));
         ChangePassword.setPreferredSize(new Dimension(200, 40));
         ChangePassword.setFocusPainted(false);
+
+        ViewProfile.addActionListener(e -> updateProfilePanel(Panel));
+        ViewScore.addActionListener(e->showStudentScorePanel(Panel));
+        ViewCourse.addActionListener(e -> showStudentCoursePanel(Panel));
         ChangePassword.addActionListener(e -> ChangePassword(Panel, this));
 
         JButton[] buttons = {ViewProfile, ViewScore, ViewCourse, ChangePassword};
