@@ -38,12 +38,12 @@ public class displayCourse extends JPanel{
 
             
                 while (rs.next()) {
-                    int no = rs.getInt("subject_No");
+                    String subject_ID = rs.getString("subject_ID");
                     String subject = rs.getString("subject");
-                    String HrsPerWeek = rs.getString("per_week");
-                    String HrsPerSem = rs.getString("per_semester");
+                    int HrsPerWeek = rs.getInt("hour_per_week");
+                    int HrsPerSem = rs.getInt("hour_per_semester");
                     CourseTableModel.addRow(new Object[]{
-                        no,
+                        subject_ID,
                         subject,
                         HrsPerWeek,
                         HrsPerSem
