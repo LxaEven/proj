@@ -8,7 +8,7 @@ import java.sql.*;
 
 public class ResetPasswordPanel extends JPanel {
     private MainPanel mainPanel;
-    private JPasswordField newPasswordField;
+    private JPasswordField newPasswordField, comfirmPasswordField;
 
     public ResetPasswordPanel(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
@@ -34,15 +34,24 @@ public class ResetPasswordPanel extends JPanel {
                 new Font("Arial", Font.PLAIN, 20)));
         newPasswordField.setFont(new Font("Arial", Font.PLAIN, 20));
 
+        comfirmPasswordField = new JPasswordField();
+        comfirmPasswordField.setPreferredSize(new Dimension(500, 60));
+        comfirmPasswordField.setBorder(BorderFactory.createTitledBorder(
+                BorderFactory.createLineBorder(Color.GRAY), "Confirm Password", TitledBorder.LEFT, TitledBorder.TOP,
+                new Font("Arial", Font.PLAIN, 20)));
+        comfirmPasswordField.setFont(new Font("Arial", Font.PLAIN, 20));
+
         // Show/hide password checkbox
         JCheckBox showPasswordCheckBox = new JCheckBox("Show Password");
         showPasswordCheckBox.setBackground(new Color(173, 216, 230));
         showPasswordCheckBox.setFont(new Font("Arial", Font.PLAIN, 18));
         showPasswordCheckBox.addActionListener(e -> {
             if (showPasswordCheckBox.isSelected()) {
-                newPasswordField.setEchoChar((char) 0); // Show password
+                newPasswordField.setEchoChar((char) 0);
+                comfirmPasswordField.setEchoChar((char) 0);
             } else {
-                newPasswordField.setEchoChar('•'); // Hide password
+                newPasswordField.setEchoChar('•');
+                comfirmPasswordField.setEchoChar('•');
             }
         });
 
@@ -70,6 +79,8 @@ public class ResetPasswordPanel extends JPanel {
         gbc.gridy++;
         inputPanel.add(newPasswordField, gbc);
         gbc.gridy++;
+        inputPanel.add(comfirmPasswordField, gbc);
+        gbc.gridy++;
         gbc.anchor = GridBagConstraints.WEST;
         inputPanel.add(showPasswordCheckBox, gbc);
         gbc.gridy++;
@@ -91,9 +102,15 @@ public class ResetPasswordPanel extends JPanel {
         // Reset password button action
         resetButton.addActionListener(e -> {
             String newPassword = new String(newPasswordField.getPassword()).trim();
-            if (newPassword.isEmpty()) {
+            String confirmPassword = new String(comfirmPasswordField.getPassword()).trim();
+            if (newPassword.isEmpty() || confirmPassword.isEmpty()) {
                 JOptionPane.showMessageDialog(mainPanel, "Password cannot be empty!", "Error",
                         JOptionPane.ERROR_MESSAGE);
+                return;
+            }if(!newPassword.equals(confirmPassword)){
+                JOptionPane.showMessageDialog(mainPanel, "Passwords do not match!", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
             } else {
                 if (updatePasswordInDatabase(newPassword)) {
                     JOptionPane.showMessageDialog(mainPanel, "Password reset successfully!", "Success",
@@ -123,8 +140,8 @@ public class ResetPasswordPanel extends JPanel {
                 PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, newPassword);
-            stmt.setString(2, MainPanel.loginUserIdentifier); // Use the identifier from the login panel
-            stmt.setString(3, MainPanel.loginUserIdentifier);
+            stmt.setString(2, MainPanel.getUserEmailOrId()); // Use the identifier from the login panel
+            stmt.setString(3, MainPanel.getUserEmailOrId());
 
             int rowsUpdated = stmt.executeUpdate();
             return rowsUpdated > 0; // Return true if the password was updated successfully
