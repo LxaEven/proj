@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 20, 2025 at 07:57 AM
+-- Generation Time: Jan 30, 2025 at 04:19 AM
 -- Server version: 8.0.40
 -- PHP Version: 8.3.14
 
@@ -24,28 +24,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `course`
+-- Table structure for table `department`
 --
 
-DROP TABLE IF EXISTS `course`;
-CREATE TABLE IF NOT EXISTS `course` (
-  `subject_No` int NOT NULL AUTO_INCREMENT,
-  `subject` varchar(50) DEFAULT NULL,
-  `per_week` varchar(50) DEFAULT NULL,
-  `per_semester` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`subject_No`)
+DROP TABLE IF EXISTS `department`;
+CREATE TABLE IF NOT EXISTS `department` (
+  `department_id` varchar(20) NOT NULL,
+  `department_name` varchar(200) NOT NULL,
+  `department_head` varchar(200) NOT NULL,
+  `Dep_head_ph` varchar(20) NOT NULL,
+  PRIMARY KEY (`department_id`)
 );
 
 --
--- Dumping data for table `course`
+-- Dumping data for table `department`
 --
 
-INSERT INTO `course` (`subject_No`, `subject`, `per_week`, `per_semester`) VALUES
-(1, 'Math', '4Hrs', '36Hrs'),
-(2, 'Physic', '3Hrs', '28Hrs'),
-(3, 'Chemistry', '3Hrs', '28Hrs'),
-(4, 'Khmer', '2Hrs', '20Hrs'),
-(5, 'History', '1Hrs', '10Hrs');
+INSERT INTO `department` (`department_id`, `department_name`, `department_head`, `Dep_head_ph`) VALUES
+('D001', 'GIC', 'Sarith Seyla', '012269887'),
+('D002', 'GTR', 'Rom Tola', '096202236'),
+('D003', 'AMS', 'Peng Seyha', '097845623'),
+('D004', 'GGG', 'Sar Vichada', '06886239'),
+('D005', 'GEE', 'Tek ChanSetha', '078963302');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
