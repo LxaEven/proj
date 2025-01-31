@@ -29,7 +29,7 @@ public class displayCourse extends JPanel{
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT * FROM `course`")) {
             
-            DefaultTableModel tableModel = new DefaultTableModel();
+            
             CourseTableModel.addColumn("subject_ID");
             CourseTableModel.addColumn("subject");
             CourseTableModel.addColumn("hour/week");
